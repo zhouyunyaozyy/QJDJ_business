@@ -55,7 +55,7 @@
       </el-form-item>
       <el-form-item label='跳转区域' prop='type' v-if='form.type == 3'>
         <el-select v-model='form.type' placeholder="请选择">
-          
+
         </el-select>
       </el-form-item>
       <el-form-item label='图文内容' required v-if='form.type == 5'>
@@ -81,7 +81,6 @@
   import { VueEditor } from 'vue2-editor'
   import { ImageDrop } from 'quill-image-drop-module'
   import ImageResize from 'quill-image-resize-module'
-  
   export default {
     components: {
       VueEditor
@@ -178,15 +177,15 @@
       handleImageAdded (file, Editor, cursorLocation, resetUploader) {
         var reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload = function(e){ 
+        reader.onload = function(e){
 //          _this.form.license = this.result // 这个就是base64编码了
           Editor.insertEmbed(cursorLocation, 'image', this.result);
           resetUploader();
         }
-        
+
 //        var formData = new FormData();
 //        formData.append('image', file)
-// 
+//
 //        axios({
 //          url: 'https://fakeapi.yoursite.com/images',
 //          method: 'POST',
@@ -205,7 +204,7 @@
         let _this = this
         var reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload = function(e){ 
+        reader.onload = function(e){
           _this.form.image = this.result // 这个就是base64编码了
         }
         return false
