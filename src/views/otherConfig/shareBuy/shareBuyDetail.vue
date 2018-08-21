@@ -60,9 +60,11 @@
         :expand-on-click-node="false">
         <span class="custom-tree-node" slot-scope="{ node, data }">
           <span>{{ node.label }}</span>
-          <span v-if='node.level == 2'>（支持/不支持）</span>
+          <span v-if='data.level == 2 && data.is_activity === 2' style='color: red;'>（支持）</span>
+          <span v-else-if='data.level == 2 && data.is_activity === 0' style='color: red;'>（不支持）</span>
+          <span v-else-if='data.level == 2 && data.is_activity === 1' style='color: red;'>（仅支持）</span>
           <span>
-            <el-radio-group v-model="node.is_activity" v-if='data.editBool' @change='radioChange(data)'>
+            <el-radio-group v-model="data.is_activity" v-if='data.editBool' @change='radioChange(data)'>
               <el-radio :label="2">支持</el-radio>
               <el-radio :label="0">不支持</el-radio>
               <el-radio :label="1">仅支持分享购买</el-radio>
@@ -77,7 +79,7 @@
         </span>
       </el-tree>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="importDialogVisible = false">确定修改</el-button>
+        <el-button @click="changeStatusSure">确定修改</el-button>
         <el-button @click="importDialogVisible = false">取 消</el-button>
       </div>
     </el-dialog>
@@ -173,11 +175,11 @@
           return false
         }
         let formData = new FormData()
-        formData.append('activity_goods_excel', file)
-        formData.append('goods_activity_category_id', this.uploadFilter_category_id)
+        formData.append('excel', file)
+        formData.append('is_activity', this.uploadFilter_category_id)
         this.$axios({
           type: 'post',
-          url: '/goods/activitygoodsload',
+          url: '/goods/changeshare',
           data: formData,
           fuc: (res) => {
             if (res.code == 200) {
@@ -199,7 +201,7 @@
                 console.log('result', result)
                 if (result.code == 200) {
                   this.$message.success('编辑成功')
-                  this.editBool = true
+                  this.changeStatusDialog = true
                 }
               }
             })
@@ -220,14 +222,36 @@
         data.editBool = true
         console.log(this.categoryArr)
       },
-      radioChange (data, num) {
-        console.log(data, num)
+      radioChange (data) {
+        console.log(data)
         data.editBool = false
         if (data.level == 1) {
           for (let val of data.children) {
-//            val.editBool = true
+            val.is_activity = data.is_activity
           }
         }
+      },
+      changeStatusSure () {
+        let obj = {}
+        for (let val of this.categoryArr) {
+          for (let val2 of val.children) {
+            if (val2.is_activity !== '') {
+              obj[val2.value] = val2.is_activity
+            }
+          }
+        }
+        this.$axios({
+          type: 'post',
+          url: '/goods/changesharecategory',
+          data: {change_data: obj},
+          fuc: (result) => {
+            console.log('result', result)
+            if (result.code == 200) {
+              this.$message.success('编辑成功')
+              this.changeStatusDialog = false
+            }
+          }
+        })
       }
     }
   }
