@@ -170,7 +170,7 @@
       },
       beforeAvatarUpload (file) {
 //        let _this = this
-        if (this.uploadFilter_category_id == '') {
+        if (this.uploadFilter_category_id === '') {
           this.$message.warning('请先选择分类')
           return false
         }
