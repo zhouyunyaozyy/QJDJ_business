@@ -103,7 +103,7 @@
             <el-button @click='addBusiness(scope.row.type, scope.row.business_offline_id)'>编辑</el-button>
             <el-button @click='outExcell(scope.row.business_offline_id, scope.row.type)'>导出</el-button>
             <el-button v-if='scope.row.type == 1 && scope.row.is_alliance == 0 && scope.row.insert_package_status == 1' @click='detailPackages(scope.row.business_offline_id)' style='margin-top: 4px;'>查看套餐</el-button>
-            <el-button v-if='scope.row.type == 1' @click='detailVouchers(scope.row.business_offline_id)' style='margin-top: 4px;'>代金券</el-button>
+            <el-button v-if='scope.row.type == 1 && scope.row.is_alliance == 0 && scope.row.insert_package_status == 1' @click='detailVouchers(scope.row.business_offline_id)' style='margin-top: 4px;'>代金券</el-button>
           </template>
         </el-table-column>
       </el-table-column>

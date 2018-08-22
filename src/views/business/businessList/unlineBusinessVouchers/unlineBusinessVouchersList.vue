@@ -24,7 +24,7 @@
     :data="tableData"
     style="width: 100%">
       <el-table-column
-        label="商品管理-套餐列表">
+        label="代金券列表">
         <el-table-column
           prop="package_id"
           label="id"
@@ -36,14 +36,18 @@
           min-width="120" align='center'>
         </el-table-column>
         <el-table-column
-          prop="package_no"
+          prop="business_name"
           label="所属商家"
           min-width="120" align='center'>
         </el-table-column>
         <el-table-column
-          prop="silver_price"
+          prop="transfer_cash"
           label="价格"
           min-width="120" align='center'>
+          <template slot-scope='scope'>
+            <span v-if='scope.row.transfer_type === 0'>{{scope.row.transfer_cash / 100}}元</span>
+            <span v-else>{{scope.row.price / 10000 * scope.row.transfer_ratio}}元</span>
+          </template>
         </el-table-column>
         <el-table-column
           prop="num"
@@ -104,7 +108,7 @@
         this.$axios({
           type: 'post',
           url: '/package/packagelists',
-          data: {page: this.start, limit: 20, business_id: this.$route.query.business_id , ...this.formInline},
+          data: {page: this.start, limit: 20, package_type: 2, business_id: this.$route.query.business_id , ...this.formInline},
           fuc: (res) => {
             if (res.code === 200) {
               this.tableData = res.data.data
