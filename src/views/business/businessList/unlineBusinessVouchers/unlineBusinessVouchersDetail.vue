@@ -16,7 +16,7 @@
       <el-form-item label='代金券结算价' prop='transfer_cash' v-if='form.transfer_type === 0'>
         <el-input v-model="form.transfer_cash" placeholder='请输入代金券结算价' :maxlength='20'></el-input>
       </el-form-item>
-      <el-form-item label='代金券结算比例' prop='transfer_ratio' v-else-if='form.transfer_type === 1'>
+      <el-form-item label='代金券结算比例' v-else-if='form.transfer_type === 1'>
         <el-input v-model="form.transfer_ratio" placeholder='请输入代金券结算比例' :maxlength='20'></el-input>
       </el-form-item>
       <el-form-item label='代金券售价' prop='price'>
