@@ -45,14 +45,13 @@
           min-width="120" align='center'>
         </el-table-column>
         <el-table-column
-          prop="package_no"
-          label="套餐编码"
-          min-width="120" align='center'>
-        </el-table-column>
-        <el-table-column
           prop="silver_price"
           label="套餐价格"
           min-width="120" align='center'>
+          <template slot-scope='scope'>
+            <span v-if='scope.row.transfer_type === 0'>{{scope.row.transfer_cash / 100}}元</span>
+            <span v-else>{{scope.row.price / 10000 * scope.row.transfer_ratio}}元</span>
+          </template>
         </el-table-column>
         <el-table-column
           prop="second_category_name"
@@ -147,7 +146,7 @@
         this.$axios({
           type: 'post',
           url: '/package/packagelists',
-          data: {page: this.start, limit: 20, ...this.formInline},
+          data: {page: this.start, limit: 20, package_type: 1, ...this.formInline},
           fuc: (res) => {
             if (res.code === 200) {
               this.tableData = res.data.data

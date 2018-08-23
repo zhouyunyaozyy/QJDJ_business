@@ -43,7 +43,10 @@
         <el-input v-model="form.num" placeholder='请输入套餐库存'></el-input>
       </el-form-item>
       <el-form-item label='温馨提示' prop='package_desc'>
-        <el-input type='textarea' v-model="form.package_desc" :maxlength='500' placeholder='请输入温馨提示'></el-input>
+<!--        <el-input type='textarea' v-model="form.package_desc" :maxlength='500' placeholder='请输入温馨提示'></el-input>-->
+<!--        <vue-wangeditor id="editor" v-model="package_desc" :menus="wangeditorMenu" @change='editorChange' :isRealtime='true'></vue-wangeditor>-->
+        
+      <div ref="editor" style="text-align:left;max-width: 400px;"></div>
       </el-form-item>
       <el-form-item>
         <el-button v-if='status === 0' type="primary" @click="submit(1)">保存,审核通过</el-button>
@@ -57,9 +60,22 @@
   </div>
 </template>
 <script>
+//  import vueWangeditor from 'vue-wangeditor'
+  import E from 'wangeditor'
   export default {
+    components: {
+//      vueWangeditor
+    },
     data () {
       return {
+        editor: '',
+        wangeditorMenu: [
+          'bold',	// 粗体
+          'fontsize',	// 字号
+          'italic',	// 斜体
+          '|',
+          'undo',	// 撤销
+        ], //编辑器菜单
         status: '', // 代金券状态
         form: {
           package_name: '',
@@ -100,6 +116,23 @@
         }
       }
     },
+    mounted () {
+      let editor = this.editor = new E(this.$refs.editor)
+      editor.customConfig.onchange = (html) => {
+        this.form.package_desc = html
+      }
+      editor.customConfig.zIndex = 10
+      editor.customConfig.menus = [
+        'fontSize',
+        'bold',
+        'italic',
+        '|',
+        'foreColor',  // 文字颜色
+        'backColor',  // 背景颜色
+        'undo'
+      ]
+      editor.create()
+    },
     created () {
       if (this.$route.query.package_id) {
         this.$axios({
@@ -119,6 +152,7 @@
             this.form.package_id = res.data.package_id
             this.status = res.data.status
             console.log(this.form)
+            this.editor.txt.html(this.form.package_desc)
           }
         })
       }
@@ -128,6 +162,7 @@
         this.form.use_time = ""
       },
       submit () {
+        console.log(this.form)
         this.$refs['form'].validate((valid) => {
           if (valid) {
             let _form = JSON.parse(JSON.stringify(this.form))
@@ -147,7 +182,10 @@
             })
           }
         })
-      }
+      },
+//      editorChange () {
+//        console.log(this.package_desc)
+//      }
     }
   }
 </script>

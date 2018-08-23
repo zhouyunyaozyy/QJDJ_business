@@ -1,17 +1,18 @@
 <template>
   <div class="onlineOrderList">
-    <el-button @click="changeStatus('all')" :type="type == 'all' ? 'primary' : ''">全部订单</el-button>
-    <el-button @click="changeStatus('wait')" :type="type == 'wait' ? 'primary' : ''">等待使用</el-button>
-    <el-button @click="changeStatus('finish')" :type="type == 'finish' ? 'primary' : ''">已完成</el-button>
-    <el-button @click="changeStatus('overdue')" :type="type == 'overdue' ? 'primary' : ''">已过期</el-button>
+    <el-button @click="changeStatus('0')" :type="type == '0' ? 'primary' : ''">全部订单</el-button>
+    <el-button @click="changeStatus('1')" :type="type == '1' ? 'primary' : ''">待使用</el-button>
+    <el-button @click="changeStatus('2')" :type="type == '2' ? 'primary' : ''">已完成</el-button>
+    <el-button @click="changeStatus('3')" :type="type == '3' ? 'primary' : ''">退款中</el-button>
+    <el-button @click="changeStatus('4')" :type="type == '4' ? 'primary' : ''">已退款</el-button>
     
     <div class="searchForm">
       <p @click='showFormBool = !showFormBool'>筛选查询<i v-if='showFormBool' class="el-icon-arrow-down"></i><i v-else class="el-icon-arrow-up"></i></p>
       <el-form :inline="true" :model="formInline" class="demo-form-inline" v-if='showFormBool'>
         <el-form-item label="输入搜索">
-          <el-input v-model="formInline.key_a" placeholder="订单编号/商家名称"></el-input>
+          <el-input v-model="formInline.search" placeholder="订单编号/商家名称"></el-input>
         </el-form-item>
-        <el-form-item label="提交时间">
+        <el-form-item label="完成时间">
           <el-date-picker
             v-model="formInline.key_time"
             type="daterange"
@@ -30,7 +31,7 @@
     :data="tableData"
     style="width: 100%">
       <el-table-column
-        label="套餐订单列表">
+        label="服务订单列表">
         <el-table-column
           prop="package_order_no"
           label="订单编号"
@@ -40,26 +41,48 @@
           prop="pay_at"
           label="付款时间"
           min-width="160" align='center'>
+          <template slot-scope='scope'>
+            <span>{{$formatTime(scope.row.pay_at)}}</span>
+          </template>
         </el-table-column>
         <el-table-column
-          prop="finish_at"
+          prop="status_at"
           label="完成时间"
           min-width="160" align='center'>
+          <template slot-scope='scope'>
+            <span>{{$formatTime(scope.row.status_at)}}</span>
+          </template>
         </el-table-column>
         <el-table-column
-          prop="name"
+          prop="business_name"
           label="商家名称"
           min-width="120" align='center'>
         </el-table-column>
         <el-table-column
-          prop="nickname"
+          prop="package_name"
+          label="服务名称"
+          min-width="120" align='center'>
+        </el-table-column>
+        <el-table-column
+          prop="user_id"
           label="购买人ID"
           min-width="120" align='center'>
         </el-table-column>
         <el-table-column
-          prop="total_cost"
-          label="支付金额"
+          prop="price"
+          label="服务售价"
           min-width="120" align='center'>
+        </el-table-column>
+        <el-table-column
+          prop="total_cost"
+          label="订单状态"
+          min-width="120" align='center'>
+          <template slot-scope='scope'>
+            <span v-if='scope.row.status == 1'>待使用</span>
+            <span v-if='scope.row.status == 2'>已完成</span>
+            <span v-if='scope.row.status == 3'>退款中</span>
+            <span v-if='scope.row.status == 4'>已退款</span>
+          </template>
         </el-table-column>
         <el-table-column
           prop="id"
@@ -87,7 +110,7 @@
       return {
         tableData: [],
         formInline: {
-          key_a: '',
+          search: '',
           key_time: []
         },
         order_type: [
@@ -115,7 +138,7 @@
           {value: 4, label: '驳回'},
           {value: 5, label: '退款失败'},
         ],
-        type: 'all',
+        type: '0',
         start: 1,
         total: 0,
         showFormBool: true, // 是否显示过滤框
@@ -134,14 +157,14 @@
       getTableData () {
         this.$axios({
           type: 'post',
-          url: '/Order/getPackageOrderList',
-          data: {opt: this.type, page : this.start, ...this.formInline},
+          url: '/order/getofflineorderlist',
+          data: {package_type: 1, status: this.type, page : this.start, ...this.formInline},
           fuc: (res) => {
             if (res.code !== 200) {
               return
             }
-            this.tableData = res.data.order_list
-            this.total = res.data.all_num
+            this.tableData = res.data.data
+            this.total = res.data.total
           }
         })
       },

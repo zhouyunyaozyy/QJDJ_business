@@ -43,7 +43,9 @@
         <el-input v-model="form.num" placeholder='请输入套餐库存'></el-input>
       </el-form-item>
       <el-form-item label='温馨提示' prop='package_desc'>
-        <el-input type='textarea' v-model="form.package_desc" :maxlength='500' placeholder='请输入温馨提示'></el-input>
+<!--        <el-input type='textarea' v-model="form.package_desc" :maxlength='500' placeholder='请输入温馨提示'></el-input>-->
+        
+        <div ref="editor" style="text-align:left;max-width: 400px;"></div>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submit">保存并上架</el-button>
@@ -52,9 +54,18 @@
   </div>
 </template>
 <script>
+  import E from 'wangeditor'
   export default {
     data () {
       return {
+        editor: '',
+        wangeditorMenu: [
+          'bold',	// 粗体
+          'fontsize',	// 字号
+          'italic',	// 斜体
+          '|',
+          'undo',	// 撤销
+        ], //编辑器菜单
         form: {
           package_name: '',
           package_tag: '',
@@ -94,6 +105,23 @@
         }
       }
     },
+    mounted () {
+      let editor = this.editor = new E(this.$refs.editor)
+      editor.customConfig.onchange = (html) => {
+        this.form.package_desc = html
+      }
+      editor.customConfig.zIndex = 10
+      editor.customConfig.menus = [
+        'fontSize',
+        'bold',
+        'italic',
+        '|',
+        'foreColor',  // 文字颜色
+        'backColor',  // 背景颜色
+        'undo'
+      ]
+      editor.create()
+    },
     created () {
       if (this.$route.query.package_id) {
         this.$axios({
@@ -112,6 +140,7 @@
             }
             this.form.package_id = res.data.package_id
             console.log(this.form)
+            this.editor.txt.html(this.form.package_desc)
           }
         })
       }
