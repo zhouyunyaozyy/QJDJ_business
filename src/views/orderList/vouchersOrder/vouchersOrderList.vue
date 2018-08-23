@@ -158,7 +158,7 @@
         this.$axios({
           type: 'post',
           url: '/order/getofflineorderlist',
-          data: {package_type: 2, status: this.type, page : this.start, ...this.formInline},
+          data: {package_type: 2, status: this.type, page : this.start, search: this.formInline.search, stime_finish: this.formInline.key_time[0] ? new Date(this.formInline.key_time[0]).getTime() / 1000 : '', etime_finish: this.formInline.key_time[1] ? new Date(this.formInline.key_time[1]).getTime() / 1000 : ''},
           fuc: (res) => {
             if (res.code !== 200) {
               return
