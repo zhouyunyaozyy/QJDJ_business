@@ -492,6 +492,9 @@ export const asyncRouterMap = [
       
       //      分享购买设置
       { path: 'shareBuyDetail', component: _import('otherConfig/shareBuy/shareBuyDetail'), name: 'shareBuyDetail', meta: { title: 'shareBuyDetail', noCache: true }},
+      
+      //     分账时间设置
+      { path: 'transferDetail', component: _import('otherConfig/transferConfig/transferDetail'), name: 'transferDetail', meta: { title: 'transferDetail', noCache: true }},
                
       //      推荐收入列表
       { path: 'referralEarningList', component: _import('otherConfig/referralEarning/referralEarningList'), name: 'referralEarningList', meta: { title: 'referralEarningList', noCache: true }, hidden: true}

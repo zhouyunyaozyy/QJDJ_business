@@ -63,7 +63,7 @@
         url: '/Order/getofflineorderinfo',
         data: {package_order_id: this.$route.query.package_order_id},
         fuc: (res) => {
-          this.tableData.push(res.data[0])
+          this.tableData.push(res.data)
         }
       })
     },

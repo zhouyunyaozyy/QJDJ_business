@@ -73,6 +73,7 @@ export default {
     
     otherConfig: '其它配置',
     referralEarningList: '推荐收入列表',
+    transferDetail: '分账时间配置',
     tombacDetail: '铜贝规则设置',
     shareBuyDetail: '分享购买设置',
     

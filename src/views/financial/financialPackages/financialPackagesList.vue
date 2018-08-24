@@ -2,17 +2,17 @@
   <div class="unlineFinancialList">
     <el-button @click="changeStatus('all')" :type="type == 'all' ? 'primary' : ''">全部</el-button>
     <el-button @click="changeStatus('1')" :type="type == '1' ? 'primary' : ''">结算成功</el-button>
-    <el-button @click="changeStatus('0')" :type="type == '0' ? 'primary' : ''">结算失败</el-button>
+    <el-button @click="changeStatus('-1')" :type="type == '-1' ? 'primary' : ''">结算失败</el-button>
     
     <div class="searchForm">
       <p @click='showFormBool = !showFormBool'>筛选查询<i v-if='showFormBool' class="el-icon-arrow-down"></i><i v-else class="el-icon-arrow-up"></i></p>
       <el-form :inline="true" :model="formInline" class="demo-form-inline" v-if='showFormBool'>
         <el-form-item label="输入搜索">
-          <el-input v-model="formInline.key_a" placeholder="商家名称"></el-input>
+          <el-input v-model="formInline.search_business_name" placeholder="商家名称"></el-input>
         </el-form-item>
         <el-form-item label="提交时间">
           <el-date-picker
-            v-model="formInline.key_time"
+            v-model="formInline.search_time"
             type="daterange"
             range-separator="至"
             start-placeholder="开始日期"
@@ -44,7 +44,7 @@
           min-width="120" align='center'>
         </el-table-column>
         <el-table-column
-          prop="name"
+          prop="business_name"
           label="商家名称"
           min-width="120" align='center'>
         </el-table-column>
@@ -53,32 +53,33 @@
           label="订单状态"
           min-width="120" align='center'>
           <template slot-scope='scope'>
-            <span v-if='scope.row.astatus == 0'>待支付</span>
-            <span v-else-if='scope.row.astatus == 1'>已支付</span>
-            <span v-else-if='scope.row.astatus == -1'>取消订单</span>
-            <span v-else-if='scope.row.astatus == 2'>已完成</span>
-            <span v-else-if='scope.row.astatus == 3'>已退款</span>
+            <span v-if='scope.row.order_status == 0'>待支付</span>
+            <span v-else-if='scope.row.order_status == 1'>已支付</span>
+            <span v-else-if='scope.row.order_status == -1'>取消订单</span>
+            <span v-else-if='scope.row.order_status == 2'>已完成</span>
+            <span v-else-if='scope.row.order_status == 3'>退款中</span>
+            <span v-else-if='scope.row.order_status == 4'>已退款</span>
           </template>
         </el-table-column>
         <el-table-column
           prop="package_name"
-          label="套餐名称"
+          label="服务名称"
           min-width="120" align='center'>
         </el-table-column>
         <el-table-column
-          prop="amount"
-          label="进价"
+          prop="total_cost"
+          label="售价"
           min-width="120" align='center'>
           <template slot-scope='scope'>
-            <span>{{scope.row.cost_price / 100}}</span>
+            <span>{{scope.row.total_cost / 100}}</span>
           </template>
         </el-table-column>
         <el-table-column
-          prop="amount"
+          prop="transfer_amount"
           label="结算金额"
           min-width="120" align='center'>
           <template slot-scope='scope'>
-            <span>{{scope.row.amount / 100}}</span>
+            <span>{{scope.row.transfer_amount / 100}}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -127,8 +128,8 @@
       return {
         tableData: [],
         formInline: {
-          key_a: '',
-          key_time: []
+          search_business_name: '',
+          search_time: []
         },
         start: 1,
         total: 0,
@@ -144,12 +145,12 @@
       getTableData () {
         this.$axios({
           type: 'post',
-          url: '/Financial/downFinancialList',
-          data: {page: this.start, type: 1, opt: this.type, ...this.formInline},
+          url: '/Financial/normalpackage',
+          data: {page: this.start, type: 1, opt: this.type, package_type: 1, ...this.formInline},
           fuc: (res) => {
             if (res.code === 200) {
-              this.tableData = res.data.order_list
-              this.total = res.data.all_num
+              this.tableData = res.data.data
+              this.total = res.data.count
             }
           }
         })
@@ -174,7 +175,7 @@
         this.getTableData()
       },
       detailFinancial (row) {
-        this.$router.push({path: '/financial/financialPackagesDetail', query: {package_order_id: row.package_order_id}})
+        this.$router.push({path: '/financial/financialPackagesDetail', query: {union_business_transfer_id: row.union_business_transfer_id}})
       }
     }
   }
