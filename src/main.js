@@ -60,7 +60,11 @@ Vue.prototype.$formatMoney = function (s) {
 
 // 格式化时间
 Vue.prototype.$formatTime = function (time) {
-  return (new Date(parseInt(time) * 1000).getFullYear()) + "-" + (new Date(parseInt(time) * 1000).getMonth() + 1) + "-" + (new Date(parseInt(time) * 1000).getDate()) + " " + (new Date(parseInt(time) * 1000).getHours()) + ":" + (new Date(parseInt(time) * 1000).getMinutes()) + ":" + (new Date(parseInt(time) * 1000).getSeconds())
+  if (time) {
+    return (new Date(parseInt(time) * 1000).getFullYear()) + "-" + (new Date(parseInt(time) * 1000).getMonth() + 1) + "-" + (new Date(parseInt(time) * 1000).getDate()) + " " + (new Date(parseInt(time) * 1000).getHours()) + ":" + (new Date(parseInt(time) * 1000).getMinutes()) + ":" + (new Date(parseInt(time) * 1000).getSeconds())
+  } else {
+    return '-'
+  }
 }
 
 // 关闭当前标签页

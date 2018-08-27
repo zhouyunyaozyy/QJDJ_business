@@ -15,17 +15,17 @@
       <el-table-column label='订单编号' prop='package_order_no' min-width="120" align='center'></el-table-column>
       <el-table-column label='订单付款时间' prop='pay_at' min-width="120" align='center'>
         <template slot-scope='scope'>
-          <span>{{$formatTime(scope.row.pay_at)}}</span>
+          <span v-if='scope.row.pay_at'>{{$formatTime(scope.row.pay_at)}}</span>
         </template>
       </el-table-column>
       <el-table-column v-if='tableData[0] && (tableData[0].status == 3 || tableData[0].status == 4)' label='申请退款时间' prop='apply_refund_at' min-width="120" align='center'>
         <template slot-scope='scope'>
-          <span>{{$formatTime(scope.row.apply_refund_at)}}</span>
+          <span v-if='scope.row.apply_refund_at'>{{$formatTime(scope.row.apply_refund_at)}}</span>
         </template>
       </el-table-column>
       <el-table-column label='订单时间' prop='create_at' min-width="120" align='center'>
         <template slot-scope='scope'>
-          <span>{{$formatTime(scope.row.create_at)}}</span>
+          <span v-if='scope.row.create_at'>{{$formatTime(scope.row.create_at)}}</span>
         </template>
       </el-table-column>
       <el-table-column v-if='tableData[0] && (tableData[0].status == 3 || tableData[0].status == 4)' label='退款原因' prop='refund_reason' min-width="120" align='center'></el-table-column>

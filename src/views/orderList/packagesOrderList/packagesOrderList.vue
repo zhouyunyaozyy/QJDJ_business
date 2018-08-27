@@ -42,7 +42,7 @@
           label="付款时间"
           min-width="160" align='center'>
           <template slot-scope='scope'>
-            <span>{{$formatTime(scope.row.pay_at)}}</span>
+            <span v-if='scope.row.pay_at'>{{$formatTime(scope.row.pay_at)}}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -50,7 +50,7 @@
           label="完成时间"
           min-width="160" align='center'>
           <template slot-scope='scope'>
-            <span>{{$formatTime(scope.row.status_at)}}</span>
+            <span v-if='scope.row.status_at'>{{$formatTime(scope.row.status_at)}}</span>
           </template>
         </el-table-column>
         <el-table-column
