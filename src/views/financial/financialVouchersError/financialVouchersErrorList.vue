@@ -165,7 +165,9 @@
       },
       downloadExcell () {
         this.$downloadExcell({
-          url: '/Financial/createExcel',
+          url: '/Financial/export',
+          package_type: 2,
+          export_type: 'exception',
           ...this.formInline
         })
       },

@@ -89,12 +89,12 @@
     <span>订单状态： </span>
     <el-select v-model="status" placeholder="请选择">
       <el-option
-        label="未结算"
-        value="-1">
+        label="结算成功"
+        value="1">
       </el-option>
       <el-option
-        label="已结算"
-        value="1">
+        label="结算失败"
+        value="0">
       </el-option>
     </el-select>
     <br/>
@@ -124,10 +124,11 @@
       changeStatus () {
         this.$axios({
           type: 'post',
-          url: '/Financial/updatedownstatus',
+          url: '/Financial/changestatus',
           data: {
-            id: this.tableData[0].package_order_id,
-            is_prorate: this.status
+            package_order_id: this.tableData[0].package_order_id,
+            change_type: 'normal',
+            change_status: this.status
           },
           fuc: (res) => {
             if (res.code == 200) {
