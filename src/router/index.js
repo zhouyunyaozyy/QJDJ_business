@@ -155,7 +155,7 @@ export const asyncRouterMap = [
       { path: 'unlineFinancialList', component: _import('financial/unlineFinancialList/unlineFinancialList'), name: 'unlineFinancialList', meta: { title: 'unlineFinancialList', noCache: true }},
       { path: 'unlineFinancialDetail', component: _import('financial/unlineFinancialList/unlineFinancialDetail'), name: 'unlineFinancialDetail', meta: { title: 'unlineFinancialDetail' }, hidden: true },
 
-      //      结算列表-服务
+      //      结算列表-服务正常
       { path: 'financialPackagesList', component: _import('financial/financialPackages/financialPackagesList'), name: 'financialPackagesList', meta: { title: 'financialPackagesList', noCache: true }},
       { path: 'financialPackagesDetail', component: _import('financial/financialPackages/financialPackagesDetail'), name: 'financialPackagesDetail', meta: { title: 'financialPackagesDetail' }, hidden: true },
 
