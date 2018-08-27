@@ -73,14 +73,14 @@
               type="text"
               size="mini"
               @click="() => changeStatus(node, data)" v-else>
-              修改{{!node.editBool}}
+              修改
             </el-button>
           </span>
         </span>
       </el-tree>
       <div slot="footer" class="dialog-footer">
         <el-button @click="changeStatusSure">确定修改</el-button>
-        <el-button @click="importDialogVisible = false">取 消</el-button>
+        <el-button @click="changeStatusDialog = false">取 消</el-button>
       </div>
     </el-dialog>
   </div>
@@ -170,7 +170,7 @@
       },
       beforeAvatarUpload (file) {
 //        let _this = this
-        if (this.uploadFilter_category_id == '') {
+        if (this.uploadFilter_category_id === '') {
           this.$message.warning('请先选择分类')
           return false
         }
