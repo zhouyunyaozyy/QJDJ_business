@@ -121,7 +121,7 @@ export const asyncRouterMap = [
       { path: 'unlineOrderList', component: _import('orderList/unlineOrderList/unlineOrderList'), name: 'unlineOrderList', meta: { title: 'unlineOrderList', noCache: true }},
       { path: 'unlineOrderDetail', component: _import('orderList/unlineOrderList/unlineOrderDetail'), name: 'unlineOrderDetail', meta: { title: 'unlineOrderDetail' }, hidden: true },
 
-      //      套餐订单
+      //      服务订单
       { path: 'packagesOrderList', component: _import('orderList/packagesOrderList/packagesOrderList'), name: 'packagesOrderList', meta: { title: 'packagesOrderList', noCache: true }},
       { path: 'packagesOrderDetail', component: _import('orderList/packagesOrderList/packagesOrderDetail'), name: 'packagesOrderDetail', meta: { title: 'packagesOrderDetail' }, hidden: true },
 
@@ -155,7 +155,7 @@ export const asyncRouterMap = [
       { path: 'unlineFinancialList', component: _import('financial/unlineFinancialList/unlineFinancialList'), name: 'unlineFinancialList', meta: { title: 'unlineFinancialList', noCache: true }},
       { path: 'unlineFinancialDetail', component: _import('financial/unlineFinancialList/unlineFinancialDetail'), name: 'unlineFinancialDetail', meta: { title: 'unlineFinancialDetail' }, hidden: true },
 
-      //      结算列表-套餐
+      //      结算列表-服务
       { path: 'financialPackagesList', component: _import('financial/financialPackages/financialPackagesList'), name: 'financialPackagesList', meta: { title: 'financialPackagesList', noCache: true }},
       { path: 'financialPackagesDetail', component: _import('financial/financialPackages/financialPackagesDetail'), name: 'financialPackagesDetail', meta: { title: 'financialPackagesDetail' }, hidden: true },
 
@@ -197,7 +197,7 @@ export const asyncRouterMap = [
       { path: 'goodsBrandsList', component: _import('goods/goodsBrands/goodsBrandsList'), name: 'goodsBrandsList', meta: { title: 'goodsBrandsList', noCache: true }},
       { path: 'goodsBrandsDetail', component: _import('goods/goodsBrands/goodsBrandsDetail'), name: 'goodsBrandsDetail', meta: { title: 'goodsBrandsDetail' }, hidden: true },
 
-      //      商品套餐
+      //      商品服务
       { path: 'goodsPackagesList', component: _import('goods/goodsPackages/goodsPackagesList'), name: 'goodsPackagesList', meta: { title: 'goodsPackagesList', noCache: true }},
       { path: 'goodsPackagesDetail', component: _import('goods/goodsPackages/goodsPackagesDetail'), name: 'goodsPackagesDetail', meta: { title: 'goodsPackagesDetail' }, hidden: true },
 
@@ -223,17 +223,17 @@ export const asyncRouterMap = [
       { path: 'onlineBusinessDetail', component: _import('business/businessList/onlineBusinessDetail'), name: 'onlineBusinessDetail', meta: { title: 'onlineBusinessDetail' }, hidden: true },
       { path: 'unlineBusinessList', component: _import('business/businessList/unlineBusinessList'), name: 'unlineBusinessList', meta: { title: 'unlineBusinessList', noCache: true }},
       { path: 'unlineBusinessDetail', component: _import('business/businessList/unlineBusinessDetail'), name: 'unlineBusinessDetail', meta: { title: 'unlineBusinessDetail' }, hidden: true },
-      
+
       // 方便首次添加商品，后面删除
       { path: 'onlineBusinessGoodsList', component: _import('business/businessList/onlineBusinessGoods/onlineBusinessGoodsList'), name: 'onlineBusinessGoodsList', meta: { title: 'onlineBusinessGoodsList', noCache: true }, hidden: true },
       { path: 'onlineBusinessGoodsDetail', component: _import('business/businessList/onlineBusinessGoods/onlineBusinessGoodsDetail'), name: 'onlineBusinessGoodsDetail', meta: { title: 'onlineBusinessGoodsDetail' }, hidden: true },
       { path: 'onlineBusinessBrandsList', component: _import('business/businessList/onlineBusinessGoods/onlineBusinessBrandsList'), name: 'onlineBusinessBrandsList', meta: { title: 'onlineBusinessBrandsList', noCache: true }, hidden: true },
       { path: 'onlineBusinessBrandsDetail', component: _import('business/businessList/onlineBusinessGoods/onlineBusinessBrandsDetail'), name: 'onlineBusinessBrandsDetail', meta: { title: 'onlineBusinessBrandsDetail' }, hidden: true },
-      
-      // 方便添加套餐，后面删除
+
+      // 方便添加服务，后面删除
       { path: 'unlineBusinessPackagesList', component: _import('business/businessList/unlineBusinessPackages/unlineBusinessPackagesList'), name: 'unlineBusinessPackagesList', meta: { title: 'unlineBusinessPackagesList', noCache: true }, hidden: true },
       { path: 'unlineBusinessPackagesDetail', component: _import('business/businessList/unlineBusinessPackages/unlineBusinessPackagesDetail'), name: 'unlineBusinessPackagesDetail', meta: { title: 'unlineBusinessPackagesDetail' }, hidden: true },
-      
+
       //  代金券
       { path: 'unlineBusinessVouchersList', component: _import('business/businessList/unlineBusinessVouchers/unlineBusinessVouchersList'), name: 'unlineBusinessVouchersList', meta: { title: 'unlineBusinessVouchersList', noCache: true }, hidden: true },
       { path: 'unlineBusinessVouchersDetail', component: _import('business/businessList/unlineBusinessVouchers/unlineBusinessVouchersDetail'), name: 'unlineBusinessVouchersDetail', meta: { title: 'unlineBusinessVouchersDetail' }, hidden: true },
@@ -329,7 +329,7 @@ export const asyncRouterMap = [
           //      首页管理-轮播图
           { path: 'indexSlideshowList', component: _import('interConfig/indexManage/indexSlideshow/indexSlideshowList'), name: 'indexSlideshowList', meta: { title: 'indexSlideshowList' }},
           { path: 'indexSlideshowDetail', component: _import('interConfig/indexManage/indexSlideshow/indexSlideshowDetail'), name: 'indexSlideshowDetail', meta: { title: 'indexSlideshowDetail' }, hidden: true},
-          
+
           //      首页管理-图标分类
           { path: 'indexIconClassifyList', component: _import('interConfig/indexManage/indexIconClassify/indexIconClassifyList'), name: 'indexIconClassifyList', meta: { title: 'indexIconClassifyList' }},
           { path: 'indexIconClassifyDetail', component: _import('interConfig/indexManage/indexIconClassify/indexIconClassifyDetail'), name: 'indexIconClassifyDetail', meta: { title: 'indexIconClassifyDetail' }, hidden: true},
@@ -337,16 +337,16 @@ export const asyncRouterMap = [
           //      首页管理-固定运营位配置
           { path: 'indexOperatingList', component: _import('interConfig/indexManage/indexOperating/indexOperatingList'), name: 'indexOperatingList', meta: { title: 'indexOperatingList' }},
           { path: 'indexOperatingDetail', component: _import('interConfig/indexManage/indexOperating/indexOperatingDetail'), name: 'indexOperatingDetail', meta: { title: 'indexOperatingDetail' }, hidden: true},
-          
+
           { path: 'indexOperatingGoodsList', component: _import('interConfig/indexManage/indexOperating/indexOperatingGoods/indexOperatingGoodsList'), name: 'indexOperatingGoodsList', meta: { title: 'indexOperatingGoodsList' }, hidden: true},
           { path: 'indexOperatingGoodsDetail', component: _import('interConfig/indexManage/indexOperating/indexOperatingGoods/indexOperatingGoodsDetail'), name: 'indexOperatingGoodsDetail', meta: { title: 'indexOperatingGoodsDetail' }, hidden: true},
-          
+
           { path: 'indexOperatingArticList', component: _import('interConfig/indexManage/indexOperating/indexOperatingArtic/indexOperatingArticList'), name: 'indexOperatingArticList', meta: { title: 'indexOperatingArticList' }, hidden: true},
           { path: 'indexOperatingArticDetail', component: _import('interConfig/indexManage/indexOperating/indexOperatingArtic/indexOperatingArticDetail'), name: 'indexOperatingArticDetail', meta: { title: 'indexOperatingArticDetail' }, hidden: true},
-          
+
           { path: 'indexOperatingBusinessList', component: _import('interConfig/indexManage/indexOperating/indexOperatingBusiness/indexOperatingBusinessList'), name: 'indexOperatingBusinessList', meta: { title: 'indexOperatingBusinessList' }, hidden: true},
           { path: 'indexOperatingBusinessDetail', component: _import('interConfig/indexManage/indexOperating/indexOperatingBusiness/indexOperatingBusinessDetail'), name: 'indexOperatingBusinessDetail', meta: { title: 'indexOperatingBusinessDetail' }, hidden: true},
-          
+
           { path: 'indexOperatingPackagesList', component: _import('interConfig/indexManage/indexOperating/indexOperatingPackages/indexOperatingPackagesList'), name: 'indexOperatingPackagesList', meta: { title: 'indexOperatingPackagesList' }, hidden: true},
           { path: 'indexOperatingPackagesDetail', component: _import('interConfig/indexManage/indexOperating/indexOperatingPackages/indexOperatingPackagesDetail'), name: 'indexOperatingPackagesDetail', meta: { title: 'indexOperatingPackagesDetail' }, hidden: true},
 
@@ -355,14 +355,14 @@ export const asyncRouterMap = [
           { path: 'indexFixClassifyDetail', component: _import('interConfig/indexManage/indexFixClassify/indexFixClassifyDetail'), name: 'indexFixClassifyDetail', meta: { title: 'indexFixClassifyDetail' }, hidden: true},
           { path: 'indexBusinessList', component: _import('interConfig/indexManage/indexFixClassify/indexBusinessList'), name: 'indexBusinessList', meta: { title: 'indexBusinessList' }, hidden: true},
           { path: 'indexBusinessDetail', component: _import('interConfig/indexManage/indexFixClassify/indexBusinessDetail'), name: 'indexBusinessDetail', meta: { title: 'indexBusinessDetail' }, hidden: true},
-          
+
           { path: 'indexGoodsList', component: _import('interConfig/indexManage/indexFixClassify/indexGoodsList'), name: 'indexGoodsList', meta: { title: 'indexGoodsList' }, hidden: true},
           { path: 'indexGoodsDetail', component: _import('interConfig/indexManage/indexFixClassify/indexGoodsDetail'), name: 'indexGoodsDetail', meta: { title: 'indexGoodsDetail' }, hidden: true},
           { path: 'indexPackagesList', component: _import('interConfig/indexManage/indexFixClassify/indexPackagesList'), name: 'indexPackagesList', meta: { title: 'indexPackagesList' }, hidden: true},
           { path: 'indexPackagesDetail', component: _import('interConfig/indexManage/indexFixClassify/indexPackagesDetail'), name: 'indexPackagesDetail', meta: { title: 'indexPackagesDetail' }, hidden: true}
         ]
       },
-      
+
       //      商城迭代
       {
         path: '/interConfig/indexMail',
@@ -373,7 +373,7 @@ export const asyncRouterMap = [
           //      商城迭代-轮播图
           { path: 'indexMailSlideshowList', component: _import('interConfig/indexMail/indexMailSlideshow/indexMailSlideshowList'), name: 'indexMailSlideshowList', meta: { title: 'indexMailSlideshowList' }},
           { path: 'indexMailSlideshowDetail', component: _import('interConfig/indexMail/indexMailSlideshow/indexMailSlideshowDetail'), name: 'indexMailSlideshowDetail', meta: { title: 'indexMailSlideshowDetail' }, hidden: true},
-          
+
           //      首页管理-图标分类
           { path: 'indexMailIconClassifyList', component: _import('interConfig/indexMail/indexMailIconClassify/indexMailIconClassifyList'), name: 'indexMailIconClassifyList', meta: { title: 'indexMailIconClassifyList' }},
           { path: 'indexMailIconClassifyDetail', component: _import('interConfig/indexMail/indexMailIconClassify/indexMailIconClassifyDetail'), name: 'indexMailIconClassifyDetail', meta: { title: 'indexMailIconClassifyDetail' }, hidden: true},
@@ -391,7 +391,7 @@ export const asyncRouterMap = [
           { path: 'indexMailRecommendedClassifyList', component: _import('interConfig/indexMail/indexMailRecommended/indexMailRecommendedClassifyList'), name: 'indexMailRecommendedClassifyList', meta: { title: 'indexMailRecommendedClassifyList'}}
         ]
       },
-      
+
       //      金贝商城迭代
       {
         path: '/interConfig/goldMail',
@@ -424,7 +424,7 @@ export const asyncRouterMap = [
           { path: 'goldMailRecommendedGoodsDetail', component: _import('interConfig/goldMail/goldMailRecommendedGoods/goldMailRecommendedGoodsDetail'), name: 'goldMailRecommendedGoodsDetail', meta: { title: 'goldMailRecommendedGoodsDetail' }, hidden: true},
         ]
       },
-      
+
       //      银贝商城迭代
       {
         path: '/interConfig/silverMail',
@@ -436,7 +436,7 @@ export const asyncRouterMap = [
           //      银贝商城迭代-顶端分类配置
           { path: 'silverMailTopClassifyList', component: _import('interConfig/silverMail/silverMailTopClassify/silverMailTopClassifyList'), name: 'silverMailTopClassifyList', meta: { title: 'silverMailTopClassifyList' }},
           { path: 'silverMailTopClassifyDetail', component: _import('interConfig/silverMail/silverMailTopClassify/silverMailTopClassifyDetail'), name: 'silverMailTopClassifyDetail', meta: { title: 'silverMailTopClassifyDetail' }, hidden: true},
-          
+
           //      银贝商城迭代-轮播图
           { path: 'silverMailSlideshowList', component: _import('interConfig/silverMail/silverMailSlideshow/silverMailSlideshowList'), name: 'silverMailSlideshowList', meta: { title: 'silverMailSlideshowList' }},
           { path: 'silverMailSlideshowDetail', component: _import('interConfig/silverMail/silverMailSlideshow/silverMailSlideshowDetail'), name: 'silverMailSlideshowDetail', meta: { title: 'silverMailSlideshowDetail' }, hidden: true},
@@ -454,7 +454,7 @@ export const asyncRouterMap = [
       }
     ]
   },
-    
+
   // 商家联盟
   {
     path: '/allianceManage',
@@ -470,12 +470,12 @@ export const asyncRouterMap = [
       { path: 'allianceList', component: _import('allianceManage/allianceList/businessAllianceList'), name: 'businessAllianceList', meta: { title: 'businessAllianceList', noCache: true }},
       { path: 'packageGoodsList', component: _import('allianceManage/allianceList/packageGoodsList'), name: 'packageGoodsList', meta: { title: 'packageGoodsList', noCache: true }, hidden: true },
       { path: 'packageGoodsDetail', component: _import('allianceManage/allianceList/packageGoodsDetail'), name: 'packageGoodsDetail', meta: { title: 'packageGoodsDetail', noCache: true }, hidden: true },
-      
+
       //      商家联盟配置
       { path: 'allianceConfig', component: _import('allianceManage/allianceConfig/allianceConfig'), name: 'allianceConfig', meta: { title: 'allianceConfig', noCache: true }}
     ]
   },
-  
+
   // 其它配置
   {
     path: '/otherConfig',
@@ -489,13 +489,13 @@ export const asyncRouterMap = [
     children: [
       //      铜贝规则设置
       { path: 'tombacDetail', component: _import('otherConfig/tombacConfig/tombacDetail'), name: 'tombacDetail', meta: { title: 'tombacDetail', noCache: true }},
-      
+
       //      分享购买设置
       { path: 'shareBuyDetail', component: _import('otherConfig/shareBuy/shareBuyDetail'), name: 'shareBuyDetail', meta: { title: 'shareBuyDetail', noCache: true }},
-      
+
       //     分账时间设置
       { path: 'transferDetail', component: _import('otherConfig/transferConfig/transferDetail'), name: 'transferDetail', meta: { title: 'transferDetail', noCache: true }},
-               
+
       //      推荐收入列表
       { path: 'referralEarningList', component: _import('otherConfig/referralEarning/referralEarningList'), name: 'referralEarningList', meta: { title: 'referralEarningList', noCache: true }, hidden: true}
     ]

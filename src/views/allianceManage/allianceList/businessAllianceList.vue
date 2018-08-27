@@ -81,7 +81,7 @@
           min-width="240" align='center'>
           <template slot-scope='scope'>
             <el-button @click='editAlliance(scope.row)'>编辑</el-button>
-            <el-button @click='packageGoods(scope.row.business_offline_id)'>套餐列表</el-button>
+            <el-button @click='packageGoods(scope.row.business_offline_id)'>服务列表</el-button>
           </template>
         </el-table-column>
       </el-table-column>
@@ -248,7 +248,7 @@
             })
           }
         })
-        
+
       },
       beforeAvatarUpload (file) {
         let formData = new FormData()

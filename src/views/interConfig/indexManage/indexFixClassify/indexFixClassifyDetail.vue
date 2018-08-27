@@ -12,7 +12,7 @@
             :value="2">
           </el-option>
           <el-option
-            label="套餐"
+            label="服务"
             :value="3">
           </el-option>
         </el-select>

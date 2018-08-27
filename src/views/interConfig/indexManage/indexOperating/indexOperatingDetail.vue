@@ -95,7 +95,7 @@
                   :value="2">
                 </el-option>
                 <el-option
-                  label="套餐"
+                  label="服务"
                   :value="3">
                 </el-option>
               </el-select>
@@ -191,7 +191,7 @@
             })
           }
         })
-        
+
       },
       category_numChange (num) {
         console.log('num', num)
@@ -208,7 +208,7 @@
         let _this = this
         var reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload = function(e){ 
+        reader.onload = function(e){
           _this.form.img_cover = this.result // 这个就是base64编码了
         }
         return false
@@ -217,7 +217,7 @@
         let _this = this
         var reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload = function(e){ 
+        reader.onload = function(e){
           _this.form.img_header = this.result // 这个就是base64编码了
         }
         return false

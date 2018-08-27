@@ -1,6 +1,6 @@
 <template>
   <div class="unlineOrderDetail">
-    <p v-if='tableData[0]'>当前订单状态： 
+    <p v-if='tableData[0]'>当前订单状态：
       <span v-if='tableData[0].status == -1'>取消订单</span>
       <span v-if='tableData[0].status == 0'>待支付</span>
       <span v-if='tableData[0].status == 1'>已支付</span>
@@ -34,7 +34,7 @@
       <el-table-column label='商家名称' prop='business_name' min-width="120" align='center'>
       </el-table-column>
     </el-table>
-    <h5>套餐信息</h5>
+    <h5>服务信息</h5>
     <el-table
     :data="tableData" border
     style="width: 100%">
@@ -68,7 +68,7 @@
       })
     },
     methods: {
-      
+
     }
   }
 </script>
@@ -77,7 +77,7 @@
     margin: 10px 20px 20px;
     overflow: hidden;
   }
-  
+
 </style>
 <style>
   .unlineOrderDetail .el-table th {

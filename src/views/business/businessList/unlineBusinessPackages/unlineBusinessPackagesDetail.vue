@@ -37,15 +37,15 @@
         </el-date-picker>
       </el-form-item>
       <el-form-item label='库存' prop='num'>
-        <el-input v-model="form.num" placeholder='请输入套餐库存'></el-input>
+        <el-input v-model="form.num" placeholder='请输入服务库存'></el-input>
       </el-form-item>
       <el-form-item label='温馨提示' prop='package_desc'>
 <!--        <el-input type='textarea' v-model="form.package_desc" :maxlength='500' placeholder='请输入温馨提示'></el-input>-->
-        
+
         <div ref="editor" style="text-align:left;max-width: 400px;"></div>
       </el-form-item>
-      
-      <code>套餐相册</code>
+
+      <code>服务相册</code>
       <el-form-item>
         <el-upload
           class="avatar-uploader"
@@ -55,7 +55,7 @@
           <img v-if="form.list_img" :src="form.list_img" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
-        <span>此处为套餐列表和详情页展示轮播图（800*800）</span>
+        <span>此处为服务列表和详情页展示轮播图（800*800）</span>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submit">保存并上架</el-button>
