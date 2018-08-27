@@ -30,6 +30,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">查询</el-button>
+          <el-button type="primary" @click="downloadExcell">导出Excell</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -282,6 +283,12 @@
         } else {
           this.$router.push({path: '/orderList/onlineOrderDetail',query: {oid: row.oid}})
         }
+      },
+      downloadExcell () {
+        this.$downloadExcell({
+          url: '/order/export', type: this.type,
+          ...this.formInline
+        })
       },
       onSubmit () {
         this.start = 1
