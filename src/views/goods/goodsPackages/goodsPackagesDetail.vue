@@ -58,7 +58,12 @@
         <span>此处为服务列表和详情页展示轮播图（800*800）</span>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submit">保存并上架</el-button>
+        <el-button v-if='status === 0' type="primary" @click="submit(1)">保存,审核通过</el-button>
+        <el-button v-if='status === 0' type="primary" @click="">驳回</el-button>
+        <el-button v-if='status === 1' type="primary" @click="submit(1)">保存,修改成功</el-button>
+        <el-button v-if='status === 1' type="primary" @click="">下架</el-button>
+        <el-button v-if='status === -2' type="primary" @click="submit(1)">保存并上架</el-button>
+        <el-button v-if='status === -1' type="primary" @click="submit(1)">保存并上架</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -102,7 +107,7 @@
         },
         pickerOptions0: {
           disabledDate(time) {
-            return time.getTime() < Date.now();
+            return time.getTime() < Date.now() - 3600 * 1000 * 24;
           }
         },
         pickerOptions1: {
@@ -110,7 +115,7 @@
             if (this.form.expire_time) {
               return time.getTime() < this.form.expire_time.getTime()
             }
-            return time.getTime() < Date.now()
+            return time.getTime() < Date.now() - 3600 * 1000 * 24
           }
         }
       }

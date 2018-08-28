@@ -1,6 +1,6 @@
 <template>
   <div class="unlineFinancialrDetail">
-    <p>当前订单状态： <span v-if='tableData[0] && tableData[0].transfer_status == 0'>待回款</span><span v-else-if='tableData[0] && tableData[0].transfer_status == 1'>回款成功</span><span v-else-if='tableData[0] && tableData[0].transfer_status == -1'>回款失败</span></p>
+    <p>当前订单状态： <span v-if='tableData[0] && tableData[0].refund_status == 0'>待回款</span><span v-else-if='tableData[0] && tableData[0].refund_status == 1'>回款成功</span><span v-else-if='tableData[0] && tableData[0].refund_status == -1'>回款失败</span></p>
     <h5>订单信息</h5>
     <el-table
     :data="tableData" border
@@ -63,6 +63,9 @@
       <el-table-column label='应退金贝' prop='gold' min-width="120" align='center'>
       </el-table-column>
       <el-table-column label='实退金贝' prop='gold' min-width="120" align='center'>
+        <template slot-scope='scope'>
+          <span v-if='scope.row.refund_status == 1'>{{scope.row.gold}}</span>
+        </template>
       </el-table-column>
       <el-table-column label='应退现金' prop='cash' min-width="120" align='center'>
         <template slot-scope='scope'>
@@ -71,7 +74,7 @@
       </el-table-column>
       <el-table-column label='实退现金' prop='cash' min-width="120" align='center'>
         <template slot-scope='scope'>
-          <span>{{scope.row.cash / 100}}</span>
+          <span v-if='scope.row.refund_status == 1'>{{scope.row.cash / 100}}</span>
         </template>
       </el-table-column>
     </el-table>

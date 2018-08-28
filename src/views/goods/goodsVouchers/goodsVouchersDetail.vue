@@ -103,7 +103,7 @@
         },
         pickerOptions0: {
           disabledDate(time) {
-            return time.getTime() < Date.now();
+            return time.getTime() < Date.now() - 3600 * 1000 * 24;
           }
         },
         pickerOptions1: {
@@ -111,7 +111,7 @@
             if (this.form.expire_time) {
               return time.getTime() < this.form.expire_time.getTime()
             }
-            return time.getTime() < Date.now()
+            return time.getTime() < Date.now() - 3600 * 1000 * 24
           }
         }
       }

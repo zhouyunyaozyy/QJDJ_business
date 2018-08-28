@@ -196,7 +196,7 @@
         this.$axios({
           type: 'post',
           url: '/Order/orderlistbyadmin',
-          data: {type: this.type, page : this.start, ...this.formInline},
+          data: {type: this.type, page: this.start, ...this.formInline},
           fuc: (res) => {
             if (res.code !== 200) {
               return

@@ -75,13 +75,16 @@
           prop="gold"
           label="实退金贝"
           min-width="120" align='center'>
+          <template slot-scope='scope'>
+            <span v-if='scope.row.transfer_status == 1'>{{scope.row.gold}}</span>
+          </template>
         </el-table-column>
         <el-table-column
           prop="cash"
           label="应退现金"
           min-width="120" align='center'>
           <template slot-scope='scope'>
-            <span>{{scope.row.cash / 100}}</span>
+            <span v-if='scope.row.transfer_status == 1'>{{scope.row.cash / 100}}</span>
           </template>
         </el-table-column>
         <el-table-column

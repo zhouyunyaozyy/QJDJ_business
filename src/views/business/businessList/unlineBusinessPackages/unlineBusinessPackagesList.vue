@@ -51,8 +51,16 @@
           label="服务价格"
           min-width="120" align='center'>
           <template slot-scope='scope'>
-            <span v-if='scope.row.transfer_type === 0'>{{scope.row.transfer_cash / 100}}元</span>
-            <span v-else>{{scope.row.price / 10000 * scope.row.transfer_ratio}}元</span>
+            <span>{{scope.row.price / 100}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="silver_price"
+          label="结算价格"
+          min-width="120" align='center'>
+          <template slot-scope='scope'>
+            <span v-if='scope.row.transfer_type === 0'>{{scope.row.transfer_cash / 100}}</span>
+            <span v-else>{{scope.row.price * scope.row.transfer_ratio / 10000}}</span>
           </template>
         </el-table-column>
         <el-table-column
