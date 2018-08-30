@@ -13,8 +13,16 @@
       </el-table-column>
       <el-table-column label='商家名称' prop='business_name' min-width="120" align='center'></el-table-column>
       <el-table-column label='商品名称' prop='g_name' min-width="120" align='center'></el-table-column>
-      <el-table-column label='商品进价' prop='g_income' min-width="120" align='center'></el-table-column>
-      <el-table-column label='商品售价' prop='g_price' min-width="120" align='center'></el-table-column>
+      <el-table-column label='商品进价' prop='g_income' min-width="120" align='center'>
+        <template slot-scope='scope'>
+          <span>{{scope.row.g_income / 100}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label='商品售价' prop='g_price' min-width="120" align='center'>
+        <template slot-scope='scope'>
+          <span>{{scope.row.g_price / 100}}</span>
+        </template>
+      </el-table-column>
     </el-table>
     <el-table
     :data="tableData" border
@@ -36,7 +44,11 @@
     style="width: 100%">
       <el-table-column label='结算单号' prop='prorate_num' min-width="120" align='center'></el-table-column>
       <el-table-column label='结算渠道' prop='channel' min-width="120" align='center'></el-table-column>
-      <el-table-column label='结算金额' prop='amount' min-width="120" align='center'></el-table-column>
+      <el-table-column label='结算金额' prop='amount' min-width="120" align='center'>
+        <template slot-scope='scope'>
+          <span>{{scope.row.amount / 100}}</span>
+        </template>
+      </el-table-column>
       <el-table-column label='结算状态' prop='roof_status' min-width="120" align='center'>
         <template slot-scope='scope'>
           <span v-if='scope.row.roof_status == 0'>失败</span>
