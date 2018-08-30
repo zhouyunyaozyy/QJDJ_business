@@ -27,11 +27,15 @@
     <el-table
     :data="tableData" border
     style="width: 100%">
-      <el-table-column label='订单总金额' prop='total_cost' min-width="120" align='center'></el-table-column>
+      <el-table-column label='订单总金额' prop='total_cost' min-width="120" align='center'>
+        <span v-if='scope.row.total_cost'>{{scope.row.total_cost / 100}}</span>
+      </el-table-column>
       <el-table-column label='金贝抵扣' prop='gold' min-width="120" align='center'></el-table-column>
       <el-table-column label='余额抵扣' prop='balance' min-width="120" align='center'></el-table-column>
       <el-table-column label='产生银贝' prop='silver' min-width="120" align='center'></el-table-column>
-      <el-table-column label='应付款金额' prop='cash' min-width="120" align='center'></el-table-column>
+      <el-table-column label='应付款金额' prop='cash' min-width="120" align='center'>
+        <span v-if='scope.row.cash'>{{scope.row.cash / 100}}</span>
+      </el-table-column>
     </el-table>
   </div>
 </template>

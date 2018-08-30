@@ -64,6 +64,14 @@
           </template>
         </el-table-column>
         <el-table-column
+          prop="transfer_cash"
+          label="售价"
+          min-width="120" align='center'>
+          <template slot-scope='scope'>
+            <span>{{scope.row.price / 100}}元</span>
+          </template>
+        </el-table-column>
+        <el-table-column
           prop="second_category_name"
           label="类目"
           min-width="120" align='center'>

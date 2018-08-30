@@ -42,11 +42,19 @@
         </el-table-column>
         <el-table-column
           prop="transfer_cash"
-          label="价格"
+          label="结算价"
           min-width="120" align='center'>
           <template slot-scope='scope'>
-            <span v-if='scope.row.transfer_type === 0'>{{scope.row.transfer_cash / 100}}元</span>
+            <span v-if='scope.row.transfer_type === 0'>{{scope.row.price / 100}}元</span>
             <span v-else>{{scope.row.price / 10000 * scope.row.transfer_ratio}}元</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="transfer_cash"
+          label="售价"
+          min-width="120" align='center'>
+          <template slot-scope='scope'>
+            <span>{{scope.row.price / 100}}元</span>
           </template>
         </el-table-column>
         <el-table-column

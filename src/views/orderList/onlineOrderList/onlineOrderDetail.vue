@@ -136,11 +136,19 @@
     style="width: 100%">
       <el-table-column label='活动优惠' prop='consume_activity' min-width="120" align='center'></el-table-column>
       <el-table-column label='折扣金额' prop='consume_discount' min-width="120" align='center'></el-table-column>
-      <el-table-column label='订单总金额' prop='consume_total_amount' min-width="120" align='center'></el-table-column>
-      <el-table-column label='应付款金额' prop='consume_amount_payable' min-width="120" align='center'></el-table-column>
+      <el-table-column label='订单总金额' prop='consume_total_amount' min-width="120" align='center'>
+        <template slot-scope='scope'>
+          <span v-if='scope.row.consume_total_amount'>{{scope.row.consume_total_amount / 100}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label='应付款金额' prop='consume_amount_payable' min-width="120" align='center'>
+        <template slot-scope='scope'>
+          <span v-if='scope.row.consume_amount_payable'>{{scope.row.consume_amount_payable / 100}}</span>
+        </template>
+      </el-table-column>
     </el-table>
     <div style="width: 100%;height: 44px;border: 1px solid #ebeef5;background: #f5f7fa;">
-      <p style="text-align: right;" v-if='formData[0]'>合计：￥<span>{{formData[0].consume_amount_payable}}</span></p>
+      <p style="text-align: right;" v-if='formData[0]'>合计：￥<span>{{formData[0].consume_amount_payable / 100}}</span></p>
     </div>
     <h5 v-if='tableData[0] && tableData[0].ginfo_except_status != 0'>异常信息</h5>
     <el-table
