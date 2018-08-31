@@ -160,6 +160,15 @@ export default {
     packageGoodsDetail: '套餐详情',
     allianceConfig: '商家联盟配置',
 
+    activityManage: '活动金贝管理',
+    virtualGoods: '虚拟商品',
+    virtualGoodsList: '虚拟商品列表',
+    virtualGoodsDetail: '虚拟商品详情',
+    virtualGoodsOrderList: '虚拟商品订单',
+    activityGoodsList: '活动商品',
+    activityGoodsDetail: '活动商品详情',
+    activityGold: '活动金贝',
+
     // 自带
     dashboard: '首页',
     introduction: '简述',

@@ -454,6 +454,42 @@ export const asyncRouterMap = [
       }
     ]
   },
+
+  // 活动商品配置
+  {
+    path: '/activityManage',
+    component: Layout,
+//    redirect: '/interConfig/indexManage/indexSlideshowList',
+    name: 'activityManage',
+    meta: {
+      title: 'activityManage',
+      icon: 'chart'
+    },
+    children: [
+      //      虚拟商品管理
+      {
+        path: '/activityManage/virtualGoods',
+        component: _import('activityManage/index'),
+        name: 'virtualGoods',
+        meta: { title: 'virtualGoods'},
+        children: [
+          //      虚拟商品
+          { path: 'virtualGoodsList', component: _import('activityManage/virtualGoods/virtualGoodsList/virtualGoodsList'), name: 'virtualGoodsList', meta: { title: 'virtualGoodsList' }},
+          { path: 'virtualGoodsDetail', component: _import('activityManage/virtualGoods/virtualGoodsList/virtualGoodsDetail'), name: 'virtualGoodsDetail', meta: { title: 'virtualGoodsDetail' }, hidden: true},
+          
+          //      虚拟商品订单
+          { path: 'virtualGoodsOrderList', component: _import('activityManage/virtualGoods/virtualGoodsOrder/virtualGoodsOrderList'), name: 'virtualGoodsOrderList', meta: { title: 'virtualGoodsOrderList' }}
+        ]
+      },
+      
+      //      活动商品
+      { path: 'activityGoodsList', component: _import('activityManage/activityGoods/activityGoodsList'), name: 'activityGoodsList', meta: { title: 'activityGoodsList' }},
+      { path: 'activityGoodsDetail', component: _import('activityManage/activityGoods/activityGoodsDetail'), name: 'activityGoodsDetail', meta: { title: 'activityGoodsDetail' }, hidden: true},
+      
+      //      活动金贝
+      { path: 'activityGold', component: _import('activityManage/activityGold/activityGold'), name: 'activityGold', meta: { title: 'activityGold' }}
+    ]
+  },
     
   // 商家联盟
   {
