@@ -35,7 +35,11 @@
           <span v-for="item in order_type" v-if='item.value == scope.row.pay_way'>{{item.label}}</span>
         </template>
       </el-table-column>
-      <el-table-column label='订单完成时间' prop='take_at' min-width="120" align='center'></el-table-column>
+      <el-table-column label='订单完成时间' prop='take_at' min-width="120" align='center'>
+        <template slot-scope='scope'>
+          <span>{{$formatTime(scope.row.take_at)}}</span>
+        </template>
+      </el-table-column>
       <el-table-column label='应退金贝' prop='retreat_gold' min-width="120" align='center'></el-table-column>
       <el-table-column label='应扣金贝' prop='deduction_gold' min-width="120" align='center'></el-table-column>
       <el-table-column label='实退金贝' prop='actual_gold' min-width="120" align='center'></el-table-column>
@@ -65,7 +69,11 @@
           <span v-else>成功</span>
         </template>
       </el-table-column>
-      <el-table-column label='结算完成时间' prop='pay_at' min-width="120" align='center'></el-table-column>
+      <el-table-column label='结算完成时间' prop='pay_at' min-width="120" align='center'>
+        <template slot-scope='scope'>
+          <span>{{$formatTime(scope.row.pay_at)}}</span>
+        </template>
+      </el-table-column>
     </el-table>
     <h5>商家信息</h5>
     <el-table

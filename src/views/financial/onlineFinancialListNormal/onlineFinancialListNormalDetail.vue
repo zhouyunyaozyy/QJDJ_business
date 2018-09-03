@@ -1,6 +1,6 @@
 <template>
   <div class="onlineFinancialListNormalDetail">
-    <p>当前订单状态： <span v-if='tableData[0] && tableData[0].roof_status == 0'>结算失败</span><span v-else>结算成功</span></p>
+    <p>当前订单状态： <span v-if='tableData[0] && tableData[0].roof_status == 0'>未结算</span><span v-else-if='tableData[0] && tableData[0].roof_status == 1'>结算成功</span><span v-else-if='tableData[0] && tableData[0].roof_status == 0'>结算失败</span></p>
     <h5>订单信息</h5>
     <el-table
     :data="tableData" border
@@ -35,7 +35,11 @@
           <span v-for="item in order_type" v-if='item.value == scope.row.pay_way'>{{item.label}}</span>
         </template>
       </el-table-column>
-      <el-table-column label='订单完成时间' prop='take_at' min-width="120" align='center'></el-table-column>
+      <el-table-column label='订单完成时间' prop='take_at' min-width="120" align='center'>
+        <template slot-scope='scope'>
+          <span>{{$formatTime(scope.row.take_at)}}</span>
+        </template>
+      </el-table-column>
       <el-table-column label='' prop='' min-width="120" align='center'></el-table-column>
     </el-table>
     <h5>结算信息</h5>
@@ -55,7 +59,11 @@
           <span v-else>成功</span>
         </template>
       </el-table-column>
-      <el-table-column label='结算完成时间' prop='pay_at' min-width="120" align='center'></el-table-column>
+      <el-table-column label='结算完成时间' prop='pay_at' min-width="120" align='center'>
+        <template slot-scope='scope'>
+          <span>{{$formatTime(scope.row.pay_at)}}</span>
+        </template>
+      </el-table-column>
     </el-table>
     <h5>商家信息</h5>
     <el-table
@@ -113,7 +121,6 @@
         data: {info_id: this.$route.query.id},
         fuc: (res) => {
           this.tableData = [res.data]
-          this.status = this.tableData[0].roof_status + ''
         }
       })
     },
