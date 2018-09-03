@@ -98,9 +98,10 @@
         </el-table-column>
         <el-table-column
           label="操作"
-          min-width="120" align='center'>
+          min-width="240" align='center'>
           <template slot-scope='scope'>
             <el-button @click='detailFinancial(scope.row)'>查看详情</el-button>
+            <el-button @click='assignMoney(scope.row)'>分账</el-button>
           </template>
         </el-table-column>
       </el-table-column>
@@ -175,6 +176,18 @@
       },
       detailFinancial (row) {
         this.$router.push({path: '/financial/onlineFinancialListNormalDetail', query: {id: row.info_id}})
+      },
+      assignMoney (row) {
+        this.$axios({
+          type: 'post',
+          url: '/queue/manualTransfer',
+          data: {type: 'online', transfer_id: row.id},
+          fuc: (res) => {
+            if (res.code == 200) {
+              this.$message.success('操作成功')
+            }
+          }
+        })
       }
     }
   }
