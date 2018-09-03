@@ -214,6 +214,7 @@
       },
       handleClose () {
         this.addDialogInput = ''
+        this.addDialog = false
       },
       addDialogTrue () {
         this.$axios({

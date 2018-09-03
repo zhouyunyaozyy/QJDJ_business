@@ -52,15 +52,15 @@
           <span>现金支付：{{scope.row.onorder_cash / 100}},余额支付：{{scope.row.onorder_balance / 100}},银贝支付：{{scope.row.onorder_silver}},金贝支付：{{scope.row.onorder_gold}},铜贝支付：{{scope.row.onorder_copper}}</span>
         </template>
       </el-table-column>
-      <el-table-column label='物流服务商' prop='onorder_logistics' min-width="120" align='center'>
+      <el-table-column label='物流服务商' prop='ginfo_logistics' min-width="120" align='center'>
         <template slot-scope='scope'>
-          <span v-if='scope.row.onorder_logistics'>{{scope.row.onorder_logistics}}</span>
+          <span v-if='scope.row.ginfo_logistics'>{{scope.row.ginfo_logistics}}</span>
           <span v-else>-</span>
         </template>
       </el-table-column>
-      <el-table-column label='物流单号' prop='onorder_logistics_id' min-width="120" align='center'>
+      <el-table-column label='物流单号' prop='ginfo_logistics_id' min-width="120" align='center'>
         <template slot-scope='scope'>
-          <span v-if='scope.row.onorder_logistics_id'>{{scope.row.onorder_logistics_id}}</span>
+          <span v-if='scope.row.ginfo_logistics_id'>{{scope.row.ginfo_logistics_id}}</span>
           <span v-else>-</span>
         </template>
       </el-table-column>
