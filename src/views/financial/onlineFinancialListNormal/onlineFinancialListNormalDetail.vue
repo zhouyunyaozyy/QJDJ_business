@@ -1,6 +1,6 @@
 <template>
   <div class="onlineFinancialListNormalDetail">
-    <p>当前订单状态： <span v-if='tableData[0] && tableData[0].roof_status == 0'>结算失败</span><span v-else>结算成功</span></p>
+    <p>当前订单状态： <span v-if='tableData[0] && tableData[0].roof_status == 0'>未结算</span><span v-else-if='tableData[0] && tableData[0].roof_status == 1'>结算成功</span><span v-else-if='tableData[0] && tableData[0].roof_status == -1'>结算失败</span></p>
     <h5>订单信息</h5>
     <el-table
     :data="tableData" border
@@ -113,7 +113,6 @@
         data: {info_id: this.$route.query.id},
         fuc: (res) => {
           this.tableData = [res.data]
-          this.status = this.tableData[0].roof_status + ''
         }
       })
     },
