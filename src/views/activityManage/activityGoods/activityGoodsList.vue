@@ -23,8 +23,8 @@
     </div>
 
     <el-button @click='addGoods' style='margin-bottom: 10px;'>添加商品</el-button>
-    <el-button @click='downExcell'>下载商品excell模板</el-button>
-    <el-button @click='importDialogVisible = true' style='margin-bottom: 10px;'>导入商品excell</el-button>
+    <el-button @click='downExcell'>下载商品excel模板</el-button>
+    <el-button @click='importDialogVisible = true' style='margin-bottom: 10px;'>导入商品excel</el-button>
     <el-table
     :data="tableData"
     style="width: 100%">
@@ -104,13 +104,13 @@
     :total="total" :page-size="20" @current-change="handleCurrentChange"
       :current-page.sync="start">
     </el-pagination>
-    
+
     <el-dialog title="批量导入" :visible.sync="importDialogVisible" :show-close='false'>
       <el-upload
         class="upload-demo"
         action="https://jsonplaceholder.typicode.com/posts/" :before-upload="beforeAvatarUpload">
         <el-button size="small" type="primary">点击上传</el-button>
-        <div slot="tip" class="el-upload__tip">只能上传模板excell文件</div>
+        <div slot="tip" class="el-upload__tip">只能上传模板excel文件</div>
       </el-upload>
       <div slot="footer" class="dialog-footer">
         <el-button @click="importDialogVisible = false">取 消</el-button>
@@ -184,7 +184,7 @@
         return false
       },
       handleCurrentChange (val) {
-        this.start = val 
+        this.start = val
         this.getTableData()
       },
       onSubmit () {
