@@ -50,7 +50,7 @@
       title="请输入追加金贝数量"
       :visible.sync="addDialog"
       width="30%"
-      :before-close="handleClose">
+      @close="handleClose">
       <el-input v-model='addDialogInput' placeholder='请输入金贝数量'></el-input>
       <span slot="footer" class="dialog-footer">
         <el-button @click="addDialog = false">取 消</el-button>
@@ -60,7 +60,7 @@
     
   <!--  添加历史弹框-->
     <el-dialog
-      title="请输入追加金贝数量"
+      title="金贝追加历史"
       :visible.sync="addListDialog"
       width="50%">
       <el-table :data='addListDialogTable' style="width: 100%" stripe>
@@ -213,8 +213,8 @@
         })
       },
       handleClose () {
+        console.log('add')
         this.addDialogInput = ''
-        this.addDialog = false
       },
       addDialogTrue () {
         this.$axios({
