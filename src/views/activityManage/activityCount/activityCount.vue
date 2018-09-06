@@ -1,5 +1,16 @@
 <template>
   <div class='activityCount'>
+    <div class="block" style="position: absolute;z-index: 9;top: 10px;left: 160px;">
+      <el-date-picker
+        v-model="timePicker"
+        type="daterange"
+        value-format="timestamp"
+        range-separator="至"
+        start-placeholder="开始日期" @change='timeChange'
+        :default-time="['00:00:00', '23:59:59']"
+        end-placeholder="结束日期">
+      </el-date-picker>
+    </div>
     <div :class="className" :id="id" :style="{height:height,width:width, display: 'inline-block'}"></div>
     <div style="width: 30%;display: inline-block;float: right; ">
       <el-form ref="form" :model="form" label-width="120px" label-position="right">
@@ -111,7 +122,7 @@ export default {
       shareLineData: [],
       joinLineData: [],
       xData: [],
-      
+      timePicker: [],
       tableData: [],
       start: 1,
       total: 0,
@@ -119,35 +130,12 @@ export default {
   },
   created () {
     this.getTableData()
-    this.$axios({
-      type: 'post',
-      url: '/active/overallCount',
-      data: {start_time: 1533052800, end_time: 1536163200},
-      fuc: (res) => {
-//        if (res.code )
-        console.log(res.data.share_data)
-        
-        this.form = res.data.share_data
-        
-//        参与人数数据重组
-        let arr = []
-        for (let val of res.data.participate_number_data) {
-          this.xData.push(val.participate_number_time)
-          arr.push(val.participate_number)
-        }
-        this.joinLineData = arr
-//        分享数数据重组
-        let arr2 = []
-        for (let val of res.data.share_number_data) {
-          arr2.push(val.share_number)
-        }
-        this.shareLineData = arr2
-        console.log(this.joinLineData, this.shareLineData)
-        this.initChart()
-      }
-    })
+    this.timePicker.push(new Date(new Date().setHours(0, 0, 0, 0)))
+    this.timePicker.push(new Date(new Date().setHours(23, 59, 59, 0)))
   },
   mounted() {
+    this.chart = echarts.init(document.getElementById(this.id))
+    this.getLineData()
 //    this.initChart()
   },
   beforeDestroy() {
@@ -158,6 +146,39 @@ export default {
     this.chart = null
   },
   methods: {
+    timeChange (val) {
+      this.getLineData()
+    },
+    getLineData () {
+      this.xData = []
+      this.$axios({
+        type: 'post',
+        url: '/active/overallCount',
+        data: {start_time: this.timePicker[0] / 1000, end_time: this.timePicker[1] / 1000},
+        fuc: (res) => {
+  //        if (res.code )
+          console.log(res.data.share_data)
+
+          this.form = res.data.share_data
+
+  //        参与人数数据重组
+          let arr = []
+          for (let val of res.data.participate_number_data) {
+            this.xData.push(val.participate_number_time)
+            arr.push(val.participate_number)
+          }
+          this.joinLineData = arr
+  //        分享数数据重组
+          let arr2 = []
+          for (let val of res.data.share_number_data) {
+            arr2.push(val.share_number)
+          }
+          this.shareLineData = arr2
+          console.log(this.joinLineData, this.shareLineData)
+          this.initChart()
+        }
+      })
+    },
     getTableData () {
       this.$axios({
         type: 'post',
@@ -174,7 +195,6 @@ export default {
       this.getTableData()
     },
     initChart() {
-      this.chart = echarts.init(document.getElementById(this.id))
       
       var joinLineData = this.joinLineData
       var shareLineData = this.shareLineData
@@ -183,14 +203,14 @@ export default {
       console.log(joinLineData, shareLineData)
       
       this.chart.setOption({
-        backgroundColor: '#394056',
+        backgroundColor: '#fff',
         title: {
           top: 20,
           text: '活动整体分享统计',
           textStyle: {
             fontWeight: 'normal',
             fontSize: 16,
-            color: '#F1F1F3'
+            color: '#000'
           },
           left: '1%'
         },
@@ -212,7 +232,7 @@ export default {
           right: '4%',
           textStyle: {
             fontSize: 12,
-            color: '#F1F1F3'
+            color: '#000'
           }
         },
         grid: {
@@ -252,7 +272,7 @@ export default {
           },
           splitLine: {
             lineStyle: {
-              color: '#57617B'
+              color: '#fff'
             }
           }
         }],
@@ -370,6 +390,7 @@ export default {
   .activityCount{
     margin: 10px 20px 20px;
     overflow: hidden;
+    position: relative;
   }
   
 </style>
