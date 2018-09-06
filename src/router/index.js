@@ -487,7 +487,10 @@ export const asyncRouterMap = [
       { path: 'activityGoodsDetail', component: _import('activityManage/activityGoods/activityGoodsDetail'), name: 'activityGoodsDetail', meta: { title: 'activityGoodsDetail' }, hidden: true},
       
       //      活动金贝
-      { path: 'activityGold', component: _import('activityManage/activityGold/activityGold'), name: 'activityGold', meta: { title: 'activityGold' }}
+      { path: 'activityGold', component: _import('activityManage/activityGold/activityGold'), name: 'activityGold', meta: { title: 'activityGold' }},
+      
+      //      活动分享统计
+      { path: 'activityCount', component: _import('activityManage/activityCount/activityCount'), name: 'activityCount', meta: { title: 'activityCount' }}
     ]
   },
     

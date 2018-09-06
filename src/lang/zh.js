@@ -168,6 +168,7 @@ export default {
     activityGoodsList: '活动商品',
     activityGoodsDetail: '活动商品详情',
     activityGold: '活动金贝',
+    activityCount: '活动分享管理',
 
     // 自带
     dashboard: '首页',
