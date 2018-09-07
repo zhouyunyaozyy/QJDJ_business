@@ -116,8 +116,11 @@
           label="结算状态"
           min-width="120" align='center'>
           <template slot-scope='scope'>
-            <span v-if='scope.row.roof_status == 0'>失败</span>
-            <span v-else-if='scope.row.roof_status == 1'>成功</span>
+            <p v-if='scope.row.channel != 0'>
+              <span v-if='scope.row.roof_status == 0'>失败</span>
+              <span v-else-if='scope.row.roof_status == 1'>成功</span>
+            </p>
+            <p v-else>未分账</p>
           </template>
         </el-table-column>
         <el-table-column

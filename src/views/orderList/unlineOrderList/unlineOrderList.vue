@@ -114,6 +114,7 @@
           data: {type: 2, ...this.formInline},
           fuc: (res) => {
             this.tableData = res.data.order_list
+            this.total = res.data.all_num
           }
         })
       },

@@ -1,6 +1,9 @@
 <template>
   <div class="onlineOrderDetail">
-    <p v-if='formData[0] && formData[0].ginfo_except_status == 0'>当前订单状态： <span>{{formData[0].onorder_pay_status == 1 ? '未支付' : '已支付'}}</span></p>
+    <p v-if='formData[0] && formData[0].ginfo_except_status == 0 && formData[0].onorder_pay_status == 1'>当前订单状态： <span>未支付</span></p>
+    
+    <p v-else-if='formData[0] && formData[0].ginfo_except_status == 0 && formData[0].onorder_pay_status == 2'>当前订单状态： <span v-for='item in ginfo_deliver_statusArr' v-if='item.value == formData[0].ginfo_deliver_status'>{{item.label}}</span></p>
+    
     <p v-else-if='formData[0]'>当前订单状态： <span v-for='item in ginfo_except_statusArr' v-if='item.value == formData[0].ginfo_except_status'>{{item.label}}</span></p>
     <h5>基本信息</h5>
     <el-table
@@ -111,7 +114,7 @@
       <el-table-column label='数量' prop='ginfo_g_num' min-width="120" align='center'></el-table-column>
       <el-table-column label='小计' prop='ginfo_subtotal' min-width="120" align='center'>
         <template slot-scope='scope'>
-          <span>{{scope.row.ginfo_subtotal / 100}}</span>
+          <span>{{(scope.row.ginfo_subtotal + scope.row.ginfo_freight) / 100}}</span>
         </template>
       </el-table-column>
     </el-table>
@@ -137,11 +140,19 @@
     style="width: 100%">
       <el-table-column label='活动优惠' prop='consume_activity' min-width="120" align='center'></el-table-column>
       <el-table-column label='折扣金额' prop='consume_discount' min-width="120" align='center'></el-table-column>
-      <el-table-column label='订单总金额' prop='consume_total_amount' min-width="120" align='center'></el-table-column>
-      <el-table-column label='应付款金额' prop='consume_amount_payable' min-width="120" align='center'></el-table-column>
+      <el-table-column label='订单总金额' prop='consume_total_amount' min-width="120" align='center'>
+        <template slot-scope='scope'>
+          <span v-if='scope.row.consume_total_amount'>{{scope.row.consume_total_amount / 100}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label='应付款金额' prop='consume_amount_payable' min-width="120" align='center'>
+        <template slot-scope='scope'>
+          <span v-if='scope.row.consume_amount_payable'>{{scope.row.consume_amount_payable / 100}}</span>
+        </template>
+      </el-table-column>
     </el-table>
     <div style="width: 100%;height: 44px;border: 1px solid #ebeef5;background: #f5f7fa;">
-      <p style="text-align: right;" v-if='formData[0]'>合计：￥<span>{{formData[0].consume_amount_payable}}</span></p>
+      <p style="text-align: right;" v-if='formData[0]'>合计：￥<span>{{formData[0].consume_amount_payable / 100}}</span></p>
     </div>
     <h5 v-if='tableData[0] && tableData[0].ginfo_except_status != 0'>异常信息</h5>
     <el-table

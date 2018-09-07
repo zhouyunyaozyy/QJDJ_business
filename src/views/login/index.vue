@@ -108,6 +108,7 @@ export default {
               if (res.code === 200) {
                 Cookies.set('Admin-Token', res.token)
                 Cookies.set('token', res.token)
+                Cookies.set('BHS_userName', res.data.username)
                 this.$store.commit('SET_TOKEN', res.token)
                 console.log(1)
                 this.loading = false
