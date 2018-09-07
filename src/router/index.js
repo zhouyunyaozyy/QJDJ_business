@@ -123,7 +123,11 @@ export const asyncRouterMap = [
 
       //      套餐订单
       { path: 'packagesOrderList', component: _import('orderList/packagesOrderList/packagesOrderList'), name: 'packagesOrderList', meta: { title: 'packagesOrderList', noCache: true }},
-      { path: 'packagesOrderDetail', component: _import('orderList/packagesOrderList/packagesOrderDetail'), name: 'packagesOrderDetail', meta: { title: 'packagesOrderDetail' }, hidden: true }
+      { path: 'packagesOrderDetail', component: _import('orderList/packagesOrderList/packagesOrderDetail'), name: 'packagesOrderDetail', meta: { title: 'packagesOrderDetail' }, hidden: true },
+
+      //      代金券订单
+      { path: 'vouchersOrderList', component: _import('orderList/vouchersOrder/vouchersOrderList'), name: 'vouchersOrderList', meta: { title: 'vouchersOrderList', noCache: true }},
+      { path: 'vouchersOrderDetail', component: _import('orderList/vouchersOrder/vouchersOrderDetail'), name: 'vouchersOrderDetail', meta: { title: 'vouchersOrderDetail' }, hidden: true }
     ]
   },
 
@@ -153,7 +157,19 @@ export const asyncRouterMap = [
 
       //      结算列表-套餐
       { path: 'financialPackagesList', component: _import('financial/financialPackages/financialPackagesList'), name: 'financialPackagesList', meta: { title: 'financialPackagesList', noCache: true }},
-      { path: 'financialPackagesDetail', component: _import('financial/financialPackages/financialPackagesDetail'), name: 'financialPackagesDetail', meta: { title: 'financialPackagesDetail' }, hidden: true }
+      { path: 'financialPackagesDetail', component: _import('financial/financialPackages/financialPackagesDetail'), name: 'financialPackagesDetail', meta: { title: 'financialPackagesDetail' }, hidden: true },
+
+      //      结算列表-服务异常
+      { path: 'financialPackagesErrorList', component: _import('financial/financialPackagesError/financialPackagesErrorList'), name: 'financialPackagesErrorList', meta: { title: 'financialPackagesErrorList', noCache: true }},
+      { path: 'financialPackagesErrorDetail', component: _import('financial/financialPackagesError/financialPackagesErrorDetail'), name: 'financialPackagesErrorDetail', meta: { title: 'financialPackagesErrorDetail' }, hidden: true },
+
+      //      结算列表-代金券正常
+      { path: 'financialVouchersNormalList', component: _import('financial/financialVouchersNormal/financialVouchersNormalList'), name: 'financialVouchersNormalList', meta: { title: 'financialVouchersNormalList', noCache: true }},
+      { path: 'financialVouchersNormalDetail', component: _import('financial/financialVouchersNormal/financialVouchersNormalDetail'), name: 'financialVouchersNormalDetail', meta: { title: 'financialVouchersNormalDetail' }, hidden: true },
+
+      //      结算列表-代金券异常
+      { path: 'financialVouchersErrorList', component: _import('financial/financialVouchersError/financialVouchersErrorList'), name: 'financialVouchersErrorList', meta: { title: 'financialVouchersErrorList', noCache: true }},
+      { path: 'financialVouchersErrorDetail', component: _import('financial/financialVouchersError/financialVouchersErrorDetail'), name: 'financialVouchersErrorDetail', meta: { title: 'financialVouchersErrorDetail' }, hidden: true }
     ]
   },
 
@@ -183,7 +199,11 @@ export const asyncRouterMap = [
 
       //      商品套餐
       { path: 'goodsPackagesList', component: _import('goods/goodsPackages/goodsPackagesList'), name: 'goodsPackagesList', meta: { title: 'goodsPackagesList', noCache: true }},
-      { path: 'goodsPackagesDetail', component: _import('goods/goodsPackages/goodsPackagesDetail'), name: 'goodsPackagesDetail', meta: { title: 'goodsPackagesDetail' }, hidden: true }
+      { path: 'goodsPackagesDetail', component: _import('goods/goodsPackages/goodsPackagesDetail'), name: 'goodsPackagesDetail', meta: { title: 'goodsPackagesDetail' }, hidden: true },
+
+      //      商品代金券
+      { path: 'goodsVouchersList', component: _import('goods/goodsVouchers/goodsVouchersList'), name: 'goodsVouchersList', meta: { title: 'goodsVouchersList', noCache: true }},
+      { path: 'goodsVouchersDetail', component: _import('goods/goodsVouchers/goodsVouchersDetail'), name: 'goodsVouchersDetail', meta: { title: 'goodsVouchersDetail' }, hidden: true }
     ]
   },
 
@@ -213,6 +233,10 @@ export const asyncRouterMap = [
       // 方便添加套餐，后面删除
       { path: 'unlineBusinessPackagesList', component: _import('business/businessList/unlineBusinessPackages/unlineBusinessPackagesList'), name: 'unlineBusinessPackagesList', meta: { title: 'unlineBusinessPackagesList', noCache: true }, hidden: true },
       { path: 'unlineBusinessPackagesDetail', component: _import('business/businessList/unlineBusinessPackages/unlineBusinessPackagesDetail'), name: 'unlineBusinessPackagesDetail', meta: { title: 'unlineBusinessPackagesDetail' }, hidden: true },
+      
+      //  代金券
+      { path: 'unlineBusinessVouchersList', component: _import('business/businessList/unlineBusinessVouchers/unlineBusinessVouchersList'), name: 'unlineBusinessVouchersList', meta: { title: 'unlineBusinessVouchersList', noCache: true }, hidden: true },
+      { path: 'unlineBusinessVouchersDetail', component: _import('business/businessList/unlineBusinessVouchers/unlineBusinessVouchersDetail'), name: 'unlineBusinessVouchersDetail', meta: { title: 'unlineBusinessVouchersDetail' }, hidden: true },
 
       //      商家类目
       { path: 'unlineBusinessClassifyList', component: _import('business/businessClassifyList/unlineBusinessClassifyList'), name: 'unlineBusinessClassifyList', meta: { title: 'unlineBusinessClassifyList', noCache: true }},
@@ -428,6 +452,45 @@ export const asyncRouterMap = [
           { path: 'silverMailRecommendedGoodsDetail', component: _import('interConfig/silverMail/silverMailRecommendedGoods/silverMailRecommendedGoodsDetail'), name: 'silverMailRecommendedGoodsDetail', meta: { title: 'silverMailRecommendedGoodsDetail' }, hidden: true},
         ]
       }
+    ]
+  },
+
+  // 活动商品配置
+  {
+    path: '/activityManage',
+    component: Layout,
+//    redirect: '/interConfig/indexManage/indexSlideshowList',
+    name: 'activityManage',
+    meta: {
+      title: 'activityManage',
+      icon: 'chart'
+    },
+    children: [
+      //      虚拟商品管理
+//      {
+//        path: '/activityManage/virtualGoods',
+//        component: _import('activityManage/index'),
+//        name: 'virtualGoods',
+//        meta: { title: 'virtualGoods'},
+//        children: [
+//          //      虚拟商品
+//          { path: 'virtualGoodsList', component: _import('activityManage/virtualGoods/virtualGoodsList/virtualGoodsList'), name: 'virtualGoodsList', meta: { title: 'virtualGoodsList' }},
+//          { path: 'virtualGoodsDetail', component: _import('activityManage/virtualGoods/virtualGoodsList/virtualGoodsDetail'), name: 'virtualGoodsDetail', meta: { title: 'virtualGoodsDetail' }, hidden: true},
+//          
+//          //      虚拟商品订单
+//          { path: 'virtualGoodsOrderList', component: _import('activityManage/virtualGoods/virtualGoodsOrder/virtualGoodsOrderList'), name: 'virtualGoodsOrderList', meta: { title: 'virtualGoodsOrderList' }}
+//        ]
+//      },
+      
+      //      活动商品
+      { path: 'activityGoodsList', component: _import('activityManage/activityGoods/activityGoodsList'), name: 'activityGoodsList', meta: { title: 'activityGoodsList' }},
+      { path: 'activityGoodsDetail', component: _import('activityManage/activityGoods/activityGoodsDetail'), name: 'activityGoodsDetail', meta: { title: 'activityGoodsDetail' }, hidden: true},
+      
+      //      活动金贝
+      { path: 'activityGold', component: _import('activityManage/activityGold/activityGold'), name: 'activityGold', meta: { title: 'activityGold' }},
+      
+      //      活动分享统计
+      { path: 'activityCount', component: _import('activityManage/activityCount/activityCount'), name: 'activityCount', meta: { title: 'activityCount' }}
     ]
   },
     

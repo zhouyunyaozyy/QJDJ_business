@@ -89,7 +89,7 @@
         class="upload-demo"
         action="https://jsonplaceholder.typicode.com/posts/" :before-upload="beforeAvatarUpload">
         <el-button size="small" type="primary">点击上传</el-button>
-        <div slot="tip" class="el-upload__tip">只能上传模板excell文件</div>
+        <div slot="tip" class="el-upload__tip">只能上传模板excel文件</div>
       </el-upload>
       <div slot="footer" class="dialog-footer">
         <el-button @click="importDialogVisible = false">取 消</el-button>
@@ -130,13 +130,13 @@
         })
       },
       changeStatus () {
-        
+
       },
       addIndexRecommendedGoods () {
         this.$router.push({path: '/interConfig/indexMail/indexMailRecommendedDetail', query: {goods_activity_category_id: this.$route.query.goods_activity_category_id}})
       },
       handleCurrentChange (val) {
-        this.start = val 
+        this.start = val
         this.getTableData()
       },
       editGoods (goods_activity_id) {

@@ -255,18 +255,22 @@
         </el-select>
       </el-form-item>
       <el-form-item v-if='form.type == -1'>
-        <span>是否允许参与分享</span>
-        <el-switch
-          v-model="form.is_activity"
-          active-text="可以"
-          inactive-text="不可以">
-        </el-switch>
+        <span>是否支持分享购买</span>
+        <el-radio v-model="form.is_activity" :label="2">支持</el-radio>
+        <el-radio v-model="form.is_activity" :label="0">不支持</el-radio>
+        <el-radio v-model="form.is_activity" :label="1">仅支持分享购买</el-radio>
       </el-form-item>
       <el-form-item label='异常原因' v-if='form.status == 0'>
         <span>{{form.reject_reason}}</span>
       </el-form-item>
       <el-form-item>
-        <el-button v-if='form.status == -1' @click='submit(1)'>完成，保存商品</el-button>
+        
+<!--        <el-button v-if='form.status == -1' @click='submit(1)'>完成，保存商品</el-button>-->
+        
+<!--        满足产品临时需求，后续启用上面代码-->
+        <el-button @click='submit(1)'>完成，保存商品</el-button>
+<!--        -->
+        
         <el-button v-if='form.status == -1' @click='dialogVisibleInput = true'>驳回</el-button>
 <!--        <el-button v-else @click="submit('')">完成，提交商品</el-button>-->
       </el-form-item>
@@ -320,7 +324,7 @@
           silver_price: '',
           fake_sale_nums: '',
           area_limit: [],
-          is_activity: false
+          is_activity: 0
         },
         firstInput: {
           type: '',
@@ -415,7 +419,6 @@
             }
             this.form.spec_info = arr
             this.form.type = this.form.type + ''
-            this.form.is_activity = this.form.is_activity == 1
             this.form.area_limit = this.form.area_limit ? JSON.parse(this.form.area_limit) : []
             this.form.imgs_url = imgsArr
             let class_category_idArr = []
@@ -452,7 +455,6 @@
         _form.imgs = arr
         _form.status = 0
         _form.attr_is_change = this.attr_is_change
-        _form.is_activity = _form.is_activity ? 1 : 0
         _form.admin_spec_info = _form.spec_info
         if (_form.status == 0) {
           _form.reject_reason = this.reject_reason
@@ -599,7 +601,6 @@
                 _form.status = status
               }
               _form.attr_is_change = this.attr_is_change
-              _form.is_activity = _form.is_activity ? 1 : 0
               _form.admin_spec_info = _form.spec_info
               if (status == -1) {
                 _form.reject_reason = this.reject_reason

@@ -1,26 +1,20 @@
 <template>
-  <div class="indexOperatingGoddsList">
-    <el-button @click='addSlideshow'>添加商品</el-button>
-      <el-button @click='downExcell'>下载模板</el-button>
-      <el-button type="primary" @click="importDialogVisible = true">批量添加商品</el-button>
-
+  <div class="goodsList">
     <div class="searchForm">
       <p @click='showFormBool = !showFormBool'>筛选查询<i v-if='showFormBool' class="el-icon-arrow-down"></i><i v-else class="el-icon-arrow-up"></i></p>
       <el-form :inline="true" :model="formInline" class="demo-form-inline" v-if='showFormBool'>
-        <el-form-item label="显示状态">
-          <el-select v-model='formInline.status' placeholder="请选择" clearable>
+        <el-form-item label="输入搜索">
+          <el-input v-model="formInline.search" placeholder="商品名称/商品编号"></el-input>
+        </el-form-item>
+        <el-form-item label="栏目名称">
+          <el-select v-model='formInline.category_type' placeholder="请选择" clearable>
             <el-option
-              label="显示"
-              value="1">
-            </el-option>
-            <el-option
-              label="不显示"
-              value="-1">
+              v-for='item in brandArr'
+              :label="item.label"
+              :value="item.value"
+              :key="item.value">
             </el-option>
           </el-select>
-        </el-form-item>
-        <el-form-item label="商品编码">
-          <el-input v-model="formInline.search" placeholder="商品编码"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">查询</el-button>
@@ -28,14 +22,22 @@
       </el-form>
     </div>
 
+    <el-button @click='addGoods' style='margin-bottom: 10px;'>添加商品</el-button>
+    <el-button @click='downExcell'>下载商品excel模板</el-button>
+    <el-button @click='importDialogVisible = true' style='margin-bottom: 10px;'>导入商品excel</el-button>
     <el-table
     :data="tableData"
     style="width: 100%">
       <el-table-column
-        label="首页运营商品列表">
+        label="商品列表">
         <el-table-column
-          prop="goods_activity_id"
-          label="商品id"
+          prop="goods_id"
+          label="id"
+          min-width="120" align='center'>
+        </el-table-column>
+        <el-table-column
+          prop="goods_no"
+          label="编码"
           min-width="120" align='center'>
         </el-table-column>
         <el-table-column
@@ -45,64 +47,54 @@
         </el-table-column>
         <el-table-column
           prop="business_name"
-          label="店家"
+          label="所属商家"
           min-width="120" align='center'>
         </el-table-column>
         <el-table-column
-          prop="name"
+          prop="business_name"
           label="价格"
           min-width="120" align='center'>
           <template slot-scope='scope'>
-            <span v-if='scope.row.payment == 1'>{{scope.row.price / 100}}</span>
-            <span v-if='scope.row.payment == 2'>{{scope.row.gold_price}}-{{scope.row.copper_price}}</span>
-            <span v-if='scope.row.payment == 3'>{{scope.row.price}}</span>
+            <span>{{scope.row.min_price}}~{{scope.row.max_price}}</span>
           </template>
         </el-table-column>
         <el-table-column
-          prop="name"
+          prop=""
           label="支付方式"
           min-width="120" align='center'>
           <template slot-scope='scope'>
-            <span v-if='scope.row.payment == 1'>金贝+现金</span>
-            <span v-if='scope.row.payment == 2'>金贝+铜贝</span>
-            <span v-if='scope.row.payment == 3'>银贝</span>
+            <span>金贝+现金</span>
           </template>
         </el-table-column>
         <el-table-column
-          prop="num"
+          prop="nums"
           label="数量"
           min-width="120" align='center'>
         </el-table-column>
         <el-table-column
-          label="商品状态"
+          prop="category_type"
+          label="所属栏目"
           min-width="120" align='center'>
           <template slot-scope='scope'>
-            <span v-if='scope.row.goods_status == -1'>冻结</span>
-            <span v-else-if='scope.row.goods_status == 0'>审核中</span>
-            <span v-else-if='scope.row.goods_status == 1'>上架</span>
-            <span v-else-if='scope.row.goods_status == -2'>审核失败</span>
+            <span v-for='item in brandArr' v-if='item.value == scope.row.category_type'>{{item.label}}</span>
           </template>
         </el-table-column>
         <el-table-column
-          prop="activity_goods_status"
+          prop="is_show"
           label="显示状态"
           min-width="120" align='center'>
           <template slot-scope='scope'>
-            <span v-if='scope.row.activity_goods_status == 1'>显示</span>
-            <span v-else>不显示</span>
+            <span v-if='scope.row.is_show == 1'>显示</span>
+            <span v-if='scope.row.is_show == 0'>不显示</span>
           </template>
         </el-table-column>
         <el-table-column
-          prop="sort"
-          label="顺序"
-          min-width="120" align='center'>
-        </el-table-column>
-        <el-table-column
+          prop="id"
           label="操作"
-          min-width="240" align='center'>
+          min-width="200" align='center'>
           <template slot-scope='scope'>
-            <el-button @click="editGoods(scope.row.goods_activity_id)">编辑</el-button>
-            <el-button @click='deleteGoods(scope.row.goods_activity_id)'>删除</el-button>
+            <el-button @click='detailGoodsDetail(scope.row)'>编辑</el-button>
+            <el-button @click='offlineGoods(scope.row)'>删除</el-button>
           </template>
         </el-table-column>
       </el-table-column>
@@ -111,7 +103,7 @@
     layout="prev, pager, next"
     :total="total" :page-size="20" @current-change="handleCurrentChange"
       :current-page.sync="start">
-  </el-pagination>
+    </el-pagination>
 
     <el-dialog title="批量导入" :visible.sync="importDialogVisible" :show-close='false'>
       <el-upload
@@ -129,17 +121,28 @@
 
 <script>
   export default {
-    name: 'unlineBusinessList',
+    name: 'goodsList',
     data () {
       return {
         tableData: [],
-        start: 1,
-        importDialogVisible: false,
         formInline: {
-          status: '',
-          search: ''
+          search: '',
+          category_type: ''
         },
+        brandArr: [{
+          value: 0, label: '首页'
+        },{
+          value: 1, label: '美妆'
+        },{
+          value: 2, label: '食品'
+        },{
+          value: 3, label: '酒类'
+        },{
+          value: 4, label: '家居'
+        }],
+        start: 1,
         total: 0,
+        importDialogVisible: false,
         showFormBool: true, // 是否显示过滤框
       }
     },
@@ -149,49 +152,29 @@
     mounted () {},
     methods: {
       getTableData () {
-        let obj = {
-          page: this.start,
-          goods_activity_category_id: 3,
-          filter_category_id: 3,
-          ...this.formInline
-        }
         this.$axios({
           type: 'post',
-          url: '/goods/activitygoodsgetlist',
-          data: obj,
+          url: '/active/getlistgoods',
+          data: {page: this.start, limit: 20, ...this.formInline},
           fuc: (res) => {
-            this.tableData = res.data.data
-            this.total = res.data.total
+            if (res.code === 200) {
+              this.tableData = res.data.data
+              this.total = res.data.total
+            }
           }
         })
       },
-      onSubmit () {
-        this.start = 1
-        this.getTableData()
-      },
-      addSlideshow () {
-        this.$router.push({path: '/interConfig/goldMail/goldMailRecommendedGoodsDetail'})
-      },
-      handleCurrentChange (val) {
-        this.start = val
-        this.getTableData()
-      },
-      editGoods (goods_activity_id) {
-        this.$router.push({path: '/interConfig/goldMail/goldMailRecommendedGoodsDetail', query: {goods_activity_category_id: this.$route.query.goods_activity_category_id, goods_activity_id}})
-      },
       downExcell () {
-        this.$downloadExcell({url: '/resource/activity_goods_load.xlsx'})
+        this.$downloadExcell({url: '/resource/active_goods_load.xlsx'})
       },
       beforeAvatarUpload (file) {
         let formData = new FormData()
-        formData.append('activity_goods_excel', file)
-        formData.append('goods_activity_category_id', 3)
+        formData.append('active_goods_excel', file)
         this.$axios({
           type: 'post',
-          url: '/goods/activitygoodsload',
+          url: '/active/loadgoods',
           data: formData,
           fuc: (res) => {
-            console.log(res)
             if (res.code == 200) {
               this.importDialogVisible = false
               this.getTableData()
@@ -200,13 +183,27 @@
         }, 1)
         return false
       },
-      deleteGoods (goods_activity_id) {
+      handleCurrentChange (val) {
+        this.start = val
+        this.getTableData()
+      },
+      onSubmit () {
+        this.start = 1
+        this.getTableData()
+      },
+      detailGoodsDetail (row) {
+        this.$router.push({path: '/activityManage/activityGoodsDetail', query: {active_goods_id: row.active_goods_id}})
+      },
+      addGoods () {
+        this.$router.push({path: '/activityManage/activityGoodsDetail'})
+      },
+      offlineGoods (row) {
         this.$axios({
           type: 'post',
-          url: '/goods/activitygoodsdelete',
-          data: {goods_activity_id},
+          url: '/active/deletegoods',
+          data: {active_goods_id: row.active_goods_id},
           fuc: (res) => {
-            if (res.code == 200) {
+            if (res.code === 200) {
               this.$message.success('操作成功')
               this.getTableData()
             }
@@ -217,7 +214,7 @@
   }
 </script>
 <style scoped="true">
-  .indexOperatingGoddsList{
+  .goodsList{
     margin: 10px 20px 0;
     overflow: hidden;
   }

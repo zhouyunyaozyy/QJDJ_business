@@ -52,15 +52,15 @@
           <span>现金支付：{{scope.row.onorder_cash / 100}},余额支付：{{scope.row.onorder_balance / 100}},银贝支付：{{scope.row.onorder_silver}},金贝支付：{{scope.row.onorder_gold}},铜贝支付：{{scope.row.onorder_copper}}</span>
         </template>
       </el-table-column>
-      <el-table-column label='物流服务商' prop='onorder_logistics' min-width="120" align='center'>
+      <el-table-column label='物流服务商' prop='ginfo_logistics' min-width="120" align='center'>
         <template slot-scope='scope'>
-          <span v-if='scope.row.onorder_logistics'>{{scope.row.onorder_logistics}}</span>
+          <span v-if='scope.row.ginfo_logistics'>{{scope.row.ginfo_logistics}}</span>
           <span v-else>-</span>
         </template>
       </el-table-column>
-      <el-table-column label='物流单号' prop='onorder_logistics_id' min-width="120" align='center'>
+      <el-table-column label='物流单号' prop='ginfo_logistics_id' min-width="120" align='center'>
         <template slot-scope='scope'>
-          <span v-if='scope.row.onorder_logistics_id'>{{scope.row.onorder_logistics_id}}</span>
+          <span v-if='scope.row.ginfo_logistics_id'>{{scope.row.ginfo_logistics_id}}</span>
           <span v-else>-</span>
         </template>
       </el-table-column>
@@ -89,7 +89,8 @@
     <el-table
     :data="tableData" border
     style="width: 100%">
-      <el-table-column label='商品图片' prop='ginfo_g_pic' min-width="120" align='center'>     <template slot-scope='scope'>
+      <el-table-column label='商品图片' prop='ginfo_g_pic' min-width="120" align='center'>
+        <template slot-scope='scope'>
           <img :src='url + scope.row.ginfo_g_pic'>
         </template>
       </el-table-column>
@@ -166,6 +167,10 @@
     </el-table>
     <div v-if='tableData[0] && tableData[0].ginfo_except_status != 0'>
       用户凭证：
+      <img v-for='item in JSON.parse(tableData[0].exception_info_p_url)' :src='item.url' style="width: 50px;height: 50px; margin: 6px;" @click='showBigImg(item.url)'>
+      <el-dialog :visible.sync="imgDialog">
+        <img :src='imgUrl'>
+      </el-dialog>
     </div>
     <el-button style='margin: 15px;' v-if='tableData[0] && tableData[0].ginfo_except_status != 0 && tableData[0].ginfo_except_status < 3' type='success' @click='dialogSuccess = true'>审核通过</el-button>
     <el-button style='margin: 15px;' v-if='tableData[0] && tableData[0].ginfo_except_status != 0 && tableData[0].ginfo_except_status < 3' type='danger' @click='dialogRefuse = true'>驳回</el-button>
@@ -197,6 +202,8 @@
         formData: [],
         total: '',
         url: '',
+        imgDialog: false,
+        imgUrl: '',
         dialogSuccess: false,
         dialogRefuse: false,
         successType: 'both',
@@ -263,6 +270,10 @@
       })
     },
     methods: {
+      showBigImg (url) {
+        this.imgUrl = url
+        this.imgDialog = true
+      },
       orderSuccess () {
         this.$axios({
           type: 'post',
