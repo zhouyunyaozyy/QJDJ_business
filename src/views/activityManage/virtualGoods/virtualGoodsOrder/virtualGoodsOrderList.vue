@@ -43,7 +43,7 @@
         <el-table-column
           prop="product_name"
           label="商品名称"
-          min-width="120" align='center'>
+          min-width="140" align='center'>
         </el-table-column>
         <el-table-column
           prop="user_id"
@@ -63,17 +63,17 @@
         <el-table-column
           prop="gold"
           label="支付金贝"
-          min-width="120" align='center'>
+          min-width="100" align='center'>
         </el-table-column>
         <el-table-column
           prop="cash"
           label="支付现金"
-          min-width="120" align='center'>
+          min-width="100" align='center'>
         </el-table-column>
         <el-table-column
           prop="price"
           label="订单总额"
-          min-width="120" align='center'>
+          min-width="100" align='center'>
         </el-table-column>
       </el-table-column>
     </el-table>
