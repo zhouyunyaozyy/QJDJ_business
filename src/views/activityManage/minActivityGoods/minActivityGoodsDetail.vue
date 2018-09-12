@@ -73,29 +73,17 @@
             url: '/active/getdetailedgoods',
             data: {active_goods_id: this.$route.query.active_goods_id},
             fuc: (res) => {
-            for (let val in this.form) {
-<<<<<<< HEAD:src/views/activityManage/minActivityGoods/minActivityGoodsDetail.vue
-              if (val != 'spec_info') {
-                this.form[val] = res.data[val] + ''
-              } else {
+              for (let val in this.form) {
+                if (val != 'spec_info') {
+                  this.form[val] = res.data[val] + ''
+                } else {
 
+                }
               }
+              this.businessSureBool = true
+              this.form.active_goods_id = this.$route.query.active_goods_id
+              console.log(this.form)
             }
-            this.businessSureBool = true
-            this.form.active_goods_id = this.$route.query.active_goods_id
-            console.log(this.form)
-=======
-          if (val != 'spec_info') {
-            this.form[val] = res.data[val] + ''
-          } else {
-
->>>>>>> a237fa99da38d67340129d1c8a5f0af22569c2bb:src/views/activityManage/minActivityGoods/minActivityGoodsDetail.vue
-          }
-        }
-        this.businessSureBool = true
-        this.form.active_goods_id = this.$route.query.active_goods_id
-        console.log(this.form)
-      }
       })
       }
     },
@@ -123,19 +111,11 @@
                 data: this.form,
                 fuc: (res) => {
                 if (res.code == 200) {
-<<<<<<< HEAD:src/views/activityManage/minActivityGoods/minActivityGoodsDetail.vue
                   this.$message.success('操作成功')
                   this.$deleteOneTag('/activityManage/minActivityGoodsList')
                 }
               }
             })
-=======
-              this.$message.success('操作成功')
-              this.$deleteOneTag('/activityManage/minActivityGoodsList')
-            }
-          }
-          })
->>>>>>> a237fa99da38d67340129d1c8a5f0af22569c2bb:src/views/activityManage/minActivityGoods/minActivityGoodsDetail.vue
           }
         })
       }
