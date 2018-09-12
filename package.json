@@ -12,6 +12,7 @@
     "lint": "eslint --ext .js,.vue src",
     "test": "npm run lint"
   },
+
   "keywords": [
     "vue",
     "element-ui",
