@@ -47,20 +47,20 @@ export default {
     business: '商家管理',
     onlineBusinessList: '线上商家',
     onlineBusinessDetail: '线上商家详情',
-    
+
     // 添加商品（后面要删）
     onlineBusinessGoodsList: '商家-商品',
     onlineBusinessGoodsDetail: '商家-商品详情',
     onlineBusinessBrandsList: '商家-邮费',
     onlineBusinessBrandsDetail: '商家-邮费详情',
-    
+
     // 添加套餐（后面要删）
     unlineBusinessPackagesList: '商家-套餐',
     unlineBusinessPackagesDetail: '商家-套餐详情',
-    
+
     unlineBusinessVouchersList: '商家-代金券',
     unlineBusinessVouchersDetail: '商家-代金券详情',
-    
+
     unlineBusinessList: '线下商家',
     unlineBusinessDetail: '线下商家详情',
     unlineBusinessClassifyList: '线下商家类目',
@@ -70,12 +70,12 @@ export default {
     cUserList: '用户列表',
     cUserDetail: '用户详情',
     referralEarning: '推荐收入列表',
-    
+
     otherConfig: '其它配置',
     referralEarningList: '推荐收入列表',
     tombacDetail: '铜贝规则设置',
     shareBuyDetail: '分享购买设置',
-    
+
     recommendConfig: '推荐配置',
     recommendConfigList: '推荐配置',
     offlineCatering: '线下餐饮',
@@ -87,7 +87,7 @@ export default {
     offlineCaterClassify: '线下餐饮-分类管理',
     offlineCaterConfig: '线下餐饮-规格配置',
     interConfig: '运营显示配置',
-    
+
     indexManage: '首页管理',
     indexSlideshowList: '首页管理-轮播图',
     indexSlideshowDetail: '首页管理-轮播图详情',
@@ -111,7 +111,7 @@ export default {
     indexGoodsDetail: '首页管理-固定分类商品详情',
     indexPackagesList: '首页管理-固定分类套餐管理',
     indexPackagesDetail: '首页管理-固定分类套餐管理详情',
-    
+
     indexMail: '商城',
     indexMailSlideshowList: '商城-轮播图',
     indexMailSlideshowDetail: '商城-轮播图详情',
@@ -125,7 +125,7 @@ export default {
     indexMailRecommendedDetail: '商城-推荐商品详情',
     indexMailRecommendedClassify: '商城-推荐商品分类详情',
     indexMailRecommendedClassifyList: '商城-推荐商品分类',
-    
+
     goldMail: '金贝商城',
     goldMailSlideshowList: '金贝-轮播图',
     goldMailSlideshowDetail: '金贝-轮播图详情',
@@ -141,7 +141,7 @@ export default {
     goldMailRecommendedOperatingGoodsDetail: '金贝-推荐运营位商品详情',
     goldMailRecommendedGoodsList: '金贝-推荐商品',
     goldMailRecommendedGoodsDetail: '金贝-推荐商品详情',
-    
+
     silverMail: '银贝商城',
     silverMailSlideshowList: '银贝-轮播图',
     silverMailSlideshowDetail: '银贝-轮播图详情',
@@ -167,6 +167,8 @@ export default {
     virtualGoodsOrderList: '虚拟商品订单',
     activityGoodsList: '活动商品',
     activityGoodsDetail: '活动商品详情',
+    minActivityGoodsList: '中秋活动商品',
+    minActivityGoodsDetail: '中秋活动商品详情',
     activityGold: '活动金贝',
     activityCount: '活动分享管理',
 
