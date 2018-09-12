@@ -73,8 +73,8 @@
       <el-table-column label='微信账号' prop='wx_account' min-width="120" align='center'></el-table-column>
       <el-table-column label='对公银行账号' prop='bank_account' min-width="120" align='center'></el-table-column>
     </el-table>
-    <el-button v-if='status !== 1' type='primary' style='margin: 20px;' @click='changeStatusBefore'>更改为已分账</el-button>
-    <el-button v-if='status == 0' type='primary' style='margin: 20px;' @click='assignMoney'>立即分账</el-button>
+    <el-button v-if='status !== 1' type='primary' style='margin: 20px;' @click='changeStatusBefore(1)'>更改为已分账</el-button>
+    <el-button v-if='status == 0' type='primary' style='margin: 20px;' @click='changeStatusBefore(2)'>立即分账</el-button>
     <el-dialog
       title="实际分账金额"
       :visible.sync="dialogVisible"
@@ -102,6 +102,7 @@
           transfer_amount: '',
           freight: ''
         },
+        type: '',
         dialogVisible: false,
         tableData: [],
         status: '',
@@ -131,16 +132,22 @@
         data: {info_id: this.$route.query.id},
         fuc: (res) => {
           this.tableData = [res.data]
+          this.status = res.data.roof_status
         }
       })
     },
     methods: {
-      changeStatusBefore () {
+      changeStatusBefore (num) {
         this.form.transfer_amount = this.tableData[0].amount / 100
         this.form.freight = this.tableData[0].freight / 100
+        this.type = num
         this.dialogVisible = true
       },
       changeStatus () {
+        if (this.type == 2) {
+          this.assignMoney()
+          return
+        }
         this.$axios({
           type: 'post',
           url: '/Financial/updateorderstatus',
@@ -161,7 +168,7 @@
         this.$axios({
           type: 'post',
           url: '/queue/manualTransfer',
-          data: {type: 'online', transfer_id: this.tableData[0].id},
+          data: {type: 'online', transfer_id: this.tableData[0].id, ...this.form},
           fuc: (res) => {
             if (res.code == 200) {
               this.$message.success('操作成功')

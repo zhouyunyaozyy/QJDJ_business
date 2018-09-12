@@ -4,12 +4,12 @@
     <el-button @click="changeStatus('0')" :type="type == '0' ? 'primary' : ''">分账中</el-button>
     <el-button @click="changeStatus('1')" :type="type == '1' ? 'primary' : ''">分账成功</el-button>
     <el-button @click="changeStatus('-1')" :type="type == '-1' ? 'primary' : ''">分账失败</el-button>
-    
+
     <div class="searchForm">
       <p @click='showFormBool = !showFormBool'>筛选查询<i v-if='showFormBool' class="el-icon-arrow-down"></i><i v-else class="el-icon-arrow-up"></i></p>
       <el-form :inline="true" :model="formInline" class="demo-form-inline" v-if='showFormBool'>
         <el-form-item label="输入搜索">
-          <el-input v-model="formInline.key_a" placeholder="商家名称"></el-input>
+          <el-input v-model="formInline.key_a" placeholder="商家名称/订单号"></el-input>
         </el-form-item>
         <el-form-item label="提交时间">
           <el-date-picker
@@ -180,7 +180,7 @@
         })
       },
       onSubmit () {
-        
+
       },
       downloadExcell () {
         this.$downloadExcell({
@@ -189,7 +189,7 @@
         })
       },
       handleCurrentChange (val) {
-        this.start = val 
+        this.start = val
         this.getTableData()
       },
       changeStatus (type) {
