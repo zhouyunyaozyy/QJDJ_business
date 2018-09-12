@@ -155,7 +155,7 @@ Vue.prototype.$axios = function(params, type) {
             type: 'error'
           })
           params.fuc(response.data)
-        } else if (response.data.code == 1001) {
+        } else if (response.data.code == 1010) {
           Cookies.remove('Admin-Token')
           Cookies.remove('token')
           location.reload()
@@ -222,7 +222,7 @@ Vue.prototype.$axios = function(params, type) {
             type: 'error'
           })
           params.fuc(response.data)
-        } else if (response.data.code == 1001) {
+        } else if (response.data.code == 1010) {
           Cookies.remove('Admin-Token')
           Cookies.remove('token')
           location.reload()

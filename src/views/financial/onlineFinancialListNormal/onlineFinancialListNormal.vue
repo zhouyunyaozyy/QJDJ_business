@@ -1,8 +1,9 @@
 <template>
   <div class="onlineFinancialListNormal">
     <el-button @click="changeStatus('all')" :type="type == 'all' ? 'primary' : ''">全部</el-button>
-    <el-button @click="changeStatus('1')" :type="type == '1' ? 'primary' : ''">结算成功</el-button>
-    <el-button @click="changeStatus('0')" :type="type == '0' ? 'primary' : ''">结算失败</el-button>
+    <el-button @click="changeStatus('0')" :type="type == '0' ? 'primary' : ''">分账中</el-button>
+    <el-button @click="changeStatus('1')" :type="type == '1' ? 'primary' : ''">分账成功</el-button>
+    <el-button @click="changeStatus('-1')" :type="type == '-1' ? 'primary' : ''">分账失败</el-button>
     
     <div class="searchForm">
       <p @click='showFormBool = !showFormBool'>筛选查询<i v-if='showFormBool' class="el-icon-arrow-down"></i><i v-else class="el-icon-arrow-up"></i></p>
@@ -27,7 +28,6 @@
         </el-form-item>
       </el-form>
     </div>
-
     <el-table
     :data="tableData"
     style="width: 100%" border>
@@ -39,9 +39,25 @@
           min-width="120" align='center'>
         </el-table-column>
         <el-table-column
-          prop="prorate_num"
+          prop="order_id"
+          label="订单支付时间"
+          min-width="120" align='center'>
+          <template slot-scope='scope'>
+            <span>{{$formatTime(scope.row.payment_at)}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="transfer_no"
           label="结算编号"
           min-width="120" align='center'>
+        </el-table-column>
+        <el-table-column
+          prop="prorate_at"
+          label="结算时间"
+          min-width="120" align='center'>
+          <template slot-scope='scope'>
+            <span>{{$formatTime(scope.row.prorate_at)}}</span>
+          </template>
         </el-table-column>
         <el-table-column
           prop="deliver_status"
@@ -78,6 +94,14 @@
           </template>
         </el-table-column>
         <el-table-column
+          prop="freight"
+          label="结算邮费"
+          min-width="120" align='center'>
+          <template slot-scope='scope'>
+            <span v-if='scope.row.freight'>{{scope.row.freight / 100}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
           prop="channel"
           label="结算渠道"
           min-width="120" align='center'>
@@ -92,15 +116,19 @@
           label="结算状态"
           min-width="120" align='center'>
           <template slot-scope='scope'>
-            <span v-if='scope.row.roof_status == 0'>失败</span>
-            <span v-else-if='scope.row.roof_status == 1'>成功</span>
+            <p v-if='scope.row.channel != 0'>
+              <span v-if='scope.row.roof_status == 0'>失败</span>
+              <span v-else-if='scope.row.roof_status == 1'>成功</span>
+            </p>
+            <p v-else>未分账</p>
           </template>
         </el-table-column>
         <el-table-column
           label="操作"
-          min-width="120" align='center'>
+          min-width="140" align='center'>
           <template slot-scope='scope'>
             <el-button @click='detailFinancial(scope.row)'>查看详情</el-button>
+<!--            <el-button @click='assignMoney(scope.row)'>分账</el-button>-->
           </template>
         </el-table-column>
       </el-table-column>

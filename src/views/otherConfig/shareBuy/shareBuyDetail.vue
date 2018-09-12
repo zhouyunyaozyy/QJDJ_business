@@ -27,7 +27,7 @@
         <el-button @click='cancleEdit' v-if='!editBool'>取消</el-button>
       </el-form-item>
     </el-form>
-    
+
     <el-dialog title="批量导入" :visible.sync="importDialogVisible" :show-close='false'>
       <el-select style='margin-bottom: 6px;' v-model='uploadFilter_category_id' placeholder="请选择">
         <el-option
@@ -47,7 +47,7 @@
         class="upload-demo"
         action="https://jsonplaceholder.typicode.com/posts/" :before-upload="beforeAvatarUpload">
         <el-button size="small" type="primary">点击上传</el-button>
-        <div slot="tip" class="el-upload__tip">只能上传模板excell文件</div>
+        <div slot="tip" class="el-upload__tip">只能上传模板excel文件</div>
       </el-upload>
       <div slot="footer" class="dialog-footer">
         <el-button @click="importDialogVisible = false">取 消</el-button>

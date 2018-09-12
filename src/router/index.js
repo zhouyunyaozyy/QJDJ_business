@@ -230,7 +230,7 @@ export const asyncRouterMap = [
       { path: 'onlineBusinessBrandsList', component: _import('business/businessList/onlineBusinessGoods/onlineBusinessBrandsList'), name: 'onlineBusinessBrandsList', meta: { title: 'onlineBusinessBrandsList', noCache: true }, hidden: true },
       { path: 'onlineBusinessBrandsDetail', component: _import('business/businessList/onlineBusinessGoods/onlineBusinessBrandsDetail'), name: 'onlineBusinessBrandsDetail', meta: { title: 'onlineBusinessBrandsDetail' }, hidden: true },
 
-      // 方便添加服务，后面删除
+      // 方便添加套餐，后面删除
       { path: 'unlineBusinessPackagesList', component: _import('business/businessList/unlineBusinessPackages/unlineBusinessPackagesList'), name: 'unlineBusinessPackagesList', meta: { title: 'unlineBusinessPackagesList', noCache: true }, hidden: true },
       { path: 'unlineBusinessPackagesDetail', component: _import('business/businessList/unlineBusinessPackages/unlineBusinessPackagesDetail'), name: 'unlineBusinessPackagesDetail', meta: { title: 'unlineBusinessPackagesDetail' }, hidden: true },
 
@@ -452,6 +452,49 @@ export const asyncRouterMap = [
           { path: 'silverMailRecommendedGoodsDetail', component: _import('interConfig/silverMail/silverMailRecommendedGoods/silverMailRecommendedGoodsDetail'), name: 'silverMailRecommendedGoodsDetail', meta: { title: 'silverMailRecommendedGoodsDetail' }, hidden: true},
         ]
       }
+    ]
+  },
+
+  // 活动商品配置
+  {
+    path: '/activityManage',
+    component: Layout,
+//    redirect: '/interConfig/indexManage/indexSlideshowList',
+    name: 'activityManage',
+    meta: {
+      title: 'activityManage',
+      icon: 'chart'
+    },
+    children: [
+      //      虚拟商品管理
+      {
+        path: '/activityManage/virtualGoods',
+        component: _import('activityManage/index'),
+        name: 'virtualGoods',
+        meta: { title: 'virtualGoods'},
+        children: [
+          //      虚拟商品
+//          { path: 'virtualGoodsList', component: _import('activityManage/virtualGoods/virtualGoodsList/virtualGoodsList'), name: 'virtualGoodsList', meta: { title: 'virtualGoodsList' }},
+//          { path: 'virtualGoodsDetail', component: _import('activityManage/virtualGoods/virtualGoodsList/virtualGoodsDetail'), name: 'virtualGoodsDetail', meta: { title: 'virtualGoodsDetail' }, hidden: true},
+
+          //      虚拟商品订单
+          { path: 'virtualGoodsOrderList', component: _import('activityManage/virtualGoods/virtualGoodsOrder/virtualGoodsOrderList'), name: 'virtualGoodsOrderList', meta: { title: 'virtualGoodsOrderList' }}
+        ]
+      },
+
+      //      活动商品
+      { path: 'activityGoodsList', component: _import('activityManage/activityGoods/activityGoodsList'), name: 'activityGoodsList', meta: { title: 'activityGoodsList' }},
+      { path: 'activityGoodsDetail', component: _import('activityManage/activityGoods/activityGoodsDetail'), name: 'activityGoodsDetail', meta: { title: 'activityGoodsDetail' }, hidden: true},
+
+      //      中秋活动商品
+      { path: 'minActivityGoodsList', component: _import('activityManage/minActivityGoods/minActivityGoodsList'), name: 'minActivityGoodsList', meta: { title: 'minActivityGoodsList' }},
+      { path: 'minActivityGoodsDetail', component: _import('activityManage/minActivityGoods/minActivityGoodsDetail'), name: 'minActivityGoodsDetail', meta: { title: 'minActivityGoodsDetail' }, hidden: true},
+
+      //      活动金贝
+      { path: 'activityGold', component: _import('activityManage/activityGold/activityGold'), name: 'activityGold', meta: { title: 'activityGold' }},
+
+      //      活动分享统计
+      { path: 'activityCount', component: _import('activityManage/activityCount/activityCount'), name: 'activityCount', meta: { title: 'activityCount' }}
     ]
   },
 

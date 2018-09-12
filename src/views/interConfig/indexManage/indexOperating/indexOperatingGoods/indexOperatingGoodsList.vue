@@ -3,7 +3,7 @@
     <el-button @click='addSlideshow'>添加商品</el-button>
     <el-button @click='downExcell'>下载模板</el-button>
     <el-button @click='importDialogVisible = true'>导入商品</el-button>
-    
+
     <div class="searchForm">
       <p @click='showFormBool = !showFormBool'>筛选查询<i v-if='showFormBool' class="el-icon-arrow-down"></i><i v-else class="el-icon-arrow-up"></i></p>
       <el-form :inline="true" :model="formInline" class="demo-form-inline" v-if='showFormBool'>
@@ -49,7 +49,7 @@
         </el-form-item>
       </el-form>
     </div>
-    
+
     <el-table
     :data="tableData"
     style="width: 100%">
@@ -148,7 +148,7 @@
         class="upload-demo"
         action="https://jsonplaceholder.typicode.com/posts/" :before-upload="beforeAvatarUpload">
         <el-button size="small" type="primary">点击上传</el-button>
-        <div slot="tip" class="el-upload__tip">只能上传模板excell文件</div>
+        <div slot="tip" class="el-upload__tip">只能上传模板excel文件</div>
       </el-upload>
       <div slot="footer" class="dialog-footer">
         <el-button @click="importDialogVisible = false">取 消</el-button>
@@ -179,7 +179,7 @@
     },
     created () {
         if (this.$route.query.template_id == 2) {
-          
+
         } else {
           // 当为金贝商品时，获取分类
           this.$axios({
@@ -204,7 +204,7 @@
         if (this.$route.query.template_id == 2) {
           obj.filter_category_id = obj.goods_activity_category_id
         } else {
-          
+
         }
         this.$axios({
           type: 'post',
@@ -224,7 +224,7 @@
         this.$router.push({path: '/interConfig/indexManage/indexOperatingGoodsDetail', query: {goods_activity_category_id: this.$route.query.goods_activity_category_id, template_id: this.$route.query.template_id}})
       },
       handleCurrentChange (val) {
-        this.start = val 
+        this.start = val
         this.getTableData()
       },
       editGoods (goods_activity_id) {
@@ -275,7 +275,7 @@
 //          url: '/goods/activitygoodsload',
 //          data: {goods_activity_category_id: this.$route.query.goods_activity_category_id, activity_goods_excel: },
 //          fuc: (res) => {
-//            
+//
 //          }
 //        })
       }
