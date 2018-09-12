@@ -6,7 +6,7 @@
         <el-form-item label="输入搜索">
           <el-input v-model="formInline.search" placeholder="商品名称/商品编号"></el-input>
         </el-form-item>
-        <el-form-item label="栏目名称">
+        <el-form-item label="商品名称">
           <el-select v-model='formInline.category_type' placeholder="请选择" clearable>
             <el-option
               v-for='item in brandArr'
@@ -130,15 +130,15 @@
           category_type: ''
         },
         brandArr: [{
-          value: 0, label: '首页'
+          value: 5, label: '中秋首页'
         },{
-          value: 1, label: '美妆'
+          value: 6, label: '月饼礼盒'
         },{
-          value: 2, label: '食品'
+          value: 7, label: '精品月饼'
         },{
-          value: 3, label: '酒类'
+          value: 8, label: '酒品特卖'
         },{
-          value: 4, label: '家居'
+          value: 9, label: '茶品人生'
         }],
         start: 1,
         total: 0,
@@ -155,7 +155,7 @@
         this.$axios({
           type: 'post',
           url: '/active/getlistgoods',
-          data: {page: this.start, limit: 20, ...this.formInline},
+          data: {active_id: 2, page: this.start, limit: 20, ...this.formInline},
           fuc: (res) => {
             if (res.code === 200) {
               this.tableData = res.data.data
@@ -192,10 +192,10 @@
         this.getTableData()
       },
       detailGoodsDetail (row) {
-        this.$router.push({path: '/activityManage/activityGoodsDetail', query: {active_goods_id: row.active_goods_id}})
+        this.$router.push({path: '/activityManage/minActivityGoodsDetail', query: {active_goods_id: row.active_goods_id}})
       },
       addGoods () {
-        this.$router.push({path: '/activityManage/activityGoodsDetail'})
+        this.$router.push({path: '/activityManage/minActivityGoodsDetail'})
       },
       offlineGoods (row) {
         this.$axios({
