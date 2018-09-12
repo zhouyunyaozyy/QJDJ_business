@@ -77,7 +77,7 @@
               if (val != 'spec_info') {
                 this.form[val] = res.data[val] + ''
               } else {
-                
+
               }
             }
             this.businessSureBool = true
@@ -112,7 +112,7 @@
               fuc: (res) => {
                 if (res.code == 200) {
                   this.$message.success('操作成功')
-                  this.$deleteOneTag('/activityManage/activityGoodsList')
+                  this.$deleteOneTag('/activityManage/minActivityGoodsList')
                 }
               }
             })
@@ -121,6 +121,7 @@
       }
     }
   }
+  // asdasd
 </script>
 
 <style scoped="true">
