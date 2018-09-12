@@ -46,15 +46,15 @@
           goods_no: ''
         },
         brandArr: [{
-          value: '0', label: '首页'
+          value: 5, label: '中秋首页'
         },{
-          value: '1', label: '美妆'
+          value: 6, label: '月饼礼盒'
         },{
-          value: '2', label: '食品'
+          value: 7, label: '精品月饼'
         },{
-          value: '3', label: '酒类'
+          value: 8, label: '酒品特卖'
         },{
-          value: '4', label: '家居'
+          value: 9, label: '茶品人生'
         }],
         businessSureBool: false,
         editBool: false,
@@ -69,11 +69,12 @@
       if (this.$route.query.active_goods_id) {
         this.editBool = true
         this.$axios({
-          type: 'post',
-          url: '/active/getdetailedgoods',
-          data: {active_goods_id: this.$route.query.active_goods_id},
-          fuc: (res) => {
+            type: 'post',
+            url: '/active/getdetailedgoods',
+            data: {active_goods_id: this.$route.query.active_goods_id},
+            fuc: (res) => {
             for (let val in this.form) {
+<<<<<<< HEAD:src/views/activityManage/minActivityGoods/minActivityGoodsDetail.vue
               if (val != 'spec_info') {
                 this.form[val] = res.data[val] + ''
               } else {
@@ -83,8 +84,19 @@
             this.businessSureBool = true
             this.form.active_goods_id = this.$route.query.active_goods_id
             console.log(this.form)
+=======
+          if (val != 'spec_info') {
+            this.form[val] = res.data[val] + ''
+          } else {
+
+>>>>>>> a237fa99da38d67340129d1c8a5f0af22569c2bb:src/views/activityManage/minActivityGoods/minActivityGoodsDetail.vue
           }
-        })
+        }
+        this.businessSureBool = true
+        this.form.active_goods_id = this.$route.query.active_goods_id
+        console.log(this.form)
+      }
+      })
       }
     },
     methods: {
@@ -98,24 +110,32 @@
           url: '/active/checkgoodsno',
           data: {goods_no: this.form.goods_no},
           fuc: (res) => {
-            this.businessSureBool = true
-          }
-        })
+          this.businessSureBool = true
+      }
+      })
       },
       submit () {
         this.$refs['form'].validate((valid) => {
           if (valid) {
             this.$axios({
-              type: 'post',
-              url: this.$route.query.active_goods_id ? '/active/editgoods' : '/active/addgoods',
-              data: this.form,
-              fuc: (res) => {
+                type: 'post',
+                url: this.$route.query.active_goods_id ? '/active/editgoods' : '/active/addgoods',
+                data: this.form,
+                fuc: (res) => {
                 if (res.code == 200) {
+<<<<<<< HEAD:src/views/activityManage/minActivityGoods/minActivityGoodsDetail.vue
                   this.$message.success('操作成功')
                   this.$deleteOneTag('/activityManage/minActivityGoodsList')
                 }
               }
             })
+=======
+              this.$message.success('操作成功')
+              this.$deleteOneTag('/activityManage/minActivityGoodsList')
+            }
+          }
+          })
+>>>>>>> a237fa99da38d67340129d1c8a5f0af22569c2bb:src/views/activityManage/minActivityGoods/minActivityGoodsDetail.vue
           }
         })
       }
