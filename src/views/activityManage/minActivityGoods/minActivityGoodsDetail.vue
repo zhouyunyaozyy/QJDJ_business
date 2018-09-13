@@ -46,15 +46,15 @@
           goods_no: ''
         },
         brandArr: [{
-          value: 5, label: '中秋首页'
+          value: '5', label: '中秋首页'
         },{
-          value: 6, label: '月饼礼盒'
+          value: '6', label: '月饼礼盒'
         },{
-          value: 7, label: '精品月饼'
+          value: '7', label: '精品月饼'
         },{
-          value: 8, label: '酒品特卖'
+          value: '8', label: '酒品特卖'
         },{
-          value: 9, label: '茶品人生'
+          value: '9', label: '茶品人生'
         }],
         businessSureBool: false,
         editBool: false,
@@ -73,18 +73,18 @@
             url: '/active/getdetailedgoods',
             data: {active_goods_id: this.$route.query.active_goods_id},
             fuc: (res) => {
-            for (let val in this.form) {
-          if (val != 'spec_info') {
-            this.form[val] = res.data[val] + ''
-          } else {
+              for (let val in this.form) {
+                if (val != 'spec_info') {
+                  this.form[val] = res.data[val] + ''
+                } else {
 
-          }
-        }
-        this.businessSureBool = true
-        this.form.active_goods_id = this.$route.query.active_goods_id
-        console.log(this.form)
-      }
-      })
+                }
+              }
+              this.businessSureBool = true
+              this.form.active_goods_id = this.$route.query.active_goods_id
+              console.log(this.form)
+            }
+        })
       }
     },
     methods: {
