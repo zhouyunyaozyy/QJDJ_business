@@ -3,8 +3,8 @@
     <p>当前订单状态： <span v-if='tableData[0] && tableData[0].roof_status == 0'>未结算</span><span v-else-if='tableData[0] && tableData[0].roof_status == 1'>结算成功</span><span v-else-if='tableData[0] && tableData[0].roof_status == -1'>结算失败</span></p>
     <h5>订单信息</h5>
     <el-table
-    :data="tableData" border
-    style="width: 100%">
+      :data="tableData" border
+      style="width: 100%">
       <el-table-column label='订单编号' prop='order_id' min-width="120" align='center'></el-table-column>
       <el-table-column label='订单状态' prop='pay_status' min-width="120" align='center'>
         <template slot-scope='scope'>
@@ -25,8 +25,8 @@
       </el-table-column>
     </el-table>
     <el-table
-    :data="tableData" border
-    style="width: 100%">
+      :data="tableData" border
+      style="width: 100%">
       <el-table-column label='商品SKU' prop='g_format' min-width="120" align='center'></el-table-column>
       <el-table-column label='商品件数' prop='g_num' min-width="120" align='center'></el-table-column>
       <el-table-column label='用户ID' prop='nickname' min-width="120" align='center'></el-table-column>
@@ -35,13 +35,17 @@
           <span>现金支付：{{scope.row.cash / 100}},余额支付：{{scope.row.balance / 100}},银贝支付：{{scope.row.silver}},金贝支付：{{scope.row.gold}},铜贝支付：{{scope.row.copper}}</span>
         </template>
       </el-table-column>
-      <el-table-column label='订单完成时间' prop='take_at' min-width="120" align='center'></el-table-column>
+      <el-table-column label='订单完成时间' prop='take_at' min-width="120" align='center'>
+        <template slot-scope='scope'>
+          <span>{{$formatTime(scope.row.take_at)}}</span>
+        </template>
+      </el-table-column>
       <el-table-column label='' prop='' min-width="120" align='center'></el-table-column>
     </el-table>
     <h5>结算信息</h5>
     <el-table
-    :data="tableData" border
-    style="width: 100%">
+      :data="tableData" border
+      style="width: 100%">
       <el-table-column label='结算单号' prop='prorate_num' min-width="120" align='center'></el-table-column>
       <el-table-column label='结算渠道' prop='channel' min-width="120" align='center'></el-table-column>
       <el-table-column label='结算金额' prop='amount' min-width="120" align='center'>
@@ -55,18 +59,22 @@
           <span v-else>成功</span>
         </template>
       </el-table-column>
-      <el-table-column label='结算完成时间' prop='pay_at' min-width="120" align='center'></el-table-column>
+      <el-table-column label='结算完成时间' prop='pay_at' min-width="120" align='center'>
+        <template slot-scope='scope'>
+          <span>{{$formatTime(scope.row.pay_at)}}</span>
+        </template>
+      </el-table-column>
     </el-table>
     <h5>商家信息</h5>
     <el-table
-    :data="tableData" border
-    style="width: 100%">
+      :data="tableData" border
+      style="width: 100%">
       <el-table-column label='支付宝账号' prop='ali_account' min-width="120" align='center'></el-table-column>
       <el-table-column label='微信账号' prop='wx_account' min-width="120" align='center'></el-table-column>
       <el-table-column label='对公银行账号' prop='bank_account' min-width="120" align='center'></el-table-column>
     </el-table>
-    <el-button v-if='status !== 1' type='primary' style='margin: 20px;' @click='changeStatusBefore'>更改为已分账</el-button>
-    <el-button v-if='status == 0' type='primary' style='margin: 20px;' @click='assignMoney'>立即分账</el-button>
+    <el-button v-if='status !== 1' type='primary' style='margin: 20px;' @click='changeStatusBefore(1)'>更改为已分账</el-button>
+    <el-button v-if='status == 0' type='primary' style='margin: 20px;' @click='changeStatusBefore(2)'>立即分账</el-button>
     <el-dialog
       title="实际分账金额"
       :visible.sync="dialogVisible"
@@ -94,6 +102,7 @@
           transfer_amount: '',
           freight: ''
         },
+        type: '',
         dialogVisible: false,
         tableData: [],
         status: '',
@@ -122,18 +131,23 @@
         url: '/Financial/getfinancialdetial',
         data: {info_id: this.$route.query.id},
         fuc: (res) => {
-          this.tableData = [res.data]
-          this.status = res.data.roof_status
-        }
-      })
+        this.tableData = [res.data]
+      this.status = res.data.roof_status
+    }
+    })
     },
     methods: {
-      changeStatusBefore () {
+      changeStatusBefore (num) {
         this.form.transfer_amount = this.tableData[0].amount / 100
         this.form.freight = this.tableData[0].freight / 100
+        this.type = num
         this.dialogVisible = true
       },
       changeStatus () {
+        if (this.type == 2) {
+          this.assignMoney()
+          return
+        }
         this.$axios({
           type: 'post',
           url: '/Financial/updateorderstatus',
@@ -141,27 +155,27 @@
             id: this.tableData[0].id,
             info_id: this.tableData[0].info_id,
             ...this.form
-          },
-          fuc: (res) => {
-            if (res.code == 200) {
-              this.$message.success('操作成功')
-              this.$deleteOneTag('/financial/onlineFinancialListNormal')
-            }
+      },
+        fuc: (res) => {
+          if (res.code == 200) {
+            this.$message.success('操作成功')
+            this.$deleteOneTag('/financial/onlineFinancialListNormal')
           }
-        })
+        }
+      })
       },
       assignMoney () {
         this.$axios({
           type: 'post',
           url: '/queue/manualTransfer',
-          data: {type: 'online', transfer_id: this.tableData[0].id},
-          fuc: (res) => {
-            if (res.code == 200) {
-              this.$message.success('操作成功')
-              this.$deleteOneTag('/financial/onlineFinancialListNormal')
-            }
+          data: {type: 'online', transfer_id: this.tableData[0].id, ...this.form},
+        fuc: (res) => {
+          if (res.code == 200) {
+            this.$message.success('操作成功')
+            this.$deleteOneTag('/financial/onlineFinancialListNormal')
           }
-        })
+        }
+      })
       }
     }
   }
@@ -171,7 +185,7 @@
     margin: 10px 20px 20px;
     overflow: hidden;
   }
-  
+
 </style>
 <style>
   .onlineFinancialListNormalDetail .el-table th {
