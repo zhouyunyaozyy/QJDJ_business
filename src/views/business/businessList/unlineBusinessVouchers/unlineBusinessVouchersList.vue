@@ -5,7 +5,7 @@
     <el-button @click="changeStatus('0')" :type="formInline.search_status == '0' ? 'primary' : ''">审核中</el-button>
     <el-button @click="changeStatus('-1')" :type="formInline.search_status == '-1' ? 'primary' : ''">已下架</el-button>
     <el-button @click="changeStatus('1')" :type="formInline.search_status == '1' ? 'primary' : ''">审核成功</el-button>
-    
+
     <div class="searchForm">
       <p @click='showFormBool = !showFormBool'>筛选查询<i v-if='showFormBool' class="el-icon-arrow-down"></i><i v-else class="el-icon-arrow-up"></i></p>
       <el-form :inline="true" :model="formInline" class="demo-form-inline" v-if='showFormBool'>
@@ -19,7 +19,7 @@
     </div>
 
     <el-button @click='addGoods' style='margin-bottom: 10px;'>添加</el-button>
-    
+
     <el-table
     :data="tableData"
     style="width: 100%">
@@ -45,8 +45,8 @@
           label="结算价"
           min-width="120" align='center'>
           <template slot-scope='scope'>
-            <span v-if='scope.row.transfer_type === 0'>{{scope.row.price / 100}}元</span>
-            <span v-else>{{scope.row.price / 10000 * scope.row.transfer_ratio}}元</span>
+            <span v-if='scope.row.transfer_type === 0'>{{scope.row.transfer_cash / 100}}元</span>
+            <span v-else>{{scope.row.price * scope.row.transfer_ratio / 10000}}元</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -88,7 +88,7 @@
     :total="total" :page-size="20" @current-change="handleCurrentChange"
       :current-page.sync="start">
     </el-pagination>
-    
+
   </div>
 </template>
 
@@ -130,7 +130,7 @@
         this.getTableData()
       },
       handleCurrentChange (val) {
-        this.start = val 
+        this.start = val
         this.getTableData()
       },
       onSubmit () {

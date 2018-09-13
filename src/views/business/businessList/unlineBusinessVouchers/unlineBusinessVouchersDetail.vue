@@ -23,7 +23,7 @@
         <el-input v-model="form.price" placeholder='请输入代金券售价'></el-input>
       </el-form-item>
       <el-form-item label='可用时间'>
-        <el-input type='textarea' v-model="form.enable_time" placeholder='不填则默认周一至周五'></el-input>
+        <el-input type='textarea' v-model="form.enable_time" placeholder='不填则默认周一至周日'></el-input>
       </el-form-item>
       <el-form-item label='购买截至时间' prop='expire_time'>
         <el-date-picker
