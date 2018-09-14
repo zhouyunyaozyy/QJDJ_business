@@ -28,11 +28,20 @@
         <el-button @click='submit'>保存</el-button>
       </el-form-item>
     </el-form>
+    <vue-editor id="editor" :customModules="customModulesForEditor" :editorOptions="editorSettings"
+                useCustomImageHandler :editorToolbar="customToolbar"
+                @imageAdded="handleImageAdded" v-model="form.body" style="width: 650px;">
+      <!--        <vue-editor id="editor" :customModules="customModulesForEditor" :editorOptions="editorSettings" v-model="form.image_text">-->
+    </vue-editor>
 
   </div>
 
 </template>
 <script>
+  import { VueEditor } from 'vue2-editor'
+  import { ImageDrop } from 'quill-image-drop-module'
+  import ImageResize from 'quill-image-resize-module'
+
   export default {
     data () {
       return {
@@ -47,11 +56,32 @@
         rules: {
           title: [{ required: true, message: '请输入', trigger: 'blur' }],
           user_id: [{ required: true, message: '请输入', trigger: 'blur' }]
+        },
+        customToolbar: [
+          ['bold', 'italic', 'underline'],
+          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+          [{ 'color': []}, { 'background': [] }],
+          ['image', 'code-block', 'link']
+        ],
+        customModulesForEditor: [
+          { alias: 'imageDrop', module: ImageDrop },
+          { alias: 'imageResize', module: ImageResize }
+        ],
+        editorSettings: {
+          modules: {
+            imageDrop: true,
+            imageResize: {}
+          }
         }
       }
     },
+    components: {
+      VueEditor
+    },
     created () {
 
+    },
+    mounted () {
     },
     methods: {
       beforeAvatarUploadLogo (file) {
@@ -66,9 +96,38 @@
       submit () {
         this.$refs['form'].validate((valid) => {
           if (valid) {
-
+            this.$axios({
+                type: 'post',
+                url: '/Operation/addpgc',
+                data: this.form,
+                fuc: (res) => {
+                  if (res.code == 200) {
+                    this.$message.success('操作成功')
+                  }
+              }
+            })
           }
         })
+      },
+      handleImageAdded (file, Editor, cursorLocation, resetUploader) {
+        let _this = this
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function (e) {
+//          _this.form.license = this.result // 这个就是base64编码了
+          _this.$axios({
+            type: 'post',
+            url: '/Operation/uploadpgc',
+            data: {pgc_img: this.result},
+            fuc: (res) => {
+              if (res.code == 200) {
+                Editor.insertEmbed(cursorLocation, 'image', res.data);
+                resetUploader();
+              }
+            }
+          })
+
+        }
       }
     }
   }
