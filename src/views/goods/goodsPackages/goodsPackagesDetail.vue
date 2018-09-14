@@ -74,6 +74,7 @@
     data () {
       return {
         editor: '',
+        status: '',
         wangeditorMenu: [
           'bold',	// 粗体
           'fontsize',	// 字号
@@ -158,6 +159,7 @@
             this.form.package_id = res.data.package_id
             this.form.list_save_path = res.data.list_save_path
             console.log(this.form)
+            this.status = res.data.status
             this.editor.txt.html(this.form.package_desc)
           }
         })
