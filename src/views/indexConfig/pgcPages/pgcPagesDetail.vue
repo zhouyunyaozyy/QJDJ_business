@@ -79,7 +79,23 @@
       VueEditor
     },
     created () {
-
+      if (this.$route.query.id) {
+        this.$axios({
+            type: 'post',
+            url: '/Operation/getpgcdetail',
+            data: {id: this.$route.query.id},
+            fuc: (res) => {
+//              debugger
+              if (res.code == 200) {
+                for (let val in this.form) {
+                  this.form[val] = res.data[val]
+                }
+                this.form.top_img = res.data.url_path + res.data.top_img_path + res.data.top_img
+                this.form.top_img_path = res.data.top_img_path
+              }
+            }
+        })
+      }
     },
     mounted () {
     },
@@ -96,13 +112,20 @@
       submit () {
         this.$refs['form'].validate((valid) => {
           if (valid) {
+            if (this.$route.query.id) {
+              if (this.form.top_img.indexOf(this.form.top_img_path) > -1) {
+                this.form.top_img = this.form.top_img.split(this.form.top_img_path)[1]
+              }
+              this.form.id = this.$route.query.id
+            }
             this.$axios({
                 type: 'post',
-                url: '/Operation/addpgc',
+                url: this.$route.query.id ? '/Operation/editpgc' : '/Operation/addpgc',
                 data: this.form,
                 fuc: (res) => {
                   if (res.code == 200) {
                     this.$message.success('操作成功')
+                    this.$deleteOneTag('/indexConfig/pgcPagesList')
                   }
               }
             })
