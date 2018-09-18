@@ -2,7 +2,7 @@
   <div class="unlineBusinessList">
     <el-button type="primary" @click="addBusiness('1')">添加A类商家</el-button>
     <el-button type="primary" @click="addBusiness('2')">添加B类商家</el-button>
-    
+
     <div class="searchForm">
       <p @click='showFormBool = !showFormBool'>筛选查询<i v-if='showFormBool' class="el-icon-arrow-down"></i><i v-else class="el-icon-arrow-up"></i></p>
       <el-form :inline="true" :model="formInline" class="demo-form-inline" v-if='showFormBool'>
@@ -102,8 +102,8 @@
           <template slot-scope='scope'>
             <el-button @click='addBusiness(scope.row.type, scope.row.business_offline_id)'>编辑</el-button>
             <el-button @click='outExcell(scope.row.business_offline_id, scope.row.type)'>导出</el-button>
-            <el-button v-if='scope.row.type == 1 && scope.row.is_alliance == 0 && scope.row.insert_package_status == 1' @click='detailPackages(scope.row.business_offline_id)' style='margin-top: 4px;'>查看套餐</el-button>
-            <el-button v-if='scope.row.type == 1' @click='detailVouchers(scope.row.business_offline_id)' style='margin-top: 4px;'>代金券</el-button>
+            <el-button v-if='scope.row.type == 1 && scope.row.is_alliance == 0 && scope.row.insert_package_status == 1' @click='detailPackages(scope.row.business_offline_id)' style='margin-top: 4px;'>查看服务</el-button>
+            <el-button v-if='scope.row.type == 1 && scope.row.is_alliance == 0 && scope.row.insert_package_status == 1' @click='detailVouchers(scope.row.business_offline_id)' style='margin-top: 4px;'>代金券</el-button>
           </template>
         </el-table-column>
       </el-table-column>
@@ -173,7 +173,7 @@
             })
           }
         })
-        
+
       },
       changeStatus (business_offline_id) {
         this.$axios({
@@ -186,7 +186,7 @@
         })
       },
       handleCurrentChange (val) {
-        this.start = val 
+        this.start = val
         this.getTableData()
       },
       addBusiness (type, business_offline_id) {
@@ -221,7 +221,7 @@
                   cancelButtonText: '取消',
                   type: 'warning'
                 }).then(() => {
-                  
+
                   this.loading.close()
                   this.$downloadExcell({
                     url: type == 1 ? '/business/offlineexportpayqrcode' : '/business/offlineexporttableqrcode',
@@ -236,13 +236,13 @@
 //                    }
 //                  })
 //                  location.href = (type == 1 ? '/business/offlineexportpayqrcode?name=' : '/business/offlineexporttableqrcode?name=') + res.data.name
-                  
+
                 }).catch(() => {
                   this.loading.close()
                   this.$message({
                     type: 'info',
                     message: '已取消下载'
-                  });          
+                  });
                 });
               }
             }

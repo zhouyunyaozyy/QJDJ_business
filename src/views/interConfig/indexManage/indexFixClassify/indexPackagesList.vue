@@ -1,7 +1,7 @@
 <template>
   <div class="indexOperatingPackagesList">
-    <el-button @click='dialogTableVisible = true' style='margin-bottom: 10px;'>添加套餐</el-button>
-    
+    <el-button @click='dialogTableVisible = true' style='margin-bottom: 10px;'>添加服务</el-button>
+
     <div class="searchForm">
       <p @click='showFormBool = !showFormBool'>筛选查询<i v-if='showFormBool' class="el-icon-arrow-down"></i><i v-else class="el-icon-arrow-up"></i></p>
       <el-form :inline="true" :model="formInline" class="demo-form-inline" v-if='showFormBool'>
@@ -38,15 +38,15 @@
     :data="tableData"
     style="width: 100%">
       <el-table-column
-        label="首页固定分类套餐管理">
+        label="首页固定分类服务管理">
         <el-table-column
           prop="goods_activity_package_id"
-          label="套餐id"
+          label="服务id"
           min-width="120" align='center'>
         </el-table-column>
         <el-table-column
           prop="package_name"
-          label="套餐名称"
+          label="服务名称"
           min-width="120" align='center'>
         </el-table-column>
         <el-table-column
@@ -107,7 +107,7 @@
       :current-page.sync="start">
     </el-pagination>
 
-    <el-dialog title="添加套餐" width='80%' @close='dialogClose' :visible.sync="dialogTableVisible">
+    <el-dialog title="添加服务" width='80%' @close='dialogClose' :visible.sync="dialogTableVisible">
       <div class="searchForm">
         <el-form :inline="true" :model="formInlineDialog" class="demo-form-inline" v-if='showFormBool'>
           <el-form-item>
@@ -116,7 +116,7 @@
           <el-form-item label="输入搜索">
             <el-input v-model="formInlineDialog.search_name_no_business" placeholder="商品名称/商品编号/商家"></el-input>
           </el-form-item>
-          <el-form-item label="套餐类目">
+          <el-form-item label="服务类目">
             <el-cascader
               :options="categoryArr" change-on-select
               v-model="formInlineDialog.search_category_id" clearable>
@@ -132,7 +132,7 @@
       :data="dialogTableData" ref='multipleTable'
       style="width: 100%" @selection-change="handleSelectionChange">
         <el-table-column
-          label="套餐列表">
+          label="服务列表">
           <el-table-column
             type="selection"
             width="55">
@@ -144,17 +144,17 @@
           </el-table-column>
           <el-table-column
             prop="package_name"
-            label="套餐名称"
+            label="服务名称"
             min-width="120" align='center'>
           </el-table-column>
           <el-table-column
             prop="package_no"
-            label="套餐编码"
+            label="服务编码"
             min-width="120" align='center'>
           </el-table-column>
           <el-table-column
             prop="silver_price"
-            label="套餐价格"
+            label="服务价格"
             min-width="120" align='center'>
           </el-table-column>
           <el-table-column
@@ -207,7 +207,7 @@
       return {
         tableData: [],
         dialogTableData: [],
-        selectedArr: [], // 选中套餐id
+        selectedArr: [], // 选中服务id
         categoryArr: [],
         formInline: {
           package_status: '',
@@ -297,11 +297,11 @@
         this.getTableData()
       },
       handleCurrentChange (val) {
-        this.start = val 
+        this.start = val
         this.getTableData()
       },
       handleCurrentChangeDiaolog (val) {
-        this.dialogStart = val 
+        this.dialogStart = val
         this.getDialogTableData()
       },
       deleteArtic (row) {
@@ -331,7 +331,7 @@
       },
       addPackages () {
         if (this.selectedArr.length < 1) {
-          this.$message.warning('请先选择套餐')
+          this.$message.warning('请先选择服务')
         } else {
           this.$axios({
             type: 'post',
@@ -345,7 +345,7 @@
             }
           })
         }
-        
+
       },
       dialogClose () {
         this.getTableData()

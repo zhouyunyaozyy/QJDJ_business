@@ -63,7 +63,7 @@
         <span v-if='type == 1'>线下A类商家</span>
         <span v-else>线下B类商家</span>
       </el-form-item>
-      <el-form-item label="是否可以创建套餐" v-if='type == 1'>
+      <el-form-item label="是否可以创建服务" v-if='type == 1'>
         <el-switch
           v-model="form.insert_package_status == 1"
           active-text="可以"
@@ -434,9 +434,9 @@
             this.form.business_offline_id = this.$route.query.business_offline_id
             this.$nextTick(() => {
 //              this.baiduMap.centerAndZoom(this.longitude_latitude, 18)
-//              this.baiduMap.addOverlay(new BMap.Marker(this.longitude_latitude)) 
+//              this.baiduMap.addOverlay(new BMap.Marker(this.longitude_latitude))
               if(!this.marker){
-            
+
 //            this.baiduMap.clearOverlays()
                 this.marker = new BMap.Marker(this.longitude_latitude);
                 this.baiduMap.addOverlay(this.marker);
@@ -464,7 +464,7 @@
         this.baiduMap = new BMap.Map('l-map')
         this.baiduMap.centerAndZoom('成都', 12)
         this.baiduMap.enableScrollWheelZoom(true)
-        
+
 //        this.baiduMap.addEventListener("click",(e) => {
 //          alert(e.point.lng + "," + e.point.lat);
 //        });
@@ -494,8 +494,8 @@
 //          menu.addItem(new BMap.MenuItem(txtMenuItem[i].text,txtMenuItem[i].callback,100));
 //        }
 //        this.baiduMap.addContextMenu(menu)
-        
-        
+
+
 //        var marker=false;
         this.baiduMap.addEventListener("rightclick", (e) => {
           var lng=e.point.lng;
@@ -505,7 +505,7 @@
           this.longitude_latitude.lng = lng
           console.log(this.longitude_latitude)
           if(!this.marker){
-            
+
 //            this.baiduMap.clearOverlays()
             this.marker = new BMap.Marker(point);
             this.baiduMap.addOverlay(this.marker);
@@ -556,9 +556,9 @@
             _this.longitude_latitude.lat = pp.lat
             _this.longitude_latitude.lng = pp.lng
             _this.baiduMap.centerAndZoom(pp, 18)
-            
+
             if(!_this.marker){
-            
+
 //              _this.baiduMap.clearOverlays()
               _this.marker = new BMap.Marker(pp);
               _this.baiduMap.addOverlay(_this.marker);

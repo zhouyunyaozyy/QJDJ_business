@@ -16,14 +16,14 @@
       <el-form-item label='代金券结算价' prop='transfer_cash' v-if='form.transfer_type === 0'>
         <el-input v-model="form.transfer_cash" placeholder='请输入代金券结算价' :maxlength='20'></el-input>
       </el-form-item>
-      <el-form-item label='代金券结算比例' prop='transfer_ratio' v-else-if='form.transfer_type === 1'>
+      <el-form-item label='代金券结算比例' v-else-if='form.transfer_type === 1'>
         <el-input v-model="form.transfer_ratio" placeholder='请输入代金券结算比例' :maxlength='20'></el-input>
       </el-form-item>
       <el-form-item label='代金券售价' prop='price'>
         <el-input v-model="form.price" placeholder='请输入代金券售价'></el-input>
       </el-form-item>
       <el-form-item label='可用时间'>
-        <el-input type='textarea' v-model="form.enable_time" placeholder='请输入可用时间'></el-input>
+        <el-input type='textarea' v-model="form.enable_time" placeholder='不填则默认周一至周日'></el-input>
       </el-form-item>
       <el-form-item label='购买截至时间' prop='expire_time'>
         <el-date-picker
@@ -40,13 +40,12 @@
         </el-date-picker>
       </el-form-item>
       <el-form-item label='库存' prop='num'>
-        <el-input v-model="form.num" placeholder='请输入套餐库存'></el-input>
-      </el-form-item>
-      <el-form-item label='不可用时间' prop='unable_time'>
-        <el-input type='textarea' v-model="form.unable_time" placeholder='请输入不可用时间'></el-input>
+        <el-input v-model="form.num" placeholder='请输入服务库存'></el-input>
       </el-form-item>
       <el-form-item label='温馨提示' prop='package_desc'>
-        <el-input type='textarea' v-model="form.package_desc" :maxlength='500' placeholder='请输入温馨提示'></el-input>
+<!--        <el-input type='textarea' v-model="form.package_desc" :maxlength='500' placeholder='请输入温馨提示'></el-input>-->
+
+        <div ref="editor" style="text-align:left;max-width: 400px;"></div>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submit">保存并上架</el-button>
@@ -55,9 +54,18 @@
   </div>
 </template>
 <script>
+  import E from 'wangeditor'
   export default {
     data () {
       return {
+        editor: '',
+        wangeditorMenu: [
+          'bold',	// 粗体
+          'fontsize',	// 字号
+          'italic',	// 斜体
+          '|',
+          'undo',	// 撤销
+        ], //编辑器菜单
         form: {
           package_name: '',
           package_tag: '',
@@ -69,7 +77,6 @@
           expire_time: '',
           use_time: '',
           num: '',
-          unable_time: '',
           package_desc: ''
         },
         rules: {
@@ -81,12 +88,11 @@
           expire_time: [{ required: true, message: '请选择日期', trigger: 'blur' }],
           use_time: [{ required: true, message: '请选择日期', trigger: 'blur' }],
           num: [{ required: true, message: '请输入库存', trigger: 'blur' }],
-          unable_time: [{ required: true, message: '请输入不可用时间', trigger: 'blur' }],
           package_desc: [{ required: true, message: '请输入温馨提示', trigger: 'blur' }]
         },
         pickerOptions0: {
           disabledDate(time) {
-            return time.getTime() < Date.now();
+            return time.getTime() < Date.now() - 3600 * 1000 * 24;
           }
         },
         pickerOptions1: {
@@ -94,13 +100,50 @@
             if (this.form.expire_time) {
               return time.getTime() < this.form.expire_time.getTime()
             }
-            return time.getTime() < Date.now()
+            return time.getTime() < Date.now() - 3600 * 1000 * 24
           }
         }
       }
     },
+    mounted () {
+      let editor = this.editor = new E(this.$refs.editor)
+      editor.customConfig.onchange = (html) => {
+        this.form.package_desc = html
+      }
+      editor.customConfig.zIndex = 10
+      editor.customConfig.menus = [
+        'fontSize',
+        'bold',
+        'italic',
+        '|',
+        'foreColor',  // 文字颜色
+        'backColor',  // 背景颜色
+        'undo'
+      ]
+      editor.create()
+    },
     created () {
-      
+      if (this.$route.query.package_id) {
+        this.$axios({
+          type: 'post',
+          url: '/package/packagedetail',
+          data: {package_id: this.$route.query.package_id},
+          fuc: (res) => {
+            for (let k in this.form) {
+              if (k === 'price' || k === 'transfer_cash') {
+                this.form[k] = res.data[k] / 100
+              } else if (k !== 'expire_time' && k !== 'use_time') {
+                this.form[k] = res.data[k]
+              } else {
+                this.form[k] = new Date(res.data[k] * 1000)
+              }
+            }
+            this.form.package_id = res.data.package_id
+            console.log(this.form)
+            this.editor.txt.html(this.form.package_desc)
+          }
+        })
+      }
     },
     methods: {
       expire_timeChange () {
@@ -109,7 +152,21 @@
       submit () {
         this.$refs['form'].validate((valid) => {
           if (valid) {
-            
+            let _form = JSON.parse(JSON.stringify(this.form))
+            _form.expire_time = new Date(_form.expire_time).getTime() / 1000
+            _form.use_time = new Date(_form.use_time).getTime() / 1000
+            this.$axios({
+              type: 'post',
+              url: this.$route.query.package_id ? '/package/packageedit' : '/package/packageinsert',
+              data: {package_type: 2, status: 1, business_id: this.$route.query.business_id, ..._form},
+              fuc: (res) => {
+                console.log('res', res)
+                if (res.code == 200) {
+                  this.$message.success('操作成功')
+                  this.$deleteOneTag('/business/unlineBusinessVouchersList', {business_id: this.$route.query.business_id})
+                }
+              }
+            })
           }
         })
       }

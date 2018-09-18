@@ -55,7 +55,7 @@
           <template slot-scope='scope'>
             <el-button @click="goOperatingGoodsRoute(scope.row.goods_activity_category_id, scope.row.template_id)" v-if="scope.row.type == 2 && scope.row.template_id != 3">商品管理</el-button>
             <el-button @click="goOperatingArticRoute(scope.row.goods_activity_category_id)" v-if="scope.row.type == 2 && scope.row.template_id == 2">文章管理</el-button>
-            <el-button @click="goOperatingPackagesRoute(scope.row.goods_activity_category_id)" v-if="scope.row.type == 2 && scope.row.template_id == 3">套餐管理</el-button>
+            <el-button @click="goOperatingPackagesRoute(scope.row.goods_activity_category_id)" v-if="scope.row.type == 2 && scope.row.template_id == 3">服务管理</el-button>
             <el-button @click="goOperatingBusinessRoute(scope.row.goods_activity_category_id)" v-if="scope.row.type == 2 && scope.row.template_id == 3">商家管理</el-button>
           </template>
         </el-table-column>

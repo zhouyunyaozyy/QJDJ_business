@@ -33,7 +33,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="爆品" v-if='$route.query.template_id == 1'>
-          <el-select v-model='formInline.status' placeholder="请选择" clearable>
+          <el-select v-model='formInline.is_hot' placeholder="请选择" clearable>
             <el-option
               label="是"
               value="1">
@@ -169,6 +169,7 @@
         importDialogVisible: false,
         formInline: {
           status: '',
+          is_hot: '',
           search: '',
           filter_category_id: ''
         },

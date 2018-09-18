@@ -111,7 +111,7 @@
         this.$axios({
           type: 'post',
           url: '/Order/downorderlist',
-          data: {type: 2, ...this.formInline},
+          data: {type: 2, page: this.start, ...this.formInline},
           fuc: (res) => {
             this.tableData = res.data.order_list
             this.total = res.data.all_num
@@ -126,7 +126,8 @@
         this.$router.push({path: '/orderList/unlineOrderDetail',query: {package_order_id: row.package_order_id}})
       },
       onSubmit () {
-        
+        this.start = 1
+        this.getTableData()
       }
     }
   }

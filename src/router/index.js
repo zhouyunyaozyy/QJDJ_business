@@ -121,7 +121,7 @@ export const asyncRouterMap = [
       { path: 'unlineOrderList', component: _import('orderList/unlineOrderList/unlineOrderList'), name: 'unlineOrderList', meta: { title: 'unlineOrderList', noCache: true }},
       { path: 'unlineOrderDetail', component: _import('orderList/unlineOrderList/unlineOrderDetail'), name: 'unlineOrderDetail', meta: { title: 'unlineOrderDetail' }, hidden: true },
 
-      //      套餐订单
+      //      服务订单
       { path: 'packagesOrderList', component: _import('orderList/packagesOrderList/packagesOrderList'), name: 'packagesOrderList', meta: { title: 'packagesOrderList', noCache: true }},
       { path: 'packagesOrderDetail', component: _import('orderList/packagesOrderList/packagesOrderDetail'), name: 'packagesOrderDetail', meta: { title: 'packagesOrderDetail' }, hidden: true },
 
@@ -155,7 +155,7 @@ export const asyncRouterMap = [
       { path: 'unlineFinancialList', component: _import('financial/unlineFinancialList/unlineFinancialList'), name: 'unlineFinancialList', meta: { title: 'unlineFinancialList', noCache: true }},
       { path: 'unlineFinancialDetail', component: _import('financial/unlineFinancialList/unlineFinancialDetail'), name: 'unlineFinancialDetail', meta: { title: 'unlineFinancialDetail' }, hidden: true },
 
-      //      结算列表-套餐
+      //      结算列表-服务正常
       { path: 'financialPackagesList', component: _import('financial/financialPackages/financialPackagesList'), name: 'financialPackagesList', meta: { title: 'financialPackagesList', noCache: true }},
       { path: 'financialPackagesDetail', component: _import('financial/financialPackages/financialPackagesDetail'), name: 'financialPackagesDetail', meta: { title: 'financialPackagesDetail' }, hidden: true },
 
@@ -197,7 +197,7 @@ export const asyncRouterMap = [
       { path: 'goodsBrandsList', component: _import('goods/goodsBrands/goodsBrandsList'), name: 'goodsBrandsList', meta: { title: 'goodsBrandsList', noCache: true }},
       { path: 'goodsBrandsDetail', component: _import('goods/goodsBrands/goodsBrandsDetail'), name: 'goodsBrandsDetail', meta: { title: 'goodsBrandsDetail' }, hidden: true },
 
-      //      商品套餐
+      //      商品服务
       { path: 'goodsPackagesList', component: _import('goods/goodsPackages/goodsPackagesList'), name: 'goodsPackagesList', meta: { title: 'goodsPackagesList', noCache: true }},
       { path: 'goodsPackagesDetail', component: _import('goods/goodsPackages/goodsPackagesDetail'), name: 'goodsPackagesDetail', meta: { title: 'goodsPackagesDetail' }, hidden: true },
 
@@ -486,6 +486,10 @@ export const asyncRouterMap = [
       { path: 'activityGoodsList', component: _import('activityManage/activityGoods/activityGoodsList'), name: 'activityGoodsList', meta: { title: 'activityGoodsList' }},
       { path: 'activityGoodsDetail', component: _import('activityManage/activityGoods/activityGoodsDetail'), name: 'activityGoodsDetail', meta: { title: 'activityGoodsDetail' }, hidden: true},
 
+      //      中秋活动商品
+      { path: 'minActivityGoodsList', component: _import('activityManage/minActivityGoods/minActivityGoodsList'), name: 'minActivityGoodsList', meta: { title: 'minActivityGoodsList' }},
+      { path: 'minActivityGoodsDetail', component: _import('activityManage/minActivityGoods/minActivityGoodsDetail'), name: 'minActivityGoodsDetail', meta: { title: 'minActivityGoodsDetail' }, hidden: true},
+
       //      活动金贝
       { path: 'activityGold', component: _import('activityManage/activityGold/activityGold'), name: 'activityGold', meta: { title: 'activityGold' }},
 
@@ -566,6 +570,9 @@ export const asyncRouterMap = [
 
       //      分享购买设置
       { path: 'shareBuyDetail', component: _import('otherConfig/shareBuy/shareBuyDetail'), name: 'shareBuyDetail', meta: { title: 'shareBuyDetail', noCache: true }},
+
+      //     分账时间设置
+      { path: 'transferDetail', component: _import('otherConfig/transferConfig/transferDetail'), name: 'transferDetail', meta: { title: 'transferDetail', noCache: true }},
 
       //      推荐收入列表
       { path: 'referralEarningList', component: _import('otherConfig/referralEarning/referralEarningList'), name: 'referralEarningList', meta: { title: 'referralEarningList', noCache: true }, hidden: true}

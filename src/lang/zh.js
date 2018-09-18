@@ -13,8 +13,8 @@ export default {
     onlineOrderDetail: '线上订单详情',
     unlineOrderDetail: '线下订单详情',
     unlineOrderList: '线下订单列表',
-    packagesOrderDetail: '套餐订单详情',
-    packagesOrderList: '套餐订单列表',
+    packagesOrderDetail: '服务订单详情',
+    packagesOrderList: '服务订单列表',
     vouchersOrderDetail: '代金券订单详情',
     vouchersOrderList: '代金券订单列表',
     financial: '财务中心',
@@ -24,8 +24,8 @@ export default {
     onlineFinancialListNormalDetail: '结算详情-线上正常',
     unlineFinancialList: '结算列表-线下',
     unlineFinancialDetail: '结算详情-线下',
-    financialPackagesList: '结算列表-套餐',
-    financialPackagesDetail: '结算详情-套餐',
+    financialPackagesList: '结算列表-服务正常',
+    financialPackagesDetail: '结算详情-服务正常',
     financialPackagesErrorList: '结算列表-服务异常',
     financialPackagesErrorDetail: '结算详情-服务异常',
     financialVouchersNormalList: '结算列表-代金券正常',
@@ -40,8 +40,8 @@ export default {
     goodsClassifyDetail: '商品类目详情',
     goodsBrandsList: '商品品牌',
     goodsBrandsDetail: '商品品牌详情',
-    goodsPackagesList: '商品套餐',
-    goodsPackagesDetail: '商品套餐详情',
+    goodsPackagesList: '商品服务',
+    goodsPackagesDetail: '商品服务详情',
     goodsVouchersList: '商品代金券',
     goodsVouchersDetail: '商品代金券详情',
     business: '商家管理',
@@ -53,11 +53,11 @@ export default {
     onlineBusinessGoodsDetail: '商家-商品详情',
     onlineBusinessBrandsList: '商家-邮费',
     onlineBusinessBrandsDetail: '商家-邮费详情',
-
-    // 添加套餐（后面要删）
-    unlineBusinessPackagesList: '商家-套餐',
-    unlineBusinessPackagesDetail: '商家-套餐详情',
-
+    
+    // 添加服务（后面要删）
+    unlineBusinessPackagesList: '商家-服务',
+    unlineBusinessPackagesDetail: '商家-服务详情',
+    
     unlineBusinessVouchersList: '商家-代金券',
     unlineBusinessVouchersDetail: '商家-代金券详情',
 
@@ -73,6 +73,7 @@ export default {
 
     otherConfig: '其它配置',
     referralEarningList: '推荐收入列表',
+    transferDetail: '分账时间配置',
     tombacDetail: '铜贝规则设置',
     shareBuyDetail: '分享购买设置',
 
@@ -99,8 +100,8 @@ export default {
     indexOperatingArticDetail: '首页管理-运营位文章详情',
     indexOperatingBusinessList: '首页管理-运营位商家',
     indexOperatingBusinessDetail: '首页管理-运营位商家详情',
-    indexOperatingPackagesList: '首页管理-运营位套餐',
-    indexOperatingPackagesDetail: '首页管理-运营位套餐详情',
+    indexOperatingPackagesList: '首页管理-运营位服务',
+    indexOperatingPackagesDetail: '首页管理-运营位服务详情',
     indexIconClassifyList: '首页管理-图标分类',
     indexIconClassifyDetail: '首页管理-图标详情',
     indexFixClassifyList: '首页管理-固定分类',
@@ -109,9 +110,9 @@ export default {
     indexBusinessDetail: '首页管理-固定分类商家详情',
     indexGoodsList: '首页管理-固定分类商品管理',
     indexGoodsDetail: '首页管理-固定分类商品详情',
-    indexPackagesList: '首页管理-固定分类套餐管理',
-    indexPackagesDetail: '首页管理-固定分类套餐管理详情',
-
+    indexPackagesList: '首页管理-固定分类服务管理',
+    indexPackagesDetail: '首页管理-固定分类服务管理详情',
+    
     indexMail: '商城',
     indexMailSlideshowList: '商城-轮播图',
     indexMailSlideshowDetail: '商城-轮播图详情',
@@ -165,8 +166,8 @@ export default {
 
     allianceManage: '商家联盟管理',
     businessAllianceList: '商家联盟',
-    packageGoodsList: '套餐列表',
-    packageGoodsDetail: '套餐详情',
+    packageGoodsList: '服务列表',
+    packageGoodsDetail: '服务详情',
     allianceConfig: '商家联盟配置',
 
     activityManage: '活动金贝管理',
@@ -176,6 +177,8 @@ export default {
     virtualGoodsOrderList: '虚拟商品订单',
     activityGoodsList: '活动商品',
     activityGoodsDetail: '活动商品详情',
+    minActivityGoodsList: '中秋活动商品',
+    minActivityGoodsDetail: '中秋活动商品详情',
     activityGold: '活动金贝',
     activityCount: '活动分享管理',
 

@@ -24,8 +24,10 @@
         <el-form-item label="提交时间">
           <el-date-picker
             v-model="formInline.key_time"
-            type="date"
-            placeholder="选择日期">
+            type="daterange"
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期">
           </el-date-picker>
         </el-form-item>
         <el-form-item>
@@ -196,7 +198,7 @@
         this.$axios({
           type: 'post',
           url: '/Order/orderlistbyadmin',
-          data: {type: this.type, page : this.start, ...this.formInline},
+          data: {type: this.type, page: this.start, ...this.formInline},
           fuc: (res) => {
             if (res.code !== 200) {
               return

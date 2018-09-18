@@ -292,6 +292,7 @@
       </el-form-item>
       <el-form-item>
         <el-button @click='submit(1)'>完成，保存商品</el-button>
+        <el-button v-if='form.status == 1' @click='submit(-2)'>下架</el-button>
 <!--        <el-button v-if='form.status == -1' @click='dialogVisibleInput = true'>驳回</el-button>-->
 <!--        <el-button v-else @click="submit('')">完成，提交商品</el-button>-->
       </el-form-item>

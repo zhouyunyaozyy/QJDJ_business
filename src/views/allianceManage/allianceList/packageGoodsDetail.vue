@@ -3,20 +3,20 @@
 
     <el-form ref="form" :model="form" label-width="150px" :rules='rules'>
       <code>基本信息</code>
-      <el-form-item label='套餐编码' prop='package_no' v-if='editAbled'>
-        <el-input v-model="form.package_no" placeholder='请输入套餐编码' :maxlength='20'></el-input>
+      <el-form-item label='服务编码' prop='package_no' v-if='editAbled'>
+        <el-input v-model="form.package_no" placeholder='请输入服务编码' :maxlength='20'></el-input>
       </el-form-item>
-      <el-form-item label='套餐类目' prop='class_category_id'>
+      <el-form-item label='服务类目' prop='class_category_id'>
         <span>{{class_category_id}}</span>
       </el-form-item>
-      <el-form-item label='套餐名称' prop='package_name'>
-        <el-input v-model="form.package_name" placeholder='请输入套餐名称' :maxlength='20'></el-input>
+      <el-form-item label='服务名称' prop='package_name'>
+        <el-input v-model="form.package_name" placeholder='请输入服务名称' :maxlength='20'></el-input>
       </el-form-item>
-      <el-form-item label='套餐进价' prop='cost_price'>
-        <el-input v-model="form.cost_price" placeholder='请输入套餐进价' :maxlength='20'></el-input>
+      <el-form-item label='服务进价' prop='cost_price'>
+        <el-input v-model="form.cost_price" placeholder='请输入服务进价' :maxlength='20'></el-input>
       </el-form-item>
-      <el-form-item label='套餐价格(银贝)' prop='silver_price'>
-        <el-input v-model="form.silver_price" placeholder='请输入套餐价格' :maxlength='20'></el-input>
+      <el-form-item label='服务价格(银贝)' prop='silver_price'>
+        <el-input v-model="form.silver_price" placeholder='请输入服务价格' :maxlength='20'></el-input>
       </el-form-item>
       <el-form-item label='过期时间' prop='expire_time'>
         <el-date-picker
@@ -25,17 +25,17 @@
           placeholder="选择日期">
         </el-date-picker>
       </el-form-item>
-      <el-form-item label='套餐库存' prop='num'>
-        <el-input v-model="form.num" placeholder='请输入套餐库存' :maxlength='20'></el-input>
+      <el-form-item label='服务库存' prop='num'>
+        <el-input v-model="form.num" placeholder='请输入服务库存' :maxlength='20'></el-input>
       </el-form-item>
-      <el-form-item label='套餐详情' prop='package_desc'>
-        <el-input type='textarea' v-model="form.package_desc" placeholder='请输入套餐描述'></el-input>
+      <el-form-item label='服务详情' prop='package_desc'>
+        <el-input type='textarea' v-model="form.package_desc" placeholder='请输入服务描述'></el-input>
       </el-form-item>
       <el-form-item label='不可用时间' prop='unable_time'>
         <el-input type='textarea' v-model="form.unable_time" placeholder='请输入不可用时间' :maxlength='40'></el-input>
       </el-form-item>
-      <code>套餐相册</code>
-      <el-form-item label='套餐列表图' required>
+      <code>服务相册</code>
+      <el-form-item label='服务列表图' required>
         <el-upload
           action="http://upload-z2.qiniu.com"
           list-type="picture-card" :file-list="form.imgs_url" :before-upload="beforeAvatarUpload" multiple
@@ -48,7 +48,7 @@
           <img width="100%" :src="dialogImages" alt="形象图片">
         </el-dialog>
       </el-form-item>
-      <el-form-item label='套餐展示图' >
+      <el-form-item label='服务展示图' >
         <el-upload
           class="avatar-uploader"
           action="https://jsonplaceholder.typicode.com/posts/"
@@ -57,7 +57,7 @@
           <img v-if="form.details_imgs_url" :src="form.details_imgs_url" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
-        <span>此图为套餐列表的显示图片展示，可以更真实、直观表达商品卖点。消费者决策前最后一步，快速提升成交转化。</span>
+        <span>此图为服务列表的显示图片展示，可以更真实、直观表达商品卖点。消费者决策前最后一步，快速提升成交转化。</span>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submit(1)">完成，保存商品</el-button>
@@ -129,14 +129,14 @@
         dialogImages: '',
         rules: {
 //          class_category_id: [{ required: true, message: '请选择类目', trigger: 'change' }],
-          package_no: [{ required: true, message: '请输入套餐编码', trigger: 'blur' }],
-          package_name: [{ required: true, message: '请输入套餐名称', trigger: 'blur' }],
-          cost_price: [{ required: true, message: '请输入套餐进价', trigger: 'blur' }],
-          silver_price: [{ required: true, message: '请输入套餐价格', trigger: 'blur' }],
-          num: [{ required: true, message: '请输入套餐库存', trigger: 'blur' }],
-          package_desc: [{ required: true, message: '请输入套餐详情', trigger: 'blur' }],
-          unable_time: [{ required: true, message: '请输入套餐不可用时间', trigger: 'blur' }],
-          type: [{ required: true, message: '请选择套餐分类', trigger: 'blur' }],
+          package_no: [{ required: true, message: '请输入服务编码', trigger: 'blur' }],
+          package_name: [{ required: true, message: '请输入服务名称', trigger: 'blur' }],
+          cost_price: [{ required: true, message: '请输入服务进价', trigger: 'blur' }],
+          silver_price: [{ required: true, message: '请输入服务价格', trigger: 'blur' }],
+          num: [{ required: true, message: '请输入服务库存', trigger: 'blur' }],
+          package_desc: [{ required: true, message: '请输入服务详情', trigger: 'blur' }],
+          unable_time: [{ required: true, message: '请输入服务不可用时间', trigger: 'blur' }],
+          type: [{ required: true, message: '请选择服务分类', trigger: 'blur' }],
           freight_id: [{ required: true, message: '请选择运费模板', trigger: 'blur' }],
           fake_sale_nums: [{ required: true, message: '请输入虚拟销售量', trigger: 'blur' }],
         }
@@ -237,7 +237,7 @@
         this.$refs['form'].validate((valid) => {
           if (valid) {
             if (this.form.imgs_url.length == 0 || this.form.details_imgs_url == '') {
-              this.$message.warning('请上传套餐图片')
+              this.$message.warning('请上传服务图片')
               return false
             } else {
               let _form = JSON.parse(JSON.stringify(this.form))
@@ -256,12 +256,12 @@
                 _form.list_img = _form.details_imgs_url
               }
               console.log(_form)
-              
+
               _form.status = status // 审核状态
-              
+
               if (status == -2) {
                 _form.reject_reason = this.reject_reason
-                
+
               }
               _form.expire_time = new Date(this.form.expire_time).getTime() / 1000
               if (this.$route.query.package_id) {

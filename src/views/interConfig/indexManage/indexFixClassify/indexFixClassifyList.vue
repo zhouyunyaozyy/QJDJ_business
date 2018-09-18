@@ -1,6 +1,6 @@
 <template>
   <div class="indexIconClassifyList">
-    
+
     <el-table
     :data="tableData"
     style="width: 100%">
@@ -36,7 +36,7 @@
           <template slot-scope='scope'>
             <span v-if='scope.row.offline_type_od == 1'>商品</span>
             <span v-if='scope.row.offline_type_od == 2'>商家</span>
-            <span v-if='scope.row.offline_type_od == 3'>套餐</span>
+            <span v-if='scope.row.offline_type_od == 3'>服务</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -52,7 +52,7 @@
           <template slot-scope='scope'>
             <el-button v-if='scope.row.offline_type_od == 1' @click="goGoods(scope.row)">商品管理</el-button>
             <el-button v-if='scope.row.offline_type_od == 2' @click="goBusiness(scope.row)">商家管理</el-button>
-            <el-button v-if='scope.row.offline_type_od == 3' @click="goPackages(scope.row)">套餐管理</el-button>
+            <el-button v-if='scope.row.offline_type_od == 3' @click="goPackages(scope.row)">服务管理</el-button>
           </template>
         </el-table-column>
       </el-table-column>
