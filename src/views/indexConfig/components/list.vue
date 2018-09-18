@@ -62,7 +62,7 @@
           min-width="120" align='center'>
           <template slot-scope="scope">
             <el-switch
-              @change="switchChange(scope.row.id, scope.row.is_show)"
+              @change="switchChange(scope.row.operation_content_id, scope.row.is_show)"
               v-model="scope.row.is_show == 1">
             </el-switch>
           </template>
