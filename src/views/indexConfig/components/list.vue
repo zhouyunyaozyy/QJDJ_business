@@ -1,7 +1,7 @@
 <template>
   <div class="unlineBusinessList">
     <el-button @click="addPgc('')" v-if="type != 6">添加</el-button>
-    <el-button @click='addSlideshow' v-if="type == 6">添加商品</el-button>
+    <el-button @click='addGoodsDialog = true' v-if="type == 6">添加商品</el-button>
     <el-button @click='downExcell' v-if="type == 6">下载模板</el-button>
     <el-button @click='importDialogVisible = true' v-if="type == 6">导入商品</el-button>
     <div class="searchForm">
@@ -183,7 +183,7 @@
     </el-dialog>
 
     <el-dialog title="添加商品" :visible.sync="addGoodsDialog" @close="addGoodsDialogClose">
-      <input v-model="addGoodsInput">
+      <el-input v-model="addGoodsInput" placeholder="商品id"></el-input>
       <div slot="footer" class="dialog-footer">
         <el-button @click="addDialogTrue">确 定</el-button>
       </div>
