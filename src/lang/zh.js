@@ -53,11 +53,11 @@ export default {
     onlineBusinessGoodsDetail: '商家-商品详情',
     onlineBusinessBrandsList: '商家-邮费',
     onlineBusinessBrandsDetail: '商家-邮费详情',
-    
+
     // 添加服务（后面要删）
     unlineBusinessPackagesList: '商家-服务',
     unlineBusinessPackagesDetail: '商家-服务详情',
-    
+
     unlineBusinessVouchersList: '商家-代金券',
     unlineBusinessVouchersDetail: '商家-代金券详情',
 
@@ -112,7 +112,7 @@ export default {
     indexGoodsDetail: '首页管理-固定分类商品详情',
     indexPackagesList: '首页管理-固定分类服务管理',
     indexPackagesDetail: '首页管理-固定分类服务管理详情',
-    
+
     indexMail: '商城',
     indexMailSlideshowList: '商城-轮播图',
     indexMailSlideshowDetail: '商城-轮播图详情',
@@ -163,6 +163,9 @@ export default {
     pgcPagesDetail: 'pgc页面详情',
     nearbyList: '附近',
     nearbyDetail: '附近详情',
+    operatingPagesList: '运营页面',
+    operatingConfigList: '运营页面配置',
+    operatingConfigDetail: '运营页面配置详情',
 
     allianceManage: '商家联盟管理',
     businessAllianceList: '商家联盟',

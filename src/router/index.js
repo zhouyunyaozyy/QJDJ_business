@@ -515,11 +515,16 @@ export const asyncRouterMap = [
 
       { path: 'indexConfigGoods', component: _import('indexConfig/indexOperatingConfig/indexConfigGoods'), name: 'indexConfigGoods', meta: { title: 'indexConfigGoods' }, hidden: true},
 
+      //      运营页面
+      { path: 'operatingPagesList', component: _import('indexConfig/operatingPages/operatingPagesList'), name: 'operatingPagesList', meta: { title: 'operatingPagesList' }},
+      { path: 'operatingConfigDetail', component: _import('indexConfig/operatingPages/operatingConfigDetail'), name: 'operatingConfigDetail', meta: { title: 'operatingConfigDetail' }, hidden: true},
+      { path: 'operatingConfigList', component: _import('indexConfig/operatingPages/operatingConfigList'), name: 'operatingConfigList', meta: { title: 'operatingConfigList' }, hidden: true},
+
       //      pgc页面
       { path: 'pgcPagesList', component: _import('indexConfig/pgcPages/pgcPagesList'), name: 'pgcPagesList', meta: { title: 'pgcPagesList' }},
       { path: 'pgcPagesDetail', component: _import('indexConfig/pgcPages/pgcPagesDetail'), name: 'pgcPagesDetail', meta: { title: 'pgcPagesDetail' }, hidden: true},
 
-      //      pgc页面
+      //      附近
       { path: 'nearbyList', component: _import('indexConfig/nearby/nearbyList'), name: 'nearbyList', meta: { title: 'nearbyList' }},
       { path: 'nearbyDetail', component: _import('indexConfig/nearby/nearbyDetail'), name: 'nearbyDetail', meta: { title: 'nearbyDetail' }, hidden: true},
 

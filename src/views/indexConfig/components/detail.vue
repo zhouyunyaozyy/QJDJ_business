@@ -165,6 +165,7 @@
       }
     },
     created () {
+      console.log('operation_pages_id', this.operation_pages_id)
       this.$axios({
         type: 'post',
         url: '/goods/category/getinfo',
