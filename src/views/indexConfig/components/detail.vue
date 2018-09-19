@@ -208,6 +208,10 @@
             if (_form.img.indexOf(_form.img_path) > -1) {
               _form.img = _form.img.split(_form.img_path)[1]
             }
+            let searchData = {operation_template_area_id: this.$route.query.operation_template_area_id, operation_pages_id: this.operation_pages_id, ..._form}
+            if (this.$route.query.operation_area_category_id) {
+              searchData.operation_area_category_id = this.$route.query.operation_area_category_id
+            }
             this.$axios({
                 type: 'post',
                 url: this.$route.query.operation_content_id ? '/operation/editcontent' : '/operation/addcontent',
