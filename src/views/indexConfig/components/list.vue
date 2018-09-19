@@ -331,8 +331,7 @@
           fuc: (res) => {
             if (res.code == 200) {
               this.$message.success('操作成功')
-              this.operation_area_category_idArr = this.operation_area_category_idArrCopy
-              this.getTableData()
+              this.getOperation_area_category_idArr()
               this.dialogVisible = false
             }
           }
