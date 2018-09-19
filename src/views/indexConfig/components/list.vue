@@ -1,19 +1,23 @@
 <template>
   <div class="unlineBusinessList">
-    <el-button @click="addPgc('')">添加</el-button>
+    <el-button @click="addPgc('')" v-if="type != 6">添加</el-button>
     <div class="searchForm">
       <p @click='showFormBool = !showFormBool'>筛选查询<i v-if='showFormBool' class="el-icon-arrow-down"></i><i v-else class="el-icon-arrow-up"></i></p>
       <el-form :inline="true" :model="formInline" class="demo-form-inline" v-if='showFormBool'>
         <el-form-item label="区域">
-          <el-select v-model="formInline.operation_template_area_id">
+          <el-select v-model="formInline.operation_template_area_id" @change="selectChange">
             <el-option v-for="item in selectArr" :value='item.operation_template_area_id' :label='item.area_name' :key="item.operation_template_area_id"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="getTableData">查询</el-button>
-        </el-form-item>
+        <!--<el-form-item>-->
+          <!--<el-button type="primary" @click="getTableData">查询</el-button>-->
+        <!--</el-form-item>-->
       </el-form>
     </div>
+
+      <el-select v-model="operation_area_category_id" style="margin: 10px;" v-if="type != 1">
+        <el-option v-for="item in operation_area_category_idArr" :value='item.operation_area_category_id' :label='item.name' :key="item.operation_area_category_id"></el-option>
+      </el-select>
 
     <el-table
       :data="tableData"
@@ -78,6 +82,12 @@
       </el-table-column>
     </el-table>
 
+    <el-pagination
+      v-if="pageShow"
+      layout="prev, pager, next"
+      :total="total" :page-size="20" @current-change="handleCurrentChange"
+      :current-page.sync="start">
+    </el-pagination>
   </div>
 </template>
 
@@ -90,6 +100,9 @@
     data () {
       return {
         tableData: [],
+        operation_area_category_id: '',
+        operation_area_category_idArr: [],
+        type: '',
         formInline: {
           operation_template_area_id: ''
         },
@@ -104,6 +117,9 @@
           {label: '运营位模板', value: 7}
         ],
         showFormBool: true, // 是否显示过滤框
+        pageShow: true, // 是否显示分页
+        start: 1,
+        total: 0,
       }
     },
     created () {
@@ -112,21 +128,83 @@
         url: '/Operation/returnPagesOption',
         data: {operation_pages_id: this.operation_pages_id},
         fuc: (res) => {
-        this.selectArr = res.data
-      this.formInline.operation_template_area_id = res.data[0].operation_template_area_id
-      this.getTableData()
-    }
-    })
+          this.selectArr = res.data
+          this.formInline.operation_template_area_id = res.data[0].operation_template_area_id
+          if (res.data[0].is_page == 1) {
+            this.pageShow = true
+            this.start = 1
+          } else {
+            this.pageShow = false
+          }
+          this.type = res.data[0].type
+          if (this.type != 1) {
+            this.getOperation_area_category_idArr()
+          } else {
+            this.getTableData()
+          }
+        }
+      })
     },
     mounted () {},
     methods: {
+      handleCurrentChange (val) {
+        this.start = val
+        this.getTableData()
+      },
+      getOperation_area_category_idArr () {
+        this.$axios({
+            type: 'post',
+            url: '/operation/getareacategorylist',
+            data: {operation_pages_id: this.operation_pages_id, operation_template_area_id: this.formInline.operation_template_area_id},
+            fuc: (res) => {
+              this.operation_area_category_idArr = res.data
+              if (res.data.length > 0) {
+                this.operation_area_category_id = res.data[0].operation_area_category_id
+              }
+              this.getTableData()
+            }
+        })
+      },
+      selectChange (value) {
+        for (let val of this.selectArr) {
+          if (val.operation_template_area_id == value) {
+
+//            分页判断
+            if (val.is_page == 1) {
+              this.pageShow = true
+              this.start = 1
+            } else {
+              this.pageShow = false
+            }
+
+//            类型判断
+            this.type = val.type
+            if (this.type != 1) {
+              this.getOperation_area_category_idArr()
+            } else {
+              this.getTableData()
+            }
+          }
+        }
+      },
       getTableData () {
+        let searchData = {operation_pages_id: this.operation_pages_id, ...this.formInline}
+        if (this.pageShow) {
+          searchData.page = this.start
+        }
+        if (this.operation_area_category_id) {
+          searchData.operation_area_category_id = this.operation_area_category_id
+        }
         this.$axios({
             type: 'post',
             url: '/operation/getcontentlist',
-            data: {operation_pages_id: this.operation_pages_id, ...this.formInline},
+            data: searchData,
           fuc: (res) => {
-          this.tableData = res.data
+          if (this.pageShow) {
+            this.tableData = res.data.data
+          } else {
+            this.tableData = res.data
+          }
         }
       })
       },
