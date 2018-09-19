@@ -216,7 +216,12 @@
               console.log('res', res)
               if (res.code == 200) {
                 this.$message.success('操作成功')
-                this.$deleteOneTag(this.listUrl)
+                if (this.operation_pages_id == 10000 || this.operation_pages_id == 10001) {
+                  this.$deleteOneTag(this.listUrl)
+                } else {
+                  this.$deleteOneTag(this.listUrl, {operation_pages_id: this.operation_pages_id})
+                }
+
               }
             }
           })
