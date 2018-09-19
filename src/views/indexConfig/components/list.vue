@@ -279,7 +279,7 @@
       beforeAvatarUpload (file) {
         let formData = new FormData()
         formData.append('operation_goods_excel', file)
-        formData.append('operation_template_area_id',this.operation_template_area_id)
+        formData.append('operation_template_area_id',this.formInline.operation_template_area_id)
         formData.append('operation_area_category_id',this.operation_area_category_id ? this.operation_area_category_id : 0)
         formData.append('operation_pages_id',this.operation_pages_id)
         this.$axios({
