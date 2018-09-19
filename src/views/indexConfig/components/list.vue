@@ -24,7 +24,7 @@
       <el-button v-if="type != 1" @click="openCategoryDialog">分类管理</el-button>
 
     <el-table
-      :data="tableData"
+      :data="tableData" key="typeTable"
       style="width: 100%" v-if="type != 6">
       <el-table-column
         label="数据列表">
@@ -87,7 +87,7 @@
     </el-table>
     <el-table
       :data="tableData"
-      style="width: 100%" v-else>
+      style="width: 100%" v-else key="goodsTable">
       <el-table-column
         label="数据列表">
         <el-table-column
@@ -159,7 +159,7 @@
       <el-button @click="addCategory" style="margin-bottom: 6px;">添加</el-button>
       <el-form>
         <el-form-item :label="'第' + (item.sort + 1) + '类'" v-for="item in operation_area_category_idArrCopy" :key="item.sort">
-          <el-input v-model="item.name" style="width: 200px"></el-input>
+          <el-input v-model="item.name" style="width: 200px" :maxlength="10"></el-input>
           <el-button @click="deleteCategory(item.sort)">删除</el-button>
           <el-button @click="topCategory(item.sort)">置顶</el-button>
         </el-form-item>
@@ -397,6 +397,7 @@
           fuc: (res) => {
           if (this.pageShow) {
             this.tableData = res.data.data
+            this.total = res.data.total
           } else {
             this.tableData = res.data
           }
