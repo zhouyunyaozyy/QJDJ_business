@@ -40,7 +40,7 @@
     style="width: 100%">
       <el-table-column label='服务名称' prop='package_name' min-width="120" align='center'></el-table-column>
       <el-table-column label='售价' prop='price' min-width="120" align='center'></el-table-column>
-      <el-table-column label='结算价' prop='total_cost' min-width="120" align='center'></el-table-column>
+      <el-table-column label='结算价' prop='cost_price' min-width="120" align='center'></el-table-column>
       <el-table-column label='支付方式' prop='' min-width="120" align='center'>
         <template slot-scope='scope'>
           <span>现金支付：{{scope.row.cash}},余额支付：{{scope.row.balance}},银贝支付：{{scope.row.silver}},金贝支付：{{scope.row.gold}}</span>

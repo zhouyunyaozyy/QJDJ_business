@@ -3,7 +3,7 @@
     <el-button @click="changeStatus('all')" :type="type == 'all' ? 'primary' : ''">全部</el-button>
     <el-button @click="changeStatus('1')" :type="type == '1' ? 'primary' : ''">退款成功</el-button>
     <el-button @click="changeStatus('-1')" :type="type == '-1' ? 'primary' : ''">退款失败</el-button>
-    
+
     <div class="searchForm">
       <p @click='showFormBool = !showFormBool'>筛选查询<i v-if='showFormBool' class="el-icon-arrow-down"></i><i v-else class="el-icon-arrow-up"></i></p>
       <el-form :inline="true" :model="formInline" class="demo-form-inline" v-if='showFormBool'>
@@ -149,7 +149,7 @@
         this.$axios({
           type: 'post',
           url: '/Financial/exceptionpackage',
-          data: {page: this.start, type: 1, opt: this.type, package_type: 2, ...this.formInline},
+          data: {page: this.start, type: 1, transfer_status: this.type, package_type: 2, ...this.formInline},
           fuc: (res) => {
             if (res.code === 200) {
               this.tableData = res.data.data
@@ -159,7 +159,7 @@
         })
       },
       handleCurrentChange (val) {
-        this.start = val 
+        this.start = val
         this.getTableData()
       },
       searchFormBtn () {

@@ -166,6 +166,19 @@
       }
     },
     methods: {
+      offLine () {
+        this.$axios({
+            type: 'post',
+            url: '/package/offpackage',
+            data: {package_id: this.form.package_id},
+            fuc: (res) => {
+        if (res.code == 200) {
+          this.$message.success('操作成功')
+          this.$deleteOneTag('/goods/goodsPackagesList')
+        }
+      }
+      })
+      },
       expire_timeChange () {
         this.form.use_time = ""
       },

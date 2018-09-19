@@ -29,10 +29,10 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <el-table
     :data="tableData" border style="width: 100%">
-      
+
       <el-table-column label='用户ID' prop='user_id' min-width="120" align='center'></el-table-column>
       <el-table-column label='支付方式' prop='g_income' min-width="120" align='center'>
         <template slot-scope='scope'>
@@ -72,7 +72,7 @@
       </el-table-column>
       <el-table-column label='结算完成时间' prop='deal_time' min-width="120" align='center'>
         <template slot-scope='scope'>
-          <span v-if='scope.row.deal_time'>{{$formatTime(scope.row.deal_time)}}</span>
+          <span v-if='scope.row.deal_time'>{{$formatTime(scope.row.transfer_at)}}</span>
           <span v-else>-</span>
         </template>
       </el-table-column>
@@ -120,7 +120,7 @@
       })
     },
     methods: {
-      
+
       changeStatus () {
         this.$axios({
           type: 'post',
@@ -146,7 +146,7 @@
     margin: 10px 20px 20px;
     overflow: hidden;
   }
-  
+
 </style>
 <style>
   .unlineFinancialrDetail .el-table th {

@@ -52,7 +52,7 @@
         <el-button v-if='status === 0' type="primary" @click="submit(1)">保存,审核通过</el-button>
         <el-button v-if='status === 0' type="primary" @click="">驳回</el-button>
         <el-button v-if='status === 1' type="primary" @click="submit(1)">保存,修改成功</el-button>
-        <el-button v-if='status === 1' type="primary" @click="">下架</el-button>
+        <el-button v-if='status === 1' type="primary" @click="offLine">下架</el-button>
         <el-button v-if='status === -2' type="primary" @click="submit(1)">保存并上架</el-button>
         <el-button v-if='status === -1' type="primary" @click="submit(1)">保存并上架</el-button>
       </el-form-item>
@@ -158,6 +158,19 @@
       }
     },
     methods: {
+      offLine () {
+        this.$axios({
+          type: 'post',
+          url: '/package/offpackage',
+          data: {package_id: this.form.package_id},
+          fuc: (res) => {
+            if (res.code == 200) {
+              this.$message.success('操作成功')
+              this.$deleteOneTag('/goods/goodsVouchersList')
+            }
+          }
+        })
+      },
       expire_timeChange () {
         this.form.use_time = ""
       },
