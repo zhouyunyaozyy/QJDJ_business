@@ -3,8 +3,8 @@
     <p>当前订单状态： <span v-if='tableData[0] && tableData[0].roof_status == 0'>未结算</span><span v-else-if='tableData[0] && tableData[0].roof_status == 1'>结算成功</span><span v-else-if='tableData[0] && tableData[0].roof_status == -1'>结算失败</span></p>
     <h5>订单信息</h5>
     <el-table
-    :data="tableData" border
-    style="width: 100%">
+      :data="tableData" border
+      style="width: 100%">
       <el-table-column label='订单编号' prop='order_id' min-width="120" align='center'></el-table-column>
       <el-table-column label='订单状态' prop='pay_status' min-width="120" align='center'>
         <template slot-scope='scope'>
@@ -25,8 +25,8 @@
       </el-table-column>
     </el-table>
     <el-table
-    :data="tableData" border
-    style="width: 100%">
+      :data="tableData" border
+      style="width: 100%">
       <el-table-column label='商品SKU' prop='g_format' min-width="120" align='center'></el-table-column>
       <el-table-column label='商品件数' prop='g_num' min-width="120" align='center'></el-table-column>
       <el-table-column label='用户ID' prop='nickname' min-width="120" align='center'></el-table-column>
@@ -44,8 +44,8 @@
     </el-table>
     <h5>结算信息</h5>
     <el-table
-    :data="tableData" border
-    style="width: 100%">
+      :data="tableData" border
+      style="width: 100%">
       <el-table-column label='结算单号' prop='prorate_num' min-width="120" align='center'></el-table-column>
       <el-table-column label='结算渠道' prop='channel' min-width="120" align='center'></el-table-column>
       <el-table-column label='结算金额' prop='amount' min-width="120" align='center'>
@@ -67,8 +67,8 @@
     </el-table>
     <h5>商家信息</h5>
     <el-table
-    :data="tableData" border
-    style="width: 100%">
+      :data="tableData" border
+      style="width: 100%">
       <el-table-column label='支付宝账号' prop='ali_account' min-width="120" align='center'></el-table-column>
       <el-table-column label='微信账号' prop='wx_account' min-width="120" align='center'></el-table-column>
       <el-table-column label='对公银行账号' prop='bank_account' min-width="120" align='center'></el-table-column>
@@ -131,10 +131,10 @@
         url: '/Financial/getfinancialdetial',
         data: {info_id: this.$route.query.id},
         fuc: (res) => {
-          this.tableData = [res.data]
-          this.status = res.data.roof_status
-        }
-      })
+        this.tableData = [res.data]
+      this.status = res.data.roof_status
+    }
+    })
     },
     methods: {
       changeStatusBefore (num) {
@@ -155,14 +155,14 @@
             id: this.tableData[0].id,
             info_id: this.tableData[0].info_id,
             ...this.form
-          },
-          fuc: (res) => {
-            if (res.code == 200) {
-              this.$message.success('操作成功')
-              this.$deleteOneTag('/financial/onlineFinancialListNormal')
-            }
+      },
+        fuc: (res) => {
+          if (res.code == 200) {
+            this.$message.success('操作成功')
+            this.$deleteOneTag('/financial/onlineFinancialListNormal')
           }
-        })
+        }
+      })
       },
       assignMoney () {
         this.$axios({
