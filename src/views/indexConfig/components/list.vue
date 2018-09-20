@@ -262,7 +262,7 @@
         this.$axios({
           type: 'post',
           url: '/operation/addgoods',
-          data: {operation_area_category_id: this.operation_area_category_id ? this.operation_area_category_id : 0, operation_pages_id: this.operation_pages_id, operation_template_area_id: this.operation_template_area_id, goods_no: this.addGoodsInput},
+          data: {operation_area_category_id: this.operation_area_category_id ? this.operation_area_category_id : 0, operation_pages_id: this.operation_pages_id, operation_template_area_id: this.formInline.operation_template_area_id, goods_no: this.addGoodsInput},
           fuc: (res) => {
             if (res.code == 200) {
               this.$message.success('操作成功')
