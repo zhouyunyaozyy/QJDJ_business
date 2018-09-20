@@ -72,7 +72,7 @@
       </el-table-column>
       <el-table-column label='结算完成时间' prop='deal_time' min-width="120" align='center'>
         <template slot-scope='scope'>
-          <span v-if='scope.row.deal_time'>{{$formatTime(scope.row.transfer_at)}}</span>
+          <span v-if='scope.row.transfer_at'>{{$formatTime(scope.row.transfer_at)}}</span>
           <span v-else>-</span>
         </template>
       </el-table-column>
