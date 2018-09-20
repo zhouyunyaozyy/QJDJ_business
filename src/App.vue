@@ -47,7 +47,7 @@
 */
     background-color: #fbfdff;
   }
-  .w-e-text p{
+  #app .w-e-text p{
     margin: 0;
   }
 </style>

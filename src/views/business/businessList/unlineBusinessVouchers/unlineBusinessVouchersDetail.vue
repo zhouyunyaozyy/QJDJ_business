@@ -150,6 +150,7 @@
         this.form.use_time = ""
       },
       submit () {
+        console.log(this.form)
         this.$refs['form'].validate((valid) => {
           if (valid) {
             let _form = JSON.parse(JSON.stringify(this.form))
