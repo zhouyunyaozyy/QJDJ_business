@@ -45,6 +45,14 @@
           </el-option>
         </el-select>
       </el-form-item>
+      <el-form-item label='线下分类' prop='jump_data' v-else-if="form.jump_type == 8">
+        <el-select v-model='form.jump_data' placeholder="请选择">
+          <el-option v-for='item in businessClassifyArr'
+                     :label="item.name"
+                     :value="item.business_category_id + ''" :key="item.business_category_id">
+          </el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item label='pgc' prop='jump_data' v-else-if="form.jump_type == 5">
         <el-button @click="openDialog">选择pgc</el-button>
       </el-form-item>
@@ -149,6 +157,7 @@
           remark: ''
         },
         goodsClassifyArr: [],
+        businessClassifyArr: [],
         jumpArr: [
           {label: '不跳转', value: 1},
           {label: 'h5', value: 2},
@@ -156,7 +165,8 @@
           {label: '区域', value: 4},
           {label: 'pgc页面', value: 5},
           {label: '商品分类', value: 6},
-          {label: '运营位模板', value: 7}
+          {label: '运营位模板', value: 7},
+          {label: '线下分类', value: 8}
         ],
         rules: {
           jump_type: [{ required: true, message: '请选择', trigger: 'blur' }],
@@ -172,6 +182,14 @@
         data: {},
         fuc: (res) => {
         this.goodsClassifyArr = res.data
+    }
+    })
+      this.$axios({
+        type: 'post',
+        url: '/business/categorygetlist',
+        data: {is_all: 1},
+        fuc: (res) => {
+        this.businessClassifyArr = res.data
     }
     })
       if (this.$route.query.operation_content_id) {

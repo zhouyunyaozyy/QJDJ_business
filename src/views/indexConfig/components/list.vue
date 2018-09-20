@@ -219,7 +219,8 @@
           {label: '区域', value: 4},
           {label: 'pgc页面', value: 5},
           {label: '商品分类', value: 6},
-          {label: '运营位模板', value: 7}
+          {label: '运营位模板', value: 7},
+          {label: '线下分类', value: 8}
         ],
         showFormBool: true, // 是否显示过滤框
         pageShow: true, // 是否显示分页
