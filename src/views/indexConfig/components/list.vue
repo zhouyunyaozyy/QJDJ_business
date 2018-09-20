@@ -325,6 +325,12 @@
         this.sortCategory()
       },
       sureCategoryBtn () {
+        for (let val of this.operation_area_category_idArrCopy) {
+          if (val.name == '') {
+            this.$message.warning('分类名称不能为空')
+            return false
+          }
+        }
         this.$axios({
           type: 'post',
           url: '/operation/setareacategory',

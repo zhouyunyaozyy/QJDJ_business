@@ -235,7 +235,7 @@
       switchChange (operation_pages_id, is_show) {
         this.$axios({
             type: 'post',
-            url: '/Operation/setattr',
+            url: '/Operation/updateOperationPagesIsShow',
             data: {operation_pages_id, is_show: is_show == 1 ? 0 : 1},
             fuc: (res) => {
             if (res.code == 200) {
