@@ -6,7 +6,7 @@
         <el-form-item label="输入搜索">
           <el-input v-model="formInline.search" placeholder="商品名称/商品编号"></el-input>
         </el-form-item>
-        <el-form-item label="商品名称">
+        <el-form-item label="栏目名称">
           <el-select v-model='formInline.category_type' placeholder="请选择" clearable>
             <el-option
               v-for='item in brandArr'
