@@ -49,5 +49,6 @@
   }
   #app .w-e-text p{
     margin: 0;
+    line-height: 1.3;
   }
 </style>
