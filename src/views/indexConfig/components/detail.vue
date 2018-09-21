@@ -273,7 +273,7 @@
         this.$axios({
             type: 'post',
             url: this.form.jump_type == 5 ? '/Operation/pgclist' : '/Operation/getOperationPagesList',
-            data: {page: this.start, limit: 20, ...this.formInline},
+            data: {publish: 1, isshow: 1, page: this.start, limit: 20, ...this.formInline},
           fuc: (res) => {
           this.gridData = res.data.data
           this.total = res.data.total
