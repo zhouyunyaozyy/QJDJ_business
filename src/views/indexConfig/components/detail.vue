@@ -122,7 +122,7 @@
           min-width="120" align='center'>
           <template slot-scope='scope'>
             <el-button v-if="form.jump_type == 5" @click='selectPage(scope.row.id)'>选择</el-button>
-            <el-button v-else @click='selectPage(scope.row.operation_pages_id)'>选择</el-button>
+            <el-button v-else @click='selectPage(scope.row.operation_pages_id, scope.row.operation_template_id)'>选择</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -278,8 +278,12 @@
         }
       })
       },
-      selectPage (id) {
-        this.form.jump_data = id
+      selectPage (id, area_id) {
+        if (this.form.jump_type == 7) {
+          this.form.jump_data = id + '_' + area_id
+        } else {
+          this.form.jump_data = id
+        }
         this.dialogTableVisible = false
       }
     }

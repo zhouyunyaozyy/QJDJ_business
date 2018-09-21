@@ -222,7 +222,7 @@
       editPgc (operation_pages_id) {
         this.$axios({
             type: 'post',
-            url: '/Operation/deletepgc',
+            url: '/Operation/deloOperationPages',
             data: {operation_pages_id},
             fuc: (res) => {
             if (res.code == 200) {
