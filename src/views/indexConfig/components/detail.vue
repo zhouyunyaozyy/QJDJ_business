@@ -17,11 +17,8 @@
       <el-form-item label='副标题'>
         <el-input v-model="form.title_sub" placeholder='请输入url' :maxlength='40'></el-input>
       </el-form-item>
-      <el-form-item label='备注'>
-        <el-input type='textarea' v-model="form.remark" placeholder='请输入备注' :maxlength='40'></el-input>
-      </el-form-item>
       <el-form-item label='跳转类型' prop='jump_type'>
-        <el-select v-model='form.jump_type' placeholder="请选择" @change="form.jump_data = ''">
+        <el-select v-model='form.jump_type' placeholder="请选择" @change="form.jump_data = form.jump_data_remark = ''">
           <el-option v-for='item in jumpArr'
                      :label="item.label"
                      :value="item.value" :key="item.value">
@@ -31,8 +28,8 @@
       <el-form-item label='url地址' prop='jump_data' v-if="form.jump_type == 2">
         <el-input type='textarea' v-model="form.jump_data" placeholder='请输入'></el-input>
       </el-form-item>
-      <el-form-item label='商品编码' prop='jump_data' v-else-if="form.jump_type == 3">
-        <el-input type='textarea' v-model="form.jump_data" placeholder='请输入'></el-input>
+      <el-form-item label='商品id' prop='jump_data' v-else-if="form.jump_type == 3">
+        <el-input v-model="form.jump_data" placeholder='请输入'></el-input>
       </el-form-item>
       <el-form-item label='区域位置' prop='jump_data' v-else-if="form.jump_type == 4">
         <el-input type='textarea' v-model="form.jump_data" placeholder='请输入'></el-input>
@@ -54,10 +51,13 @@
         </el-select>
       </el-form-item>
       <el-form-item label='pgc' prop='jump_data' v-else-if="form.jump_type == 5">
-        <el-button @click="openDialog">选择pgc</el-button>
+        <el-button @click="openDialog">选择pgc</el-button><span v-if="form.jump_data_remark">{{'<' + form.jump_data_remark + '>'}}</span>
       </el-form-item>
       <el-form-item label='运营页面' prop='jump_data' v-else-if="form.jump_type == 7">
-        <el-button @click="openDialog">选择运营页面</el-button>
+        <el-button @click="openDialog">选择运营页面</el-button><span v-if="form.jump_data_remark">{{'<' + form.jump_data_remark + '>'}}</span>
+      </el-form-item>
+      <el-form-item label='备注'>
+        <el-input type='textarea' v-model="form.remark" placeholder='请输入备注' :maxlength='40'></el-input>
       </el-form-item>
       <el-form-item>
         <el-button @click='submit'>保存</el-button>
@@ -92,6 +92,7 @@
           min-width="120" align='center'>
         </el-table-column>
         <el-table-column
+          v-else
           prop="name"
           label="运营页面名称"
           min-width="120" align='center'>
@@ -121,8 +122,8 @@
           label="操作"
           min-width="120" align='center'>
           <template slot-scope='scope'>
-            <el-button v-if="form.jump_type == 5" @click='selectPage(scope.row.id)'>选择</el-button>
-            <el-button v-else @click='selectPage(scope.row.operation_pages_id, scope.row.operation_template_id)'>选择</el-button>
+            <el-button v-if="form.jump_type == 5" @click='selectPage(scope.row.title, scope.row.id)'>选择</el-button>
+            <el-button v-else @click='selectPage(scope.row.name, scope.row.operation_pages_id, scope.row.operation_template_id)'>选择</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -154,7 +155,8 @@
           title_sub: '',
           jump_type: '',
           jump_data: '',
-          remark: ''
+          remark: '',
+          jump_data_remark: ''
         },
         goodsClassifyArr: [],
         businessClassifyArr: [],
@@ -278,12 +280,13 @@
         }
       })
       },
-      selectPage (id, area_id) {
+      selectPage (name, id, area_id) {
         if (this.form.jump_type == 7) {
           this.form.jump_data = id + '_' + area_id
         } else {
           this.form.jump_data = id
         }
+        this.form.jump_data_remark = name
         this.dialogTableVisible = false
       }
     }
