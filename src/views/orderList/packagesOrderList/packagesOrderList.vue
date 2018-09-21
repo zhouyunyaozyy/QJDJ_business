@@ -18,9 +18,7 @@
             type="daterange"
             range-separator="至"
             start-placeholder="开始日期"
-            end-placeholder="结束日期"
-            format="yyyy 年 MM 月 dd 日"
-            value-format="yyyy-MM-dd">
+            end-placeholder="结束日期">
           </el-date-picker>
         </el-form-item>
         <el-form-item>
