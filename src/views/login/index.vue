@@ -109,6 +109,7 @@ export default {
                 Cookies.set('Admin-Token', res.token)
                 Cookies.set('token', res.token)
                 Cookies.set('BHS_userName', res.data.username)
+                Cookies.set('BHS_uid', res.data.uid)
                 this.$store.commit('SET_TOKEN', res.token)
                 console.log(1)
                 this.loading = false
@@ -118,7 +119,7 @@ export default {
               }
             }
           })
-          
+
 //          this.$store.dispatch('LoginByUsername', this.loginForm).then(() => {
 //            this.loading = false
 //            this.$router.push({ path: '/' })

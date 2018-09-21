@@ -8,7 +8,7 @@
     <el-button @click="changeStatus('applyrefund ')" :type="type == 'applyrefund ' ? 'primary' : ''">退款申请</el-button>
     <el-button @click="changeStatus('waitrefund')" :type="type == 'waitrefund' ? 'primary' : ''">等待退款</el-button>
     <el-button @click="changeStatus('seccussrefund')" :type="type == 'seccussrefund' ? 'primary' : ''">退款成功</el-button>
-    
+
     <div class="searchForm">
       <p @click='showFormBool = !showFormBool'>筛选查询<i v-if='showFormBool' class="el-icon-arrow-down"></i><i v-else class="el-icon-arrow-up"></i></p>
       <el-form :inline="true" :model="formInline" class="demo-form-inline" v-if='showFormBool'>
@@ -27,7 +27,9 @@
             type="daterange"
             range-separator="至"
             start-placeholder="开始日期"
-            end-placeholder="结束日期">
+            end-placeholder="结束日期"
+            format="yyyy 年 MM 月 dd 日"
+            value-format="yyyy-MM-dd">
           </el-date-picker>
         </el-form-item>
         <el-form-item>
@@ -207,24 +209,24 @@
             let arr = []
             for (let val of _tableData) { // 订单
               let num = 0
-              
+
               // 取总商品数量
               for (let n = 0; n < val.ginfo.length; n++) { // 商家
                 num += val.ginfo[n].ginfo.length
               }
               val.num = num
-              
+
               //重组数据
               for (let n = 0; n < val.ginfo.length; n++) { // 商家
                 let goodsLength = val.ginfo[n].ginfo.length
-                
+
                 for (let i = 0; i < val.ginfo[n].ginfo.length; i++) { // 商品
                   if (n == 0 && i == 0) {
-                    
+
                   } else {
                     val.num = 0
                   }
-                  
+
                   if (i == 0) {
                     val.goodsNum = val.ginfo[n].ginfo.length
                   } else {
@@ -242,7 +244,7 @@
         })
       },
       handleCurrentChange (val) {
-        this.start = val 
+        this.start = val
         this.getTableData()
       },
       objectSpanMethod({ row, column, rowIndex, columnIndex }) {

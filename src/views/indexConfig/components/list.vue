@@ -53,6 +53,10 @@
           prop="jump_data"
           label="跳转后的页面名称或url"
           min-width="120" align='center'>
+          <template slot-scope="scope">
+            <span v-if="scope.type == 5 || scope.type == 7">{{scope.row.jump_data_remark}}</span>
+            <span v-else>{{scope.row.jump_data}}</span>
+          </template>
         </el-table-column>
         <el-table-column
           prop="remark"
@@ -183,7 +187,7 @@
     </el-dialog>
 
     <el-dialog title="添加商品" :visible.sync="addGoodsDialog" @close="addGoodsDialogClose">
-      <el-input v-model="addGoodsInput" placeholder="商品id"></el-input>
+      <el-input v-model="addGoodsInput" placeholder="商品编码"></el-input>
       <div slot="footer" class="dialog-footer">
         <el-button @click="addDialogTrue">确 定</el-button>
       </div>
