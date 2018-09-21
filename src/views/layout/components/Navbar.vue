@@ -131,7 +131,7 @@ export default {
           this.$axios({
             type: 'post',
             url: '/System/resetPwd',
-            data: this.changePwdForm,
+            data: {uid: Cookies.get('BHS_uid'), ...this.changePwdForm},
             fuc: (res) => {
               if (res.code == 200) {
                 Cookies.remove('Admin-Token')
