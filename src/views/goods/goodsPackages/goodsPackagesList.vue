@@ -58,7 +58,7 @@
           label="类目"
           min-width="120" align='center'>
           <template slot-scope='scope'>
-            <span>{{scope.row.package_name}}-{{scope.row.second_category_name}}</span>
+            <span>{{scope.row.first_category_name}}-{{scope.row.second_category_name}}</span>
           </template>
         </el-table-column>
         <el-table-column
