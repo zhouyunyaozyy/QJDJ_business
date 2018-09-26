@@ -30,6 +30,9 @@
       <el-form-item label='商品名称' prop='goods_name'>
         <el-input v-model="form.goods_name" placeholder='请输入商品名称'></el-input>
       </el-form-item>
+      <el-form-item label='商品货号' prop='art_no'>
+        <el-input v-model="form.art_no" placeholder='请输入商品货号'></el-input>
+      </el-form-item>
       <el-form-item label='商品品牌'>
         <el-select v-model='form.brand_id' clearable placeholder="请选择">
           <el-option
@@ -122,7 +125,7 @@
       <el-form-item>
         <span>商品相册</span>
       </el-form-item>
-      
+
       <el-form-item label='列表展示图' required>
         <el-upload
           class="avatar-uploader"
@@ -156,7 +159,7 @@
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-form-item>
-      
+
 <!--      A类商品-->
       <el-form-item v-if='form.type == 1'>
         <span>A类商品属性</span>
@@ -183,7 +186,7 @@
           </li>
         </ul>
       </el-form-item>
-      
+
 <!--      B类商品-->
       <el-form-item v-if='form.type == -1'>
         <span>B类商品属性</span>
@@ -266,7 +269,7 @@
           </el-table-column>
         </el-table>
       </el-form-item>
-      
+
 <!--      高级属性-->
       <el-form-item>
         <span>高级属性</span>
@@ -333,6 +336,7 @@
           class_category_id: [],
           goods_no: '',
           goods_name: '',
+          art_no: '',
           brand_id: '',
           freight_id: '',
           spec_info: [],
@@ -369,6 +373,7 @@
           goods_no: [{ required: true, message: '请输入商品编码', trigger: 'blur' },
             { pattern: /^[^\u4e00-\u9fa5]{0,30}$/, message: '商品编码由1-30位非中文字符组成' }],
           goods_name: [{ required: true, message: '请输入商品名称', trigger: 'blur' }],
+          art_no: [{ required: true, message: '请输入商品货号', trigger: 'blur' }],
           type: [{ required: true, message: '请选择商品分类', trigger: 'blur' }],
           freight_id: [{ required: true, message: '请选择运费模板', trigger: 'blur' }],
           fake_sale_nums: [{ required: true, message: '请输入虚拟销售量', trigger: 'blur' }],
@@ -429,7 +434,7 @@
             }
             this.firstInput = {type: _form.first_attr, content: firstContent.join(',')}
             this.secondInput = {type: _form.second_attr, content: secondContent.join(',')}
-            
+
             let imgsArr = []
             for (let val of _form.imgs_url) {
               imgsArr.push({url: val})
@@ -459,7 +464,7 @@
           this.$message.warning('请务必填写驳回理由')
           return false
         }
-        
+
         let _form = JSON.parse(JSON.stringify(this.form))
         _form.second_class_category_id = _form.class_category_id[1]
         let arr = []
@@ -544,7 +549,7 @@
         let _this = this
         var reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload = function(e){ 
+        reader.onload = function(e){
           _this.form.details_imgs_url = this.result // 这个就是base64编码了
         }
         return false
@@ -553,7 +558,7 @@
         let _this = this
         var reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload = function(e){ 
+        reader.onload = function(e){
           _this.form.list_url = this.result // 这个就是base64编码了
         }
         return false

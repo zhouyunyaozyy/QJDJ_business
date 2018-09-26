@@ -61,7 +61,7 @@
         <el-table-column
           prop="remark"
           label="备注"
-          min-width="120" align='center'>
+          min-width="120" align='center' show-overflow-tooltip>
         </el-table-column>
         <el-table-column
           prop="sort"
@@ -384,6 +384,7 @@
             if (this.type != 1) {
               this.getOperation_area_category_idArr()
             } else {
+              this.operation_area_category_id = ''
               this.getTableData()
             }
           }

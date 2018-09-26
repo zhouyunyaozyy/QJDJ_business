@@ -151,7 +151,7 @@
         this.$axios({
           type: 'post',
           url: '/Financial/exceptionpackage',
-          data: {page: this.start, type: 1, transfer_status: this.type, package_type: 2, ...this.formInline},
+          data: {page: this.start, type: 1, refund_status: this.type, package_type: 2, ...this.formInline},
           fuc: (res) => {
             if (res.code === 200) {
               this.tableData = res.data.data
