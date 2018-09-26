@@ -384,6 +384,7 @@
             if (this.type != 1) {
               this.getOperation_area_category_idArr()
             } else {
+              this.operation_area_category_id = ''
               this.getTableData()
             }
           }
