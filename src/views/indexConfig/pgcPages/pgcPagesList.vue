@@ -75,7 +75,7 @@
         <el-table-column
           prop="remark"
           label="备注"
-          min-width="170" align='center'>
+          min-width="170" align='center' show-overflow-tooltip>
         </el-table-column>
         <el-table-column
           label="操作"
