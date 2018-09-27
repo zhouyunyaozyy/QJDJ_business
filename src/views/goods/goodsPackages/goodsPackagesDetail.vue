@@ -17,7 +17,7 @@
         <el-input v-model="form.transfer_cash" placeholder='请输入服务结算价' :maxlength='20'></el-input>
       </el-form-item>
       <el-form-item label='服务结算比例' v-else-if='form.transfer_type === 1'>
-        <el-input v-model="form.transfer_ratio" placeholder='请输入服务结算比例' :maxlength='20'></el-input>
+        <el-input v-model="form.transfer_ratio" placeholder='请输入服务结算比例' :maxlength='20' @keyup.native="form.transfer_ratio = $inputKeyUp($event)" @afterpaste.native="form.transfer_ratio = $inputKeyUp($event)"></el-input>
       </el-form-item>
       <el-form-item label='服务售价' prop='price'>
         <el-input v-model="form.price" placeholder='请输入服务售价'></el-input>
