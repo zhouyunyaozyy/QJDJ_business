@@ -50,6 +50,7 @@
   #app .w-e-text p{
     margin: 0;
     line-height: 1.3;
+    /*font-size: small;*/
   }
 
 </style>

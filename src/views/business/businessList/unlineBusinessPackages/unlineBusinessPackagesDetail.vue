@@ -69,13 +69,6 @@
     data () {
       return {
         editor: '',
-        wangeditorMenu: [
-          'bold',	// 粗体
-          'fontsize',	// 字号
-          'italic',	// 斜体
-          '|',
-          'undo',	// 撤销
-        ], //编辑器菜单
         form: {
           package_name: '',
           package_tag: '',

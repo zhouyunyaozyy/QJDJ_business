@@ -48,14 +48,6 @@
         </el-table-column>
         <el-table-column
           prop="silver_price"
-          label="服务价格"
-          min-width="120" align='center'>
-          <template slot-scope='scope'>
-            <span>{{scope.row.price / 100}}</span>
-          </template>
-        </el-table-column>
-        <el-table-column
-          prop="silver_price"
           label="结算价格"
           min-width="120" align='center'>
           <template slot-scope='scope'>
