@@ -108,6 +108,21 @@ Vue.prototype.$downloadExcell = function (obj) {
   window.open(process.env.BASE_API + obj.url + '?' + 'source=admin&token=' + Cookies.get('token') + str)
 }
 
+// 限制整数
+Vue.prototype.$inputKeyUp = (e) => { // 输入框限制
+//	console.log(window.arguments)
+//  var event = window.event || arguments.callee.caller.arguments[0]
+  let target = window.event ? (event.srcElement || event.target) : e.target
+  console.log(target)
+//  let target = event.srcElement || event.target
+  if (target.value.length === 1) {
+    target.value = target.value.replace(/[^1-9]/g, '')
+  } else {
+    target.value = target.value.replace(/\D/g, '')
+  }
+  return target.value
+}
+
 Vue.prototype.$axios = function(params, type) {
 //  console.log(1, params, type)
   const baseUrl = process.env.BASE_API
