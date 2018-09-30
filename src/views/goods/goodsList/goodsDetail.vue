@@ -30,9 +30,6 @@
       <el-form-item label='商品名称' prop='goods_name'>
         <el-input v-model="form.goods_name" placeholder='请输入商品名称'></el-input>
       </el-form-item>
-      <el-form-item label='商品货号' prop='art_no'>
-        <el-input v-model="form.art_no" placeholder='请输入商品货号'></el-input>
-      </el-form-item>
       <el-form-item label='商品品牌'>
         <el-select v-model='form.brand_id' clearable placeholder="请选择">
           <el-option
@@ -73,6 +70,11 @@
                   <li>
                     <el-form-item label='商品库存' required>
                       <el-input v-model="list.nums" placeholder='请输入商品库存'></el-input>
+                    </el-form-item>
+                  </li>
+                  <li>
+                    <el-form-item label='商品货号' required>
+                      <el-input v-model="list.art_no" placeholder='请输入商品货号'></el-input>
                     </el-form-item>
                   </li>
                   <li>
@@ -315,7 +317,6 @@
           class_category_id: [],
           goods_no: '',
           goods_name: '',
-          art_no: '',
           brand_id: '',
           freight_id: '',
           spec_info: [],
@@ -353,7 +354,6 @@
             { required: true, message: '请输入商品编码', trigger: 'blur' },
             { pattern: /^[^\u4e00-\u9fa5]{0,30}$/, message: '商品编码由1-30位非中文字符组成' }],
           goods_name: [{ required: true, message: '请输入商品名称', trigger: 'blur' }],
-          art_no: [{ required: true, message: '请输入商品货号', trigger: 'blur' }],
           type: [{ required: true, message: '请选择商品分类', trigger: 'blur' }],
           freight_id: [{ required: true, message: '请选择运费模板', trigger: 'blur' }],
           fake_sale_nums: [{ required: true, message: '请输入虚拟销售量', trigger: 'blur' }],
@@ -445,7 +445,7 @@
         }
         for (let val of this.form.spec_info) {
           for (let valKey in val) {
-            if ((valKey == 'cost_price' || valKey == 'sale_price' || valKey == 'nums') && val[valKey] == '') {
+            if ((valKey == 'cost_price' || valKey == 'sale_price' || valKey == 'nums' || valKey == 'art_no') && val[valKey] == '') {
               this.$message.warning('规则每项都为必填')
               return false
             }
@@ -587,7 +587,7 @@
               for (let val of this.form.spec_info) {
                 console.log(val)
                 for (let valKey in val) {
-                  if ((valKey == 'cost_price' || valKey == 'sale_price' || valKey == 'nums') && val[valKey] == '') {
+                  if ((valKey == 'cost_price' || valKey == 'sale_price' || valKey == 'nums' || valKey == 'art_no') && val[valKey] == '') {
                     this.$message.warning('规则每项都为必填')
                     return false
                   }
