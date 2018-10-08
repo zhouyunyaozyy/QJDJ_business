@@ -67,6 +67,9 @@
           prop="sort"
           label="顺序"
           min-width="120" align='center'>
+          <template slot-scope="scope">
+            <el-input v-model="scope.row.sort" @blur="sortBlur(scope.row)"></el-input>
+          </template>
         </el-table-column>
         <el-table-column
           prop="is_show"
@@ -126,6 +129,14 @@
           prop="nums"
           label="数量"
           min-width="120" align='center'>
+        </el-table-column>
+        <el-table-column
+          prop="sort"
+          label="顺序"
+          min-width="120" align='center'>
+          <template slot-scope="scope">
+            <el-input v-model="scope.row.sort" @blur="sortGoodsBlur(scope.row)"></el-input>
+          </template>
         </el-table-column>
         <el-table-column
           prop="is_show"
@@ -257,6 +268,33 @@
     },
     mounted () {},
     methods: {
+      sortBlur (e) {
+        this.$axios({
+            type: 'post',
+            url: '/operation/setcontentsort',
+            data: {operation_content_id: e.operation_content_id, sort: e.sort},
+            fuc: (res) => {
+            if (res.code == 200) {
+          this.$message.success('操作成功')
+        }
+        this.getTableData()
+      }
+      })
+      },
+      sortGoodsBlur (e) {
+        this.$axios({
+            type: 'post',
+            url: '/operation/setgoodssort',
+            data: {operation_goods_id: e.operation_goods_id, sort: e.sort},
+            fuc: (res) => {
+            if (res.code == 200) {
+          this.$message.success('操作成功')
+        }
+        this.getTableData()
+      }
+      })
+      },
+
 //      商品
       addDialogTrue () {
         if (this.addGoodsInput === '') {

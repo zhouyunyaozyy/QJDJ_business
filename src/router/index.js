@@ -513,8 +513,6 @@ export const asyncRouterMap = [
       { path: 'indexConfigList', component: _import('indexConfig/indexOperatingConfig/indexConfigList'), name: 'indexConfigList', meta: { title: 'indexConfigList' }},
       { path: 'indexConfigDetail', component: _import('indexConfig/indexOperatingConfig/indexConfigDetail'), name: 'indexConfigDetail', meta: { title: 'indexConfigDetail' }, hidden: true},
 
-      { path: 'indexConfigGoods', component: _import('indexConfig/indexOperatingConfig/indexConfigGoods'), name: 'indexConfigGoods', meta: { title: 'indexConfigGoods' }, hidden: true},
-
       //      运营页面
       { path: 'operatingPagesList', component: _import('indexConfig/operatingPages/operatingPagesList'), name: 'operatingPagesList', meta: { title: 'operatingPagesList' }},
       { path: 'operatingConfigDetail', component: _import('indexConfig/operatingPages/operatingConfigDetail'), name: 'operatingConfigDetail', meta: { title: 'operatingConfigDetail' }, hidden: true},
