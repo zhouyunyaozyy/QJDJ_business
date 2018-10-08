@@ -116,7 +116,19 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
+  .hideSidebar .tags-view-container{
+    padding-left: 36px;
+  }
+  .mobile .tags-view-container{
+    padding-left: 0px;
+  }
 .tags-view-container {
+  position: fixed;
+  top: 50px;
+  left:0;
+  right:0;
+  z-index: 999;
+  padding-left: 180px;
   .tags-view-wrapper {
     background: #fff;
     height: 34px;

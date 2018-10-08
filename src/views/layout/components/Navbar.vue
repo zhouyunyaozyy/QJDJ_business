@@ -169,9 +169,21 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-.navbar {
+  .hideSidebar .navbar{
+    padding-left: 36px;
+  }
+  .mobile .navbar{
+    padding-left: 0px;
+  }
+  .navbar {
   height: 50px;
   line-height: 50px;
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index: 999;
+  padding-left: 180px;
   border-radius: 0px !important;
   .hamburger-container {
     line-height: 58px;
