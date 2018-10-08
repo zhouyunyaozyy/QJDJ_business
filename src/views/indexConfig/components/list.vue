@@ -68,7 +68,7 @@
           label="顺序"
           min-width="120" align='center'>
           <template slot-scope="scope">
-            <el-input v-model="scope.row.sort" @blur="sortBlur(scope.row)"></el-input>
+            <el-input v-model="scope.row.sort" @blur="sortBlur(scope.row)" @keyup.native="scope.row.sort = $inputKeyUp($event)" @afterpaste.native="scope.row.sort = $inputKeyUp($event)"></el-input>
           </template>
         </el-table-column>
         <el-table-column
@@ -135,7 +135,7 @@
           label="顺序"
           min-width="120" align='center'>
           <template slot-scope="scope">
-            <el-input v-model="scope.row.sort" @blur="sortGoodsBlur(scope.row)"></el-input>
+            <el-input v-model="scope.row.sort" @blur="sortGoodsBlur(scope.row)" @keyup.native="scope.row.sort = $inputKeyUp($event)" @afterpaste.native="scope.row.sort = $inputKeyUp($event)"></el-input>
           </template>
         </el-table-column>
         <el-table-column
