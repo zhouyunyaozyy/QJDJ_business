@@ -17,7 +17,7 @@
         <el-input v-model="form.transfer_cash" placeholder='请输入服务结算价' :maxlength='20'></el-input>
       </el-form-item>
       <el-form-item label='服务结算比例' v-else-if='form.transfer_type === 1'>
-        <el-input v-model="form.transfer_ratio" placeholder='请输入服务结算比例' :maxlength='20'></el-input>
+        <el-input v-model="form.transfer_ratio" placeholder='请输入服务结算比例' :maxlength='20' @keyup.native="form.transfer_ratio = $inputKeyUp($event)" @afterpaste.native="form.transfer_ratio = $inputKeyUp($event)"></el-input>
       </el-form-item>
       <el-form-item label='服务售价' prop='price'>
         <el-input v-model="form.price" placeholder='请输入服务售价'></el-input>
@@ -61,7 +61,7 @@
         <el-button v-if='status === 0' type="primary" @click="submit(1)">保存,审核通过</el-button>
         <el-button v-if='status === 0' type="primary" @click="">驳回</el-button>
         <el-button v-if='status === 1' type="primary" @click="submit(1)">保存,修改成功</el-button>
-        <el-button v-if='status === 1' type="primary" @click="">下架</el-button>
+        <el-button v-if='status === 1' type="primary" @click="offLine">下架</el-button>
         <el-button v-if='status === -2' type="primary" @click="submit(1)">保存并上架</el-button>
         <el-button v-if='status === -1' type="primary" @click="submit(1)">保存并上架</el-button>
       </el-form-item>
@@ -166,6 +166,19 @@
       }
     },
     methods: {
+      offLine () {
+        this.$axios({
+            type: 'post',
+            url: '/package/offpackage',
+            data: {package_id: this.form.package_id},
+            fuc: (res) => {
+        if (res.code == 200) {
+          this.$message.success('操作成功')
+          this.$deleteOneTag('/goods/goodsPackagesList')
+        }
+      }
+      })
+      },
       expire_timeChange () {
         this.form.use_time = ""
       },

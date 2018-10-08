@@ -92,7 +92,12 @@ Vue.prototype.$downloadExcell = function (obj) {
       if (obj[key] instanceof Array && obj[key].length > 0) {
         str += '&'
         str += key + '='
-        str += obj[key][0].getTime() + ',' + obj[key][1].getTime()
+        if (obj[key][0] instanceof Date) {
+          str += obj[key][0].getTime() + ',' + obj[key][1].getTime()
+        } else {
+          str += obj[key][0] + ',' + obj[key][1]
+        }
+
       } else if (obj[key] != '') {
         str += '&'
         str += key + '='+ obj[key]
@@ -101,6 +106,21 @@ Vue.prototype.$downloadExcell = function (obj) {
   }
   console.log(str)
   window.open(process.env.BASE_API + obj.url + '?' + 'source=admin&token=' + Cookies.get('token') + str)
+}
+
+// 限制整数
+Vue.prototype.$inputKeyUp = (e) => { // 输入框限制
+//	console.log(window.arguments)
+//  var event = window.event || arguments.callee.caller.arguments[0]
+  let target = window.event ? (event.srcElement || event.target) : e.target
+  console.log(target)
+//  let target = event.srcElement || event.target
+  if (target.value.length === 1) {
+    target.value = target.value.replace(/[^1-9]/g, '')
+  } else {
+    target.value = target.value.replace(/\D/g, '')
+  }
+  return target.value
 }
 
 Vue.prototype.$axios = function(params, type) {
@@ -122,13 +142,13 @@ Vue.prototype.$axios = function(params, type) {
     });
   }
   this.$store.state.app.showLoadingNums++ // 开启请求数据
-  
+
   if (params.url == '/business/offlinecreatepayqrcode' || '/business/offlinecreatetableqrcode') {
 //    axios.defaults.timeout = 10000; //导出暂不定响应时间
   } else {
     axios.defaults.timeout = 10000; //响应时间
   }
-  
+
   //返回状态判断(添加响应拦截器)
 //  axios.interceptors.response.use((res) =>{
 //    //对响应数据做些事
@@ -180,7 +200,7 @@ Vue.prototype.$axios = function(params, type) {
         } else {
           params.fuc(response.data)
         }
-      
+
 //        结束loading
         this.$store.state.app.showLoadingNums-- // 开启请求数据
         if (this.$store.state.app.showLoadingNums < 1) {
@@ -235,7 +255,7 @@ Vue.prototype.$axios = function(params, type) {
         } else {
           params.fuc(response.data)
         }
-      
+
 //        结束loading
         this.$store.state.app.showLoadingNums-- // 开启请求数据
         if (this.$store.state.app.showLoadingNums < 1) {

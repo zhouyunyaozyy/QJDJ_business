@@ -13,7 +13,7 @@
           <span v-else-if='scope.row.order_status == -1'>取消订单</span>
           <span v-else-if='scope.row.order_status == 2'>已完成</span>
           <span v-else-if='scope.row.order_status == 3'>退款中</span>
-          <span v-else-if='scope.row.order_status == 3'>已退款</span>
+          <span v-else-if='scope.row.order_status == 4'>已退款</span>
         </template>
       </el-table-column>
       <el-table-column label='商家名称' prop='business_name' min-width="120" align='center'></el-table-column>
@@ -29,10 +29,10 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <el-table
     :data="tableData" border style="width: 100%">
-      
+
       <el-table-column label='用户ID' prop='user_id' min-width="120" align='center'></el-table-column>
       <el-table-column label='支付方式' prop='g_income' min-width="120" align='center'>
         <template slot-scope='scope'>
@@ -121,7 +121,7 @@
       })
     },
     methods: {
-      
+
       changeStatus () {
         this.$axios({
           type: 'post',
@@ -147,7 +147,7 @@
     margin: 10px 20px 20px;
     overflow: hidden;
   }
-  
+
 </style>
 <style>
   .unlineFinancialrDetail .el-table th {

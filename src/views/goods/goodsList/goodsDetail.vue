@@ -73,6 +73,11 @@
                     </el-form-item>
                   </li>
                   <li>
+                    <el-form-item label='商品货号' required>
+                      <el-input v-model="list.art_no" placeholder='请输入商品货号'></el-input>
+                    </el-form-item>
+                  </li>
+                  <li>
                     <el-form-item label='运费模板' required>
                       <el-select v-model='list.freight_id' placeholder="请选择" disabled>
                         <el-option
@@ -92,7 +97,7 @@
       <el-form-item>
         <span>商品相册</span>
       </el-form-item>
-      
+
       <el-form-item label='列表展示图' required>
         <el-upload
           class="avatar-uploader"
@@ -126,7 +131,7 @@
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-form-item>
-      
+
 <!--      A类商品-->
       <el-form-item v-if='form.type == 1'>
         <span>A类商品属性</span>
@@ -153,7 +158,7 @@
           </li>
         </ul>
       </el-form-item>
-      
+
 <!--      B类商品-->
       <el-form-item v-if='form.type == -1'>
         <span>B类商品属性</span>
@@ -236,7 +241,7 @@
           </el-table-column>
         </el-table>
       </el-form-item>
-      
+
 <!--      高级属性-->
       <el-form-item>
         <span>高级属性</span>
@@ -264,13 +269,13 @@
         <span>{{form.reject_reason}}</span>
       </el-form-item>
       <el-form-item>
-        
+
 <!--        <el-button v-if='form.status == -1' @click='submit(1)'>完成，保存商品</el-button>-->
-        
+
 <!--        满足产品临时需求，后续启用上面代码-->
         <el-button @click='submit(1)'>完成，保存商品</el-button>
 <!--        -->
-        
+
         <el-button v-if='form.status == -1' @click='dialogVisibleInput = true'>驳回</el-button>
         <el-button v-if='form.status == 1' @click='submit(-2)'>下架</el-button>
 <!--        <el-button v-else @click="submit('')">完成，提交商品</el-button>-->
@@ -409,7 +414,7 @@
             }
             this.firstInput = {type: _form.first_attr, content: firstContent.join(',')}
             this.secondInput = {type: _form.second_attr, content: secondContent.join(',')}
-            
+
             let imgsArr = []
             for (let val of _form.imgs_url) {
               imgsArr.push({url: val})
@@ -440,7 +445,7 @@
         }
         for (let val of this.form.spec_info) {
           for (let valKey in val) {
-            if ((valKey == 'cost_price' || valKey == 'sale_price' || valKey == 'nums') && val[valKey] == '') {
+            if ((valKey == 'cost_price' || valKey == 'sale_price' || valKey == 'nums' || valKey == 'art_no') && val[valKey] == '') {
               this.$message.warning('规则每项都为必填')
               return false
             }
@@ -531,7 +536,7 @@
         let _this = this
         var reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload = function(e){ 
+        reader.onload = function(e){
           _this.form.details_imgs_url = this.result // 这个就是base64编码了
         }
         return false
@@ -540,7 +545,7 @@
         let _this = this
         var reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload = function(e){ 
+        reader.onload = function(e){
           _this.form.list_url = this.result // 这个就是base64编码了
         }
         return false
@@ -582,7 +587,7 @@
               for (let val of this.form.spec_info) {
                 console.log(val)
                 for (let valKey in val) {
-                  if ((valKey == 'cost_price' || valKey == 'sale_price' || valKey == 'nums') && val[valKey] == '') {
+                  if ((valKey == 'cost_price' || valKey == 'sale_price' || valKey == 'nums' || valKey == 'art_no') && val[valKey] == '') {
                     this.$message.warning('规则每项都为必填')
                     return false
                   }

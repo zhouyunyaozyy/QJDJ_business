@@ -17,7 +17,7 @@
         <el-input v-model="form.transfer_cash" placeholder='请输入代金券结算价' :maxlength='20'></el-input>
       </el-form-item>
       <el-form-item label='代金券结算比例' v-else-if='form.transfer_type === 1'>
-        <el-input v-model="form.transfer_ratio" placeholder='请输入代金券结算比例' :maxlength='20'></el-input>
+        <el-input v-model="form.transfer_ratio" placeholder='请输入代金券结算比例' :maxlength='20' @keyup.native="form.transfer_ratio = $inputKeyUp($event)" @afterpaste.native="form.transfer_ratio = $inputKeyUp($event)"></el-input>
       </el-form-item>
       <el-form-item label='代金券售价' prop='price'>
         <el-input v-model="form.price" placeholder='请输入代金券售价'></el-input>
@@ -59,13 +59,6 @@
     data () {
       return {
         editor: '',
-        wangeditorMenu: [
-          'bold',	// 粗体
-          'fontsize',	// 字号
-          'italic',	// 斜体
-          '|',
-          'undo',	// 撤销
-        ], //编辑器菜单
         form: {
           package_name: '',
           package_tag: '',
@@ -150,6 +143,7 @@
         this.form.use_time = ""
       },
       submit () {
+        console.log(this.form)
         this.$refs['form'].validate((valid) => {
           if (valid) {
             let _form = JSON.parse(JSON.stringify(this.form))

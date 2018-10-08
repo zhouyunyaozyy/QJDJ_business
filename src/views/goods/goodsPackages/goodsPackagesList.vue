@@ -50,7 +50,7 @@
           min-width="120" align='center'>
           <template slot-scope='scope'>
             <span v-if='scope.row.transfer_type === 0'>{{scope.row.transfer_cash / 100}}元</span>
-            <span v-else>{{scope.row.price / 10000 * scope.row.transfer_ratio}}元</span>
+            <span v-else>{{scope.row.price * scope.row.transfer_ratio / 10000}}元</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -58,7 +58,7 @@
           label="类目"
           min-width="120" align='center'>
           <template slot-scope='scope'>
-            <span>{{scope.row.package_name}}-{{scope.row.second_category_name}}</span>
+            <span>{{scope.row.first_category_name}}-{{scope.row.second_category_name}}</span>
           </template>
         </el-table-column>
         <el-table-column
