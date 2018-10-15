@@ -613,14 +613,27 @@ export const asyncRouterMap = [
       //      分享统计
       { path: 'guaShareDetail', component: _import('guaguale/guaShare/guaShareDetail'), name: 'guaShareDetail', meta: { title: 'guaShareDetail' }}
 
-      // {
-      //   path: '/indexConfig/indexOperatingConfig',
-      //   component: _import('indexConfig/index'),
-      //   name: 'indexOperatingConfig',
-      //   meta: {title: 'indexOperatingConfig'},
-      //   children: [
-      //   ]
-      // },
+    ]
+  },
+
+  // 摇色子
+  {
+    path: '/yaoyao',
+    component: Layout,
+//    redirect: '/interConfig/indexManage/indexSlideshowList',
+    name: 'yaoyao',
+    meta: {
+      title: 'yaoyao',
+      icon: 'chart'
+    },
+    children: [
+      //      商品统计
+      { path: 'yaoGoodsCount', component: _import('yaoyao/yaoGoodsCount/yaoGoodsCount'), name: 'yaoGoodsCount', meta: { title: 'yaoGoodsCount' }},
+
+      //      商品
+      { path: 'yaoGoodsList', component: _import('yaoyao/yaoGoods/yaoGoodsList'), name: 'yaoGoodsList', meta: { title: 'yaoGoodsList' }},
+      { path: 'yaoGoodsDetail', component: _import('yaoyao/yaoGoods/yaoGoodsDetail'), name: 'yaoGoodsDetail', meta: { title: 'yaoGoodsDetail' }, hidden: true}
+
     ]
   },
 

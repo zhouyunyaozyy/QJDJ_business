@@ -81,7 +81,7 @@
           if (val != 'scratchcards_img') {
             this.form[val] = res.data[val] + ''
           } else {
-            this.form.scratchcards_img = res.data.img_url + res.data.save_path + res.data.scratchcards_img
+            this.form.scratchcards_img = res.data.url + res.data.save_path + res.data.scratchcards_img
           }
         }
         this.form.id = this.$route.query.id

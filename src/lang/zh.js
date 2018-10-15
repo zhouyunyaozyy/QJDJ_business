@@ -186,14 +186,19 @@ export default {
     activityCount: '活动分享管理',
 
     guaguale: '刮刮乐',
-    guaVisit: '参与统计',
-    guaGoodsList: '活动商品',
-    guaGoodsDetail: '活动商品详情',
-    guaUserList: '用户管理',
-    guaUserDetail: '用户详情',
-    guaGoldList: '金贝发放',
-    guaGoldDetail: '金贝管理',
-    guaShareDetail: '分享统计',
+    guaVisit: '刮-参与统计',
+    guaGoodsList: '刮-活动商品',
+    guaGoodsDetail: '刮-活动商品详情',
+    guaUserList: '刮-用户管理',
+    guaUserDetail: '刮-用户详情',
+    guaGoldList: '刮-金贝发放',
+    guaGoldDetail: '刮-金贝管理',
+    guaShareDetail: '刮-分享统计',
+
+    yaoyao: '摇骰子',
+    yaoGoodsCount: '骰子-商品统计',
+    yaoGoodsList: '骰子-活动商品',
+    yaoGoodsDetail: '骰子-活动商品详情',
 
     // 自带
     dashboard: '首页',
