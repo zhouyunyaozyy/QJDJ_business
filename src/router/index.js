@@ -582,6 +582,48 @@ export const asyncRouterMap = [
     ]
   },
 
+  // 刮刮乐
+  {
+    path: '/guaguale',
+    component: Layout,
+//    redirect: '/interConfig/indexManage/indexSlideshowList',
+    name: 'guaguale',
+    meta: {
+      title: 'guaguale',
+      icon: 'chart'
+    },
+    children: [
+      //      参与统计
+      { path: 'guaVisit', component: _import('guaguale/guaVisit/guaVisit'), name: 'guaVisit', meta: { title: 'guaVisit' }},
+
+      //      商品
+      { path: 'guaGoodsList', component: _import('guaguale/guaGoods/guaGoodsList'), name: 'guaGoodsList', meta: { title: 'guaGoodsList' }},
+      { path: 'guaGoodsDetail', component: _import('guaguale/guaGoods/guaGoodsDetail'), name: 'guaGoodsDetail', meta: { title: 'guaGoodsDetail' }, hidden: true},
+
+      //      用户管理
+      { path: 'guaUserList', component: _import('guaguale/guaUser/guaUserList'), name: 'guaUserList', meta: { title: 'guaUserList' }},
+      { path: 'guaUserDetail', component: _import('guaguale/guaUser/guaUserDetail'), name: 'guaUserDetail', meta: { title: 'guaUserDetail' }, hidden: true},
+
+      //      金贝发放
+      { path: 'guaGoldList', component: _import('guaguale/guaGold/guaGoldList'), name: 'guaGoldList', meta: { title: 'guaGoldList' }},
+
+      //      金贝管理
+      { path: 'guaGoldDetail', component: _import('guaguale/guaGold/guaGoldDetail'), name: 'guaGoldDetail', meta: { title: 'guaGoldDetail' }},
+
+      //      分享统计
+      { path: 'guaShareDetail', component: _import('guaguale/guaShare/guaShareDetail'), name: 'guaShareDetail', meta: { title: 'guaShareDetail' }}
+
+      // {
+      //   path: '/indexConfig/indexOperatingConfig',
+      //   component: _import('indexConfig/index'),
+      //   name: 'indexOperatingConfig',
+      //   meta: {title: 'indexOperatingConfig'},
+      //   children: [
+      //   ]
+      // },
+    ]
+  },
+
   // 自带
 
   //  {

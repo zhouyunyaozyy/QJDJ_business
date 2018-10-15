@@ -82,12 +82,12 @@
       :current-page.sync="start">
   </el-pagination>
   </div>
-  
+
 </template>
 
 <script>
 import echarts from 'echarts'
-import resize from './resize'
+import resize from '@/resize'
 
 export default {
   mixins: [resize],
@@ -191,17 +191,17 @@ export default {
       })
     },
     handleCurrentChange (val) {
-      this.start = val 
+      this.start = val
       this.getTableData()
     },
     initChart() {
-      
+
       var joinLineData = this.joinLineData
       var shareLineData = this.shareLineData
       var xData = this.xData
 
       console.log(joinLineData, shareLineData)
-      
+
       this.chart.setOption({
         backgroundColor: '#fff',
         title: {
@@ -392,5 +392,5 @@ export default {
     overflow: hidden;
     position: relative;
   }
-  
+
 </style>

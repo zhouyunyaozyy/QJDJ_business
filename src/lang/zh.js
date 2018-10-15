@@ -185,6 +185,16 @@ export default {
     activityGold: '活动金贝',
     activityCount: '活动分享管理',
 
+    guaguale: '刮刮乐',
+    guaVisit: '参与统计',
+    guaGoodsList: '活动商品',
+    guaGoodsDetail: '活动商品详情',
+    guaUserList: '用户管理',
+    guaUserDetail: '用户详情',
+    guaGoldList: '金贝发放',
+    guaGoldDetail: '金贝管理',
+    guaShareDetail: '分享统计',
+
     // 自带
     dashboard: '首页',
     introduction: '简述',
