@@ -1,9 +1,9 @@
 <template>
   <div class="onlineOrderDetail">
     <p v-if='formData[0] && formData[0].ginfo_except_status == 0 && formData[0].onorder_pay_status == 1'>当前订单状态： <span>未支付</span></p>
-    
+
     <p v-else-if='formData[0] && formData[0].ginfo_except_status == 0 && formData[0].onorder_pay_status == 2'>当前订单状态： <span v-for='item in ginfo_deliver_statusArr' v-if='item.value == formData[0].ginfo_deliver_status'>{{item.label}}</span></p>
-    
+
     <p v-else-if='formData[0]'>当前订单状态： <span v-for='item in ginfo_except_statusArr' v-if='item.value == formData[0].ginfo_except_status'>{{item.label}}</span></p>
     <h5>基本信息</h5>
     <el-table
@@ -25,13 +25,13 @@
         </template>
       </el-table-column>
       <el-table-column label='订单关闭时间' prop='onorder_close_at' min-width="120" align='center'>
-      
+
         <template slot-scope='scope'>
           <span v-if='scope.row.onorder_close_at'>{{scope.row.onorder_close_at}}</span>
           <span v-else>-</span>
         </template></el-table-column>
       <el-table-column label='订单关闭原因' prop='onorder_close_reason' min-width="120" align='center'>
-      
+
         <template slot-scope='scope'>
           <span v-if='scope.row.onorder_close_reason'>{{scope.row.onorder_close_reason}}</span>
           <span v-else>-</span>
@@ -84,9 +84,9 @@
     <el-table
     :data="formData" border
     style="width: 100%">
-      <el-table-column label='收货人' prop='receiver_receiver_name' min-width="160" align='center'></el-table-column>
-      <el-table-column label='手机号码' prop='receiver_receiver_phone' min-width="160" align='center'></el-table-column>
-      <el-table-column label='收货地址' prop='receiver_receiver_address' min-width="400" align='center'></el-table-column>
+      <el-table-column label='收货人' prop='onorder_receiver_name' min-width="160" align='center'></el-table-column>
+      <el-table-column label='手机号码' prop='onorder_receiver_phone' min-width="160" align='center'></el-table-column>
+      <el-table-column label='收货地址' prop='onorder_receiver_address' min-width="400" align='center'></el-table-column>
     </el-table>
     <h5>商品信息</h5>
     <el-table
@@ -185,7 +185,7 @@
     </div>
     <el-button style='margin: 15px;' v-if='tableData[0] && tableData[0].ginfo_except_status != 0 && tableData[0].ginfo_except_status < 3' type='success' @click='dialogSuccess = true'>审核通过</el-button>
     <el-button style='margin: 15px;' v-if='tableData[0] && tableData[0].ginfo_except_status != 0 && tableData[0].ginfo_except_status < 3' type='danger' @click='dialogRefuse = true'>驳回</el-button>
-    
+
     <el-dialog title="审核通过" :visible.sync="dialogSuccess">
       <el-radio v-model="successType" label="both">退货退款</el-radio>
       <el-radio v-model="successType" label="only">不退货退款</el-radio>
@@ -194,7 +194,7 @@
         <el-button type="primary" @click="orderSuccess">确 定</el-button>
       </div>
     </el-dialog>
-    
+
     <el-dialog title="填写驳回理由" :visible.sync="dialogRefuse">
       <el-checkbox v-model="refuseType">发送短信</el-checkbox>
       <el-input type='textarea' v-model='refuseInput' placeholder='请务必填写驳回理由'></el-input>
@@ -336,7 +336,7 @@
     margin: 10px 20px 20px;
     overflow: hidden;
   }
-  
+
 </style>
 <style>
   .onlineOrderDetail .el-table th {
