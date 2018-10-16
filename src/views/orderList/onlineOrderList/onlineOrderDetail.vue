@@ -99,7 +99,7 @@
       </el-table-column>
       <el-table-column label='商家名称' prop='ginfo_business_name' min-width="120" align='center'></el-table-column>
       <el-table-column label='商品名称' prop='ginfo_g_name' min-width="120" align='center'></el-table-column>
-      <el-table-column label='货号' prop='ginfo_goods_id' min-width="120" align='center'></el-table-column>
+      <el-table-column label='货号' prop='ginfo_art_no' min-width="120" align='center'></el-table-column>
       <el-table-column label='商品规格' prop='ginfo_g_format' min-width="120" align='center'></el-table-column>
       <el-table-column label='单价' prop='ginfo_g_price' min-width="120" align='center'>
         <template slot-scope='scope'>

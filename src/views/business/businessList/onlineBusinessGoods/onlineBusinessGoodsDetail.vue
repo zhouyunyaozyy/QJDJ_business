@@ -74,9 +74,10 @@
         <el-button @click='saveSpecinfo'>保存生成规格</el-button>
       </el-form-item>
       <el-form-item label='统一填充' class='allFormClass'>
-        <el-input v-model="ulForm.cost_price" placeholder='供应价'></el-input>
-        <el-input v-model="ulForm.sale_price" placeholder='供应价'></el-input>
-        <el-input v-model="ulForm.nums" placeholder='供应价'></el-input>
+        <el-input v-model="ulForm.cost_price" placeholder='商品进价'></el-input>
+        <el-input v-model="ulForm.sale_price" placeholder='商品售价'></el-input>
+        <el-input v-model="ulForm.nums" placeholder='商品库存'></el-input>
+        <el-input v-model="ulForm.art_no" placeholder='商品货号'></el-input>
         <el-button @click='giveUlForm'>确认</el-button>
       </el-form-item>
       <el-form-item label='商品规格' class='ulFormItem' required>
