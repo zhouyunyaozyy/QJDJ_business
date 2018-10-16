@@ -139,7 +139,7 @@
         this.$refs['form'].validate((valid) => {
           if (valid) {
             let _form = JSON.parse(JSON.stringify(this.form))
-            for (let val of _form) {
+            for (let val of _form.benefit_data) {
               if (val.benefit_value == '') {
                 this.$message.warning('每项策略为必填')
                 return
