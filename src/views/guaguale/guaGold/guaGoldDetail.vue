@@ -89,7 +89,7 @@
 
     <!--  编辑弹框-->
     <el-dialog
-      title="编辑比例"
+      title="修改截止时间"
       :visible.sync="editDialog"
       width="50%">
       <el-form ref="form" :model="form" label-width="120px">

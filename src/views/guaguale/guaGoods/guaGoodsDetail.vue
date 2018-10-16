@@ -11,7 +11,7 @@
         <el-input placeholder='请输入商品编码' v-model='form.goods_no'></el-input>
       </el-form-item>
       <el-form-item label='金贝数量' prop='scratchcards_gold_num' v-else-if="form.scratchcards_goods_type == 2">
-        <el-input placeholder='请输入商品编码' v-model='form.scratchcards_gold_num'></el-input>
+        <el-input placeholder='请输入金贝数量' v-model='form.scratchcards_gold_num'></el-input>
         <p>目前活动金贝总量：{{allGold}}</p>
       </el-form-item>
       <el-form-item label='商品名称' prop='scratchcards_goods_name'>
