@@ -32,7 +32,7 @@
           <el-radio :label="1">优惠</el-radio>
           <el-radio :label="2">金贝</el-radio>
         </el-radio-group>
-        <el-input v-model='item.benefit_value' style="width: 100px"></el-input>
+        <el-input v-model='item.benefit_value' style="width: 100px" @keyup.native="item.benefit_value = $inputKeyUp($event)" @afterpaste.native="item.benefit_value = $inputKeyUp($event)"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button @click='submit' v-if='businessSureBool'>保存</el-button>
