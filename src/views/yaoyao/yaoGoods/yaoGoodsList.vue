@@ -2,7 +2,7 @@
   <div class="indexOperatingGoddsList">
     <el-button @click='addSlideshow'>添加商品</el-button>
     <el-button @click='downExcell'>下载模板</el-button>
-    <el-button type="primary" @click="importDialogVisible = true">批量添加商品</el-button>
+    <el-button @click="importDialogVisible = true">批量添加商品</el-button>
     <el-button @click="openCategoryDialog">分类管理</el-button>
 
     <div class="searchForm">
@@ -30,7 +30,7 @@
       <el-table-column
         label="商品列表">
         <el-table-column
-          prop="id"
+          prop="game_sort"
           label="商品排序"
           min-width="120" align='center'>
         </el-table-column>

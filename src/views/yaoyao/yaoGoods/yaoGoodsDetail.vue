@@ -23,9 +23,9 @@
         <el-input placeholder='请输入数字区间' v-model='form.game_num_section'></el-input>
         <span>此处发起者摇中的数字，数字区间以,为区分</span>
       </el-form-item>
-      <el-form-item label='参与者概率（赢）' prop='pk_win_chance' v-if='businessSureBool'>
+      <el-form-item label='发起者概率（赢）' prop='pk_win_chance' v-if='businessSureBool'>
         <el-input placeholder='请输入1-100整数' v-model='form.pk_win_chance'></el-input>
-        <span>此处为参与PK者赢的概率</span>
+        <span>此处为发起PK者赢的概率</span>
       </el-form-item>
       <el-form-item :label="item.name" v-for="item in form.benefit_data" :key="item.benefit_level" v-if='businessSureBool' required>
         <el-radio-group v-model="item.benefit_type" @change="item.benefit_value = ''">
