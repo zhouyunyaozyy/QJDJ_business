@@ -30,7 +30,7 @@
       <el-table-column
         label="商品列表">
         <el-table-column
-          prop="id"
+          prop="game_sort"
           label="商品排序"
           min-width="120" align='center'>
         </el-table-column>
