@@ -59,7 +59,7 @@
           scratchcards_img: [{ required: true, message: '请上传', trigger: 'blur' }],
           scratchcards_ratio: [{ required: true, message: '请输入', trigger: 'blur' }],
           scratchcards_goods_type: [{ required: true, message: '请选择', trigger: 'blur' }],
-          price: [{ required: true, message: '请选择', trigger: 'blur' }],
+          price: [{ required: true, message: '请输入', trigger: 'blur' }],
           goods_no: [{ required: true, message: '请输入', trigger: 'blur' }]
         }
       }
@@ -83,9 +83,7 @@
             data: {id: this.$route.query.id},
             fuc: (res) => {
             for (let val in this.form) {
-          if (val == 'price') {
-            this.form[val] = res.data[val] / 100
-          } else if (val != 'scratchcards_img') {
+          if (val != 'scratchcards_img') {
             this.form[val] = res.data[val] + ''
           } else {
             this.form.scratchcards_img = res.data.url + res.data.save_path + res.data.scratchcards_img
