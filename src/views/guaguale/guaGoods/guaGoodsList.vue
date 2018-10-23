@@ -45,10 +45,18 @@
         </el-table-column>
         <el-table-column
           prop="business_name"
-          label="价格"
+          label="商品价格"
           min-width="120" align='center'>
           <template slot-scope='scope'>
             <span>{{scope.row.sale_price / 100}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="price"
+          label="商品价值"
+          min-width="120" align='center'>
+          <template slot-scope='scope'>
+            <span>{{scope.row.price / 100}}</span>
           </template>
         </el-table-column>
         <el-table-column

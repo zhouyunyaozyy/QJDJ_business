@@ -17,6 +17,9 @@
       <el-form-item label='商品名称' prop='scratchcards_goods_name'>
         <el-input placeholder='请输入商品名称' v-model='form.scratchcards_goods_name'></el-input>
       </el-form-item>
+      <el-form-item label='商品价格' prop='price'>
+        <el-input placeholder='请输入商品价格' v-model='form.price'></el-input>
+      </el-form-item>
       <el-form-item label='商品封面' prop='scratchcards_img'>
         <el-upload
           class="avatar-uploader"
@@ -43,6 +46,7 @@
         form: {
           scratchcards_goods_type: '',
           goods_no: '',
+          price: '',
           scratchcards_goods_name: '',
           scratchcards_ratio: '',
           scratchcards_img: '',
@@ -55,6 +59,7 @@
           scratchcards_img: [{ required: true, message: '请上传', trigger: 'blur' }],
           scratchcards_ratio: [{ required: true, message: '请输入', trigger: 'blur' }],
           scratchcards_goods_type: [{ required: true, message: '请选择', trigger: 'blur' }],
+          price: [{ required: true, message: '请选择', trigger: 'blur' }],
           goods_no: [{ required: true, message: '请输入', trigger: 'blur' }]
         }
       }
@@ -78,7 +83,9 @@
             data: {id: this.$route.query.id},
             fuc: (res) => {
             for (let val in this.form) {
-          if (val != 'scratchcards_img') {
+          if (val == 'price') {
+            this.form[val] = res.data[val] / 100
+          } else if (val != 'scratchcards_img') {
             this.form[val] = res.data[val] + ''
           } else {
             this.form.scratchcards_img = res.data.url + res.data.save_path + res.data.scratchcards_img
