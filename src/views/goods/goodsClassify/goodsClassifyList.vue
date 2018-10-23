@@ -1,7 +1,7 @@
 <template>
   <div class="goodsClassifyList">
     <el-button type='primary' @click='addClassify'>添加类目</el-button>
-    
+
     <el-table
     :data="tableData"
     style="width: 100%">
@@ -26,6 +26,18 @@
           prop="goods_num"
           label="商品数量"
           min-width="120" align='center'>
+        </el-table-column>
+        <el-table-column
+          prop="goods_num"
+          label="显示状态"
+          min-width="140" align='center'>
+          <template slot-scope="scope">
+            <el-switch
+              v-model="scope.row.status == 1"
+              active-text="开"
+              inactive-text="关" @change="statusChange(scope.row.status, scope.row.cid)">
+            </el-switch>
+          </template>
         </el-table-column>
         <el-table-column
           prop="seq"
@@ -71,6 +83,19 @@
     },
     mounted () {},
     methods: {
+      statusChange (status, cid) {
+        console.log('status', status)
+        this.$axios({
+            type: 'post',
+            url: '/goods/category/changestatus',
+            data: {cid, status: status == 1 ? 0 : 1},
+            fuc: (res) => {
+            if (res.code === 200) {
+            this.getTableData()
+          }
+        }
+        })
+      },
       getTableData () {
         this.$axios({
           type: 'post',
@@ -85,11 +110,11 @@
         })
       },
       handleCurrentChange (val) {
-        this.start = val 
+        this.start = val
         this.getTableData()
       },
       onSubmit () {
-        
+
       },
       addSecondClassify (parent_id) {
         this.$router.push({path: '/goods/goodsClassifyDetail', query: {level: 2, parent_id}})
