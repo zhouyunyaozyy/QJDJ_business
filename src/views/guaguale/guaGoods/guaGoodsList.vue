@@ -55,9 +55,6 @@
           prop="price"
           label="商品价值"
           min-width="120" align='center'>
-          <template slot-scope='scope'>
-            <span>{{scope.row.price / 100}}</span>
-          </template>
         </el-table-column>
         <el-table-column
           prop="scratchcards_ration"
