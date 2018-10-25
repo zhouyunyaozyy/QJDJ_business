@@ -69,7 +69,7 @@
         this.$axios({
           type: 'post',
           url: '/business/categorygetlist',
-          data: {parent_id: this.$route.query.parent_id},
+          data: {page: this.start,parent_id: this.$route.query.parent_id},
           fuc: (res) => {
             this.tableData = res.data.data
             this.total = res.data.total
@@ -77,11 +77,11 @@
         })
       },
       handleCurrentChange (val) {
-        this.start = val 
+        this.start = val
         this.getTableData()
       },
       onSubmit () {
-        
+
       },
       addFirstClassify (parent_id, type) {
         this.$router.push({path: '/business/unBusinessClassifyDetail', query: {parent_id: parent_id, type: type}})
