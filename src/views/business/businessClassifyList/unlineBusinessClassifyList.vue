@@ -80,7 +80,7 @@
         this.$axios({
           type: 'post',
           url: '/business/categorygetlist',
-          data: {},
+          data: {page: this.start},
           fuc: (res) => {
             this.tableData = res.data.data
             this.total = res.data.total
@@ -91,17 +91,17 @@
         this.$router.push({path: '/business/unBusinessClassifySecondList', query: {parent_id: parent_id}})
       },
       handleCurrentChange (val) {
-        this.start = val 
+        this.start = val
         this.getTableData()
       },
       onSubmit () {
-        
+
       },
       addFirstClassify (parent_id, type) {
         if (parent_id && type) {
           this.$router.push({path: '/business/unBusinessClassifyDetail', query: {parent_id: parent_id, type: type}})
         } else if (parent_id) {
-          this.$router.push({path: '/business/unBusinessClassifyDetail', query: {parent_id: parent_id}})    
+          this.$router.push({path: '/business/unBusinessClassifyDetail', query: {parent_id: parent_id}})
         } else {
           this.$router.push({path: '/business/unBusinessClassifyDetail'})
         }
