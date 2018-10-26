@@ -76,6 +76,7 @@ export default {
     transferDetail: '分账时间配置',
     tombacDetail: '铜贝规则设置',
     shareBuyDetail: '分享购买设置',
+    clearRedis: '清除redis',
 
     recommendConfig: '推荐配置',
     recommendConfigList: '推荐配置',
