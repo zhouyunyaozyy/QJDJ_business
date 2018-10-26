@@ -578,7 +578,10 @@ export const asyncRouterMap = [
       { path: 'transferDetail', component: _import('otherConfig/transferConfig/transferDetail'), name: 'transferDetail', meta: { title: 'transferDetail', noCache: true }},
 
       //      推荐收入列表
-      { path: 'referralEarningList', component: _import('otherConfig/referralEarning/referralEarningList'), name: 'referralEarningList', meta: { title: 'referralEarningList', noCache: true }, hidden: true}
+      { path: 'referralEarningList', component: _import('otherConfig/referralEarning/referralEarningList'), name: 'referralEarningList', meta: { title: 'referralEarningList', noCache: true }, hidden: true},
+      
+      //      推荐收入列表
+      { path: 'clearRedis', component: _import('otherConfig/clearRedis/clearRedis'), name: 'clearRedis', meta: { title: 'clearRedis', noCache: true } }
     ]
   },
 
