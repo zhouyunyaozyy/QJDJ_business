@@ -46,7 +46,7 @@
       <el-form-item label='是否限购'>
         <el-radio v-model="radio" label="1">不限购</el-radio>
         <el-radio v-model="radio" label="2">限购</el-radio>
-        <el-input v-model="form.buy_limit" placeholder='请输入限购数量' :maxlength="4" @keyup.native="form.buy_limit = $inputKeyUp($event)" @afterpaste.native="form.buy_limit = $inputKeyUp($event)"></el-input>
+        <el-input v-model="form.buy_limit" placeholder='请输入限购数量' :maxlength="3" @keyup.native="form.buy_limit = $inputKeyUp($event)" @afterpaste.native="form.buy_limit = $inputKeyUp($event)"></el-input>
       </el-form-item>
       <el-form-item label='统一填充' class='allFormClass'>
         <el-input v-model="ulForm.cost_price" placeholder='供应价'></el-input>
