@@ -426,6 +426,11 @@
             for (let val of _form.imgs_url) {
               imgsArr.push({url: val})
             }
+            if (_form.buy_limit == 0) {
+              this.radio = '1'
+            } else {
+              this.radio = '2'
+            }
             this.form = res.data
             if (this.form.brand_id == 0) {
               this.form.brand_id = ''
