@@ -46,7 +46,7 @@
       <el-form-item label='是否限购'>
         <el-radio v-model="radio" label="1">不限购</el-radio>
         <el-radio v-model="radio" label="2">限购</el-radio>
-        <el-input v-model="form.buy_limit" placeholder='请输入限购数量' :maxlength="4" @keyup.native="form.buy_limit = $inputKeyUp($event)" @afterpaste.native="form.buy_limit = $inputKeyUp($event)"></el-input>
+        <el-input v-model="form.buy_limit" placeholder='请输入限购数量' :maxlength="3" @keyup.native="form.buy_limit = $inputKeyUp($event)" @afterpaste.native="form.buy_limit = $inputKeyUp($event)"></el-input>
       </el-form-item>
       <el-form-item label='统一填充' class='allFormClass'>
         <el-input v-model="ulForm.cost_price" placeholder='商品进价'></el-input>
@@ -426,6 +426,11 @@
             let imgsArr = []
             for (let val of _form.imgs_url) {
               imgsArr.push({url: val})
+            }
+            if (_form.buy_limit == 0) {
+              this.radio = '1'
+            } else {
+              this.radio = '2'
             }
             this.form = res.data
             if (this.form.brand_id == 0) {
