@@ -52,6 +52,11 @@
           </el-option>
         </el-select>
       </el-form-item>
+      <el-form-item label='是否限购'>
+        <el-radio v-model="radio" label="1">不限购</el-radio>
+        <el-radio v-model="radio" label="2">限购</el-radio>
+        <el-input v-model="form.buy_limit" placeholder='请输入限购数量'></el-input>
+      </el-form-item>
       <el-form-item label='' v-if='!form.goods_activity_id'>
         <span>一级属性</span>
       </el-form-item>
@@ -335,7 +340,9 @@
           sale_price: '',
           nums: ''
         },
+        radio: '1',
         form: {
+          buy_limit: '',
           class_category_id: [],
           goods_no: '',
           goods_name: '',
@@ -432,6 +439,11 @@
               if (secondContent.indexOf(val.second_attr_value) == -1) {
                 secondContent.push(val.second_attr_value)
               }
+            }
+            if (_form.buy_limit == 0) {
+              this.radio = '1'
+            } else {
+              this.radio = '2'
             }
             this.firstInput = {type: _form.first_attr, content: firstContent.join(',')}
             this.secondInput = {type: _form.second_attr, content: secondContent.join(',')}
@@ -619,6 +631,9 @@
               let arr = []
               for (let val of this.form.imgs_url) {
                 arr.push(val.url)
+              }
+              if (this.radio == 1) {
+                _form.buy_limit = 0
               }
               _form.imgs_url = arr
               console.log(_form)

@@ -43,6 +43,11 @@
       <el-form-item label='产品描述'>
         <el-input type='textarea' v-model="form.goods_desc" placeholder='请输入产品描述'></el-input>
       </el-form-item>
+      <el-form-item label='是否限购'>
+        <el-radio v-model="radio" label="1">不限购</el-radio>
+        <el-radio v-model="radio" label="2">限购</el-radio>
+        <el-input v-model="form.buy_limit" placeholder='请输入限购数量'></el-input>
+      </el-form-item>
       <el-form-item label='统一填充' class='allFormClass'>
         <el-input v-model="ulForm.cost_price" placeholder='商品进价'></el-input>
         <el-input v-model="ulForm.sale_price" placeholder='商品售价'></el-input>
@@ -314,7 +319,9 @@
           sale_price: '',
           nums: ''
         },
+        radio: '1',
         form: {
+          buy_limit: '',
           class_category_id: [],
           goods_no: '',
           goods_name: '',
@@ -606,6 +613,11 @@
               console.log(_form)
               if (status != '') {
                 _form.status = status
+              }
+              if (_form.buy_limit == 0) {
+                this.radio = '1'
+              } else {
+                this.radio = '2'
               }
               _form.attr_is_change = this.attr_is_change
               _form.admin_spec_info = _form.spec_info
