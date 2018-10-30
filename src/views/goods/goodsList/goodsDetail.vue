@@ -618,10 +618,8 @@
               if (status != '') {
                 _form.status = status
               }
-              if (_form.buy_limit == 0) {
-                this.radio = '1'
-              } else {
-                this.radio = '2'
+              if (this.radio == 1) {
+                _form.buy_limit = 0
               }
               _form.attr_is_change = this.attr_is_change
               _form.admin_spec_info = _form.spec_info
