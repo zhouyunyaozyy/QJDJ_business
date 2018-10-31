@@ -108,7 +108,7 @@ Vue.prototype.$downloadExcell = function (obj) {
   window.open(process.env.BASE_API + obj.url + '?' + 'source=admin&token=' + Cookies.get('token') + str)
 }
 
-// 限制整数
+// 限制大于0的整数
 Vue.prototype.$inputKeyUp = (e) => { // 输入框限制
 //	console.log(window.arguments)
 //  var event = window.event || arguments.callee.caller.arguments[0]
@@ -119,6 +119,19 @@ Vue.prototype.$inputKeyUp = (e) => { // 输入框限制
     target.value = target.value.replace(/[^1-9]/g, '')
   } else {
     target.value = target.value.replace(/\D/g, '')
+  }
+  return target.value
+}
+// 限制可输入0的整数
+Vue.prototype.$inputKeyUp0100 = (e) => { // 输入框限制
+//	console.log(window.arguments)
+//  var event = window.event || arguments.callee.caller.arguments[0]
+  let target = window.event ? (event.srcElement || event.target) : e.target
+  console.log(target)
+//  let target = event.srcElement || event.target
+  target.value = target.value.replace(/\D/g, '')
+  if (target.value >= 100) {
+    target.value = 100
   }
   return target.value
 }

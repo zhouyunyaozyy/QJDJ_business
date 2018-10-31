@@ -184,10 +184,10 @@
         <el-input v-model="form.rating_ratio" placeholder='请输入内容'></el-input>
       </el-form-item>
       <el-form-item label="反金贝比例" prop='back_gold_ratio' v-if='type == 1'>
-        <el-input v-model="form.back_gold_ratio" placeholder='请输入内容'></el-input>
+        <el-input v-model="form.back_gold_ratio" placeholder='请输入反金贝比例' :maxlength="3" @keyup.native="form.back_gold_ratio = $inputKeyUp0100($event)" @afterpaste.native="form.back_gold_ratio = $inputKeyUp0100($event)"></el-input>
       </el-form-item>
       <el-form-item label="优惠比例" prop='discount' v-if='type == 1'>
-        <el-input v-model="form.discount" placeholder='请输入0-100，10就是一折'></el-input>
+        <el-input v-model="form.discount" placeholder='请输入0-100，10就是一折' :maxlength="3" @keyup.native="form.discount = $inputKeyUp0100($event)" @afterpaste.native="form.discount = $inputKeyUp0100($event)"></el-input>
       </el-form-item>
       <el-form-item label="推荐人id" v-if='type == 1'>
         <el-input v-model="form.recommend_user_id" placeholder='请输入内容'></el-input>
