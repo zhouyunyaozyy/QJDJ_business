@@ -83,6 +83,17 @@
           </template>
         </el-table-column>
         <el-table-column
+          prop="is_show"
+          label="显示状态"
+          min-width="120" align='center'>
+          <template slot-scope="scope">
+            <el-switch
+              @change="switchChange(scope.row.id, scope.row.status)"
+              v-model="scope.row.status == 1">
+            </el-switch>
+          </template>
+        </el-table-column>
+        <el-table-column
           label="操作"
           min-width="240" align='center'>
           <template slot-scope='scope'>
@@ -282,6 +293,19 @@
             type: 'post',
             url: '/game/goodsdelete',
             data: {id},
+            fuc: (res) => {
+            if (res.code == 200) {
+          this.$message.success('操作成功')
+          this.getTableData()
+        }
+      }
+      })
+      },
+      switchChange (id, status) {
+        this.$axios({
+            type: 'post',
+            url: '/game/goodssxj',
+            data: {id, status: status == 1 ? 0 : 1},
             fuc: (res) => {
             if (res.code == 200) {
           this.$message.success('操作成功')
