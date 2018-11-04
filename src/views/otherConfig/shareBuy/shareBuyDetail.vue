@@ -201,7 +201,7 @@
                 console.log('result', result)
                 if (result.code == 200) {
                   this.$message.success('编辑成功')
-                  this.changeStatusDialog = true
+                  this.changeStatusDialog = false
                 }
               }
             })
