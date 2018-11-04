@@ -5,18 +5,18 @@
         <h3 class="title">{{$t('login.title')}}</h3>
 <!--        <lang-select class="set-language"></lang-select>-->
       </div>
-      <el-form-item prop="username">
+      <el-form-item prop="account">
         <span class="svg-container svg-container_login">
           <svg-icon icon-class="user" />
         </span>
-        <el-input name="username" type="text" v-model="loginForm.username" autoComplete="on" placeholder="username" />
+        <el-input name="account" type="text" v-model="loginForm.account" autoComplete="on" placeholder="account" />
       </el-form-item>
 
-      <el-form-item prop="pwd">
+      <el-form-item prop="password">
         <span class="svg-container">
           <svg-icon icon-class="password" />
         </span>
-        <el-input name="password" :type="passwordType" @keyup.enter.native="handleLogin" v-model="loginForm.pwd" autoComplete="on" placeholder="password" />
+        <el-input name="password" :type="passwordType" @keyup.enter.native="handleLogin" v-model="loginForm.password" autoComplete="on" placeholder="password" />
         <span class="show-pwd" @click="showPwd">
           <svg-icon icon-class="eye" />
         </span>
@@ -75,12 +75,12 @@ export default {
     }
     return {
       loginForm: {
-        username: '',
-        pwd: ''
+        account: '',
+        password: ''
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur' }],
-        pwd: [{ required: true, trigger: 'blur', validator: validatePassword }]
+        account: [{ required: true, trigger: 'blur' }],
+        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       passwordType: 'password',
       loading: false,
@@ -101,7 +101,7 @@ export default {
           this.loading = true
           this.$axios({
             type: 'post',
-            url: '/System/checklogin',
+            url: '/shop/login',
             data: this.loginForm,
             fuc: (res) => {
               console.log('res', this.$router)

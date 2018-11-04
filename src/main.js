@@ -140,10 +140,10 @@ Vue.prototype.$axios = function(params, type) {
 //  console.log(1, params, type)
   const baseUrl = process.env.BASE_API
   if (type == 1) {
-    params.data.append('source', 'admin')
+//    params.data.append('source', 'admin')
     params.data.append('token', Cookies.get('token') ? Cookies.get('token') : '')
   } else {
-    params.data.source = 'admin'
+//    params.data.source = 'admin'
     params.data.token = Cookies.get('token') ? Cookies.get('token') : ''
   }
   if (this.$store.state.app.showLoadingNums < 1) {
