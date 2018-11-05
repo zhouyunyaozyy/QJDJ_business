@@ -181,24 +181,24 @@ Vue.prototype.$axios = function(params, type) {
       .then((response) => {
 //        Cookies.set('token', response.data.token)
 //        Cookies.set('token', 'will')
-        if (response.data.code == 416) {
-          Message({
-            showClose: true,
-            message: response.data.info,
-            type: 'error'
-          })
-          params.fuc(response.data)
-        } else if (response.data.code == 1010) {
-          Cookies.remove('Admin-Token')
-          Cookies.remove('token')
-          location.reload()
-        } else if (response.data.code != 200) {
-          // params.fuc(response.data)
-          Message({
-            showClose: true,
-            message: response.data.info,
-            type: 'error'
-          })
+//        if (response.data.code == 416) {
+//          Message({
+//            showClose: true,
+//            message: response.data.info,
+//            type: 'error'
+//          })
+//          params.fuc(response.data)
+//        } else if (response.data.code == 1010) {
+//          Cookies.remove('Admin-Token')
+//          Cookies.remove('token')
+//          location.reload()
+//        } else if (response.data.code != 200) {
+//          // params.fuc(response.data)
+//          Message({
+//            showClose: true,
+//            message: response.data.info,
+//            type: 'error'
+//          })
           //          params.nowThis.$Modal.warning({
           //            content: response.data.msg,
           //            title: '警告',
@@ -210,9 +210,9 @@ Vue.prototype.$axios = function(params, type) {
           //              })
           //            }
           //          })
-        } else {
+//        } else {
           params.fuc(response.data)
-        }
+//        }
 
 //        结束loading
         this.$store.state.app.showLoadingNums-- // 开启请求数据
@@ -248,26 +248,26 @@ Vue.prototype.$axios = function(params, type) {
       .then((response) => {
 //        Cookies.set('token', response.data.token)
 //                Cookies.set('token', 'will')
-        if (response.data.code == 416) {
-          Message({
-            showClose: true,
-            message: response.data.info,
-            type: 'error'
-          })
+//        if (response.data.code == 416) {
+//          Message({
+//            showClose: true,
+//            message: response.data.info,
+//            type: 'error'
+//          })
+//          params.fuc(response.data)
+//        } else if (response.data.code == 1010) {
+//          Cookies.remove('Admin-Token')
+//          Cookies.remove('token')
+//          location.reload()
+//        } else if (response.data.code != 200) {
+//          Message({
+//            showClose: true,
+//            message: response.data.info,
+//            type: 'error'
+//          })
+//        } else {
           params.fuc(response.data)
-        } else if (response.data.code == 1010) {
-          Cookies.remove('Admin-Token')
-          Cookies.remove('token')
-          location.reload()
-        } else if (response.data.code != 200) {
-          Message({
-            showClose: true,
-            message: response.data.info,
-            type: 'error'
-          })
-        } else {
-          params.fuc(response.data)
-        }
+//        }
 
 //        结束loading
         this.$store.state.app.showLoadingNums-- // 开启请求数据
