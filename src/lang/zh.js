@@ -3,6 +3,8 @@ export default {
     updateOrderList: '上传订单',
     orderHistoryList: '草稿箱',
     orderAllList: '订单中心',
+    onlineBusinessDetail: '基本信息',
+    searchArea: '安装区域查询',
 
     // 自带
     dashboard: '首页',

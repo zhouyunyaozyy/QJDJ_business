@@ -139,13 +139,13 @@ Vue.prototype.$inputKeyUp0100 = (e) => { // 输入框限制
 Vue.prototype.$axios = function(params, type) {
 //  console.log(1, params, type)
   const baseUrl = process.env.BASE_API
-  if (type == 1) {
-//    params.data.append('source', 'admin')
-    params.data.append('token', Cookies.get('token') ? Cookies.get('token') : '')
-  } else {
-//    params.data.source = 'admin'
-    params.data.token = Cookies.get('token') ? Cookies.get('token') : ''
-  }
+//  if (type == 1) {
+////    params.data.append('source', 'admin')
+//    params.data.append('token', Cookies.get('token') ? Cookies.get('token') : '')
+//  } else {
+////    params.data.source = 'admin'
+//    params.data.token = Cookies.get('token') ? Cookies.get('token') : ''
+//  }
   if (this.$store.state.app.showLoadingNums < 1) {
     this.$store.state.app.showLoading = this.$loading({
       lock: true,
@@ -177,7 +177,7 @@ Vue.prototype.$axios = function(params, type) {
 //    return Promise.reject(error);
 //  });
   if (params.type === 'get') {
-    axios.get(baseUrl + params.url, { params: params.data, withCredentials: false, headers: { 'Content-Type': type == 1 ? 'multipart/form-data' : 'application/json', 'Accept': '*/*' }})
+    axios.get(baseUrl + params.url, { params: params.data, withCredentials: false, headers: { 'Content-Type': type == 1 ? 'multipart/form-data' : 'application/json', 'Accept': '*/*' , 'Authorization': Cookies.get('token') ? 'Bearer ' + Cookies.get('token') : ''}})
       .then((response) => {
 //        Cookies.set('token', response.data.token)
 //        Cookies.set('token', 'will')
@@ -222,15 +222,16 @@ Vue.prototype.$axios = function(params, type) {
       })
       .catch((error) => {
         let mes = '加载超时 请检查网络！'
+        console.log(1, error.request, error.response)
         if (error.response && error.response.status) {
-          mes = '服务器错误，请联系管理员！'
+          mes = error.response.data
         }
 //        结束loading
         this.$store.state.app.showLoadingNums-- // 开启请求数据
         if (this.$store.state.app.showLoadingNums < 1) {
           this.$store.state.app.showLoading.close()
         }
-        params.fuc(error)
+//        params.fuc(error)
         Message({
           showClose: true,
           message: mes,
@@ -243,7 +244,7 @@ Vue.prototype.$axios = function(params, type) {
       type == 1 ? params.data : JSON.stringify(params.data),
       {
         withCredentials: false,
-        headers: { 'Content-Type': type == 1 ? 'multipart/form-data' : 'application/json' }
+        headers: { 'Content-Type': type == 1 ? 'multipart/form-data' : 'application/json' , 'Authorization':  Cookies.get('token') ? 'Bearer ' + Cookies.get('token') : ''}
       })
       .then((response) => {
 //        Cookies.set('token', response.data.token)
@@ -278,14 +279,14 @@ Vue.prototype.$axios = function(params, type) {
       .catch((error) => {
         let mes = '加载超时 请检查网络！'
         if (error.response && error.response.status) {
-          mes = '服务器错误，请联系管理员！'
+          mes = error.response.data
         }
 //        结束loading
         this.$store.state.app.showLoadingNums-- // 开启请求数据
         if (this.$store.state.app.showLoadingNums < 1) {
           this.$store.state.app.showLoading.close()
         }
-        params.fuc(error)
+//        params.fuc(error)
         Message({
           showClose: true,
           message: mes,

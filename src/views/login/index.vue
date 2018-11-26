@@ -98,7 +98,7 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          this.loading = true
+//          this.loading = true
           this.$axios({
             type: 'post',
             url: '/shop/login',
@@ -109,7 +109,7 @@ export default {
 //              Cookies.set('BHS_userName', res.data.username)
 //              Cookies.set('BHS_uid', res.data.uid)
               this.$store.commit('SET_TOKEN', res)
-              this.loading = false
+//              this.loading = false
               this.$router.push({ path: '/' })
             }
           })

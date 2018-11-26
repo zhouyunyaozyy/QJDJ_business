@@ -113,7 +113,7 @@ export const asyncRouterMap = [
       icon: 'lock'
     },
     children: [
-      //      管理组
+      
       { path: 'updateOrderList', component: _import('updateOrder/updateOrderList'), name: 'updateOrderList', meta: { title: 'updateOrderList', noCache: true }}
     ]
   },
@@ -129,7 +129,7 @@ export const asyncRouterMap = [
       icon: 'lock'
     },
     children: [
-      //      管理组
+      
       { path: 'orderHistoryList', component: _import('orderHistory/orderHistoryList'), name: 'orderHistoryList', meta: { title: 'orderHistoryList', noCache: true }}
     ]
   },
@@ -145,8 +145,40 @@ export const asyncRouterMap = [
       icon: 'lock'
     },
     children: [
-      //      管理组
+      
       { path: 'orderAllList', component: _import('orderAll/orderAllList'), name: 'orderAllList', meta: { title: 'orderAllList', noCache: true }}
+    ]
+  },
+  
+  // 商家信息
+  {
+    path: '/businessDetail',
+    component: Layout,
+    redirect: 'noredirect',
+    name: 'businessDetail',
+    meta: {
+      title: 'businessDetail',
+      icon: 'lock'
+    },
+    children: [
+      
+      { path: 'onlineBusinessDetail', component: _import('business/businessList/onlineBusinessDetail'), name: 'onlineBusinessDetail', meta: { title: 'onlineBusinessDetail', noCache: true }}
+    ]
+  },
+  
+  // 区域查询
+  {
+    path: '/searchArea',
+    component: Layout,
+    redirect: 'noredirect',
+    name: 'searchArea',
+    meta: {
+      title: 'searchArea',
+      icon: 'lock'
+    },
+    children: [
+      
+      { path: 'searchArea', component: _import('searchArea/searchArea'), name: 'searchArea', meta: { title: 'searchArea', noCache: true }}
     ]
   },
 
