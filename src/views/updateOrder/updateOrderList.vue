@@ -66,7 +66,15 @@
         label="商品图片"
         min-width="120" align='center'>
         <template slot-scope="scope">
-          <el-input placeholder="商品图片" v-model="scope.row.kehu"></el-input>
+<!--          <el-input placeholder="商品图片" v-model="scope.row.kehu"></el-input>-->
+          <el-upload
+          class="avatar-uploader"
+          action="http://192.168.100.122:5110/bhs-fileserver/file/uploadSingle"
+          :show-file-list="false"
+          :before-upload="beforeAvatarUpload">
+          <img v-if="scope.row.img" :src="scope.row.img" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
         </template>
       </el-table-column>
       <el-table-column
@@ -112,6 +120,21 @@
         this.tableData.push({
           kehu: ""
         })
+      },
+      beforeAvatarUpload () {
+        let formData = new FormData()
+        formData.append('file', file)
+        this.$axios({
+          type: 'post',
+          url: '/bhs-fileserver/file/uploadSingle',
+          data: formData,
+          fuc: (res) => {
+            console.log(res)
+            if (res.code == 1) {
+              this.form.licenseImage = res.data
+            }
+          }
+        }, 1)
       },
       delOrder (scope) {
         this.tableData.splice(scope.$index, 1)
