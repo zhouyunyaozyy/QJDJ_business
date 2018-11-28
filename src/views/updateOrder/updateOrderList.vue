@@ -4,21 +4,36 @@
     
     <el-table
     :data="tableData"
-    style="width: 100%" border>
+    style="width: 100%" border @row-click="handleCurrentChange">
       <el-table-column
-        prop="kehu"
-        label="客户名"
-        min-width="120" align='center'>
+        prop="productId"
+        label="产品类型"
+        min-width="140" align='center'>
         <template slot-scope="scope">
-          <el-input placeholder="客户名" v-model="scope.row.kehu"></el-input>
+          <el-select v-model="scope.row.productId" placeholder="请选择">
+            <el-option
+              v-for="item in productList"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id">
+            </el-option>
+          </el-select>
         </template>
       </el-table-column>
       <el-table-column
-        prop="pho"
+        prop="clientName"
+        label="客户名"
+        min-width="120" align='center'>
+        <template slot-scope="scope">
+          <el-input placeholder="客户名" v-model="scope.row.clientName"></el-input>
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="clientPhone"
         label="联系方式"
         min-width="120" align='center'>
         <template slot-scope="scope">
-          <el-input placeholder="联系方式" v-model="scope.row.kehu"></el-input>
+          <el-input placeholder="联系方式" v-model="scope.row.clientPhone"></el-input>
         </template>
       </el-table-column>
       <el-table-column
@@ -26,31 +41,31 @@
         label="地址"
         min-width="120" align='center'>
         <template slot-scope="scope">
-          <el-input placeholder="地址" v-model="scope.row.kehu"></el-input>
+          <el-input placeholder="地址" v-model="scope.row.address"></el-input>
         </template>
       </el-table-column>
       <el-table-column
-        prop="ping"
+        prop="productSize"
         label="产品平方数"
         min-width="120" align='center'>
         <template slot-scope="scope">
-          <el-input placeholder="产品平方数" v-model="scope.row.kehu"></el-input>
+          <el-input placeholder="产品平方数" v-model="scope.row.productSize"></el-input>
         </template>
       </el-table-column>
       <el-table-column
-        prop="goods"
+        prop="productInfo"
         label="所有商品信息"
         min-width="120" align='center'>
         <template slot-scope="scope">
-          <el-input placeholder="商品信息" v-model="scope.row.kehu"></el-input>
+          <el-input placeholder="商品信息" v-model="scope.row.productInfo"></el-input>
         </template>
       </el-table-column>
       <el-table-column
-        prop="id"
+        prop="logisticsNumber"
         label="物流单号"
         min-width="120" align='center'>
         <template slot-scope="scope">
-          <el-input placeholder="物流单号" v-model="scope.row.kehu"></el-input>
+          <el-input placeholder="物流单号" v-model="scope.row.logisticsNumber"></el-input>
         </template>
       </el-table-column>
       <el-table-column
@@ -58,11 +73,11 @@
         label="备注"
         min-width="120" align='center'>
         <template slot-scope="scope">
-          <el-input placeholder="备注" v-model="scope.row.kehu"></el-input>
+          <el-input placeholder="备注" v-model="scope.row.remark"></el-input>
         </template>
       </el-table-column>
       <el-table-column
-        prop="img"
+        prop="productPics"
         label="商品图片"
         min-width="120" align='center'>
         <template slot-scope="scope">
@@ -70,9 +85,9 @@
           <el-upload
           class="avatar-uploader"
           action="http://192.168.100.122:5110/bhs-fileserver/file/uploadSingle"
-          :show-file-list="false"
-          :before-upload="beforeAvatarUpload">
-          <img v-if="scope.row.img" :src="scope.row.img" class="avatar">
+          :before-upload="beforeUpload"
+          :show-file-list="false">
+          <img v-if="scope.row.productPicsUrl" :src="scope.row.productPicsUrl" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
         </template>
@@ -97,11 +112,21 @@
     name: 'unlineBusinessList',
     data () {
       return {
+        changeRow: {},
         tableData: [],
+        productList: [],
         showFormBool: true, // 是否显示过滤框
       }
     },
     created () {
+      this.$axios({
+        type: 'get',
+        url: '/shop-product/list',
+        data: {},
+        fuc: (res) => {
+          this.productList = res
+        }
+      })
 //      this.getTableData()
     },
     mounted () {},
@@ -118,23 +143,35 @@
       },
       addSlideshow () {
         this.tableData.push({
-          kehu: ""
+          clientName: "",
+          clientPhone: "",
+          address: "",
+          productSize: "",
+          productInfo: "",
+          logisticsNumber: "",
+          remark: "",
+          productPics: "",
+          productPicsUrl: "",
         })
       },
-      beforeAvatarUpload () {
+      handleCurrentChange (row, event, column) {
+//        console.log(1, row, event, column)
+        this.changeRow = row
+      },
+      beforeUpload (file) {
         let formData = new FormData()
-        formData.append('file', file)
+        formData.append('pictures', file)
         this.$axios({
           type: 'post',
-          url: '/bhs-fileserver/file/uploadSingle',
+          url: '/shop-order/upload-picture',
           data: formData,
           fuc: (res) => {
-            console.log(res)
-            if (res.code == 1) {
-              this.form.licenseImage = res.data
-            }
+            console.log(1, res, this.changeRow)
+            this.changeRow.productPics = res.urls
+            this.changeRow.productPicsUrl = res["origin-urls"]
           }
         }, 1)
+        return false
       },
       delOrder (scope) {
         this.tableData.splice(scope.$index, 1)
@@ -147,5 +184,30 @@
   .indexSlideshowList{
     margin: 10px 20px 0;
     overflow: hidden;
+  }
+</style>
+<style>
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 90px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+  }
+  .avatar {
+    width: 90px;
+    height: 34px;
+    display: block;
   }
 </style>
