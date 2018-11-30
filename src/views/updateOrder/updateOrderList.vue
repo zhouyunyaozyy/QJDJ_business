@@ -102,8 +102,8 @@
       </el-table-column>
     </el-table>
 
-    <el-button style="margin: 10px 10px 0 10px;">上传</el-button>
-    <el-button>保存到草稿箱</el-button>
+    <el-button style="margin: 10px 10px 0 10px;" @click="onsubmit">上传</el-button>
+    <el-button @click="onlySave">保存到草稿箱</el-button>
   </div>
 </template>
 
@@ -176,6 +176,30 @@
       delOrder (scope) {
         this.tableData.splice(scope.$index, 1)
         this.$message.success('操作成功')
+      },
+      onsubmit () {
+        for (let val of this.tableData) {
+          this.$axios({
+            type: 'post',
+            url: '/shop-order/save',
+            data: val,
+            fuc: (res) => {
+              this.$deleteOneTag('/orderAll/orderAllList')
+            }
+          })
+        }
+      },
+      onlySave () {
+        for (let val of this.tableData) {
+          this.$axios({
+            type: 'post',
+            url: '/shop-order/save-draft',
+            data: val,
+            fuc: (res) => {
+              this.$deleteOneTag('/orderHistory/orderHistoryList')
+            }
+          })
+        }
       }
     }
   }

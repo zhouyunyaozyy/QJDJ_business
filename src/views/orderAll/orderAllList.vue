@@ -5,10 +5,10 @@
       <p @click='showFormBool = !showFormBool'>筛选查询<i v-if='showFormBool' class="el-icon-arrow-down"></i><i v-else class="el-icon-arrow-up"></i></p>
       <el-form :inline="true" :model="formInline" class="demo-form-inline" v-if='showFormBool'>
         <el-form-item label="输入搜索">
-          <el-input v-model="formInline.search" placeholder="客户名"></el-input>
+          <el-input v-model="formInline.clientName" placeholder="客户名"></el-input>
         </el-form-item>
         <el-form-item label="状态">
-          <el-select v-model='formInline.status' placeholder='请选择对应状态' clearable>
+          <el-select v-model='formInline.stateFlag' placeholder='请选择对应状态' clearable>
             <el-option v-for='item in categoryList' :label='item.label' :key='item.value' :value='item.value'></el-option>
           </el-select>
         </el-form-item>
@@ -22,17 +22,17 @@
     :data="tableData"
     style="width: 100%" border>
       <el-table-column
-        prop="kehu"
+        prop="updateTime"
         label="下单时间"
         min-width="120" align='center'>
       </el-table-column>
       <el-table-column
-        prop="kehu"
+        prop="clientName"
         label="客户名"
         min-width="120" align='center'>
       </el-table-column>
       <el-table-column
-        prop="pho"
+        prop="clientPhone"
         label="联系方式"
         min-width="120" align='center'>
       </el-table-column>
@@ -42,17 +42,17 @@
         min-width="120" align='center'>
       </el-table-column>
       <el-table-column
-        prop="ping"
+        prop="productSize"
         label="产品平方数"
         min-width="120" align='center'>
       </el-table-column>
       <el-table-column
-        prop="goods"
+        prop="productInfo"
         label="所有商品信息"
         min-width="120" align='center'>
       </el-table-column>
       <el-table-column
-        prop="id"
+        prop="logisticsNumber"
         label="物流单号"
         min-width="120" align='center'>
       </el-table-column>
@@ -62,15 +62,15 @@
         min-width="120" align='center'>
       </el-table-column>
       <el-table-column
-        prop="img"
+        prop="productPics"
         label="商品图片"
         min-width="120" align='center'>
         <template slot-scope="scope">
-          <el-input placeholder="商品图片" v-model="scope.row.kehu"></el-input>
+          <img :src="scope.row.productPics" width="50px" height="50px">
         </template>
       </el-table-column>
       <el-table-column
-        prop="remark"
+        prop="stateVal"
         label="订单状态"
         min-width="120" align='center'>
       </el-table-column>
@@ -90,11 +90,15 @@
       return {
         tableData: [],
         formInline: {
-          search: '',
-          status: ''
+          clientName: '',
+          stateFlag: '-1'
         },
         form: {},
+//        -1-全部 1-未接单，2-未预约，3-已预约，4-已开工，5-已完工，6-未审核，7-已审核，8-已失效，9-已撤回
         categoryList: [{
+          value: '-1',
+          label: "全部"
+        },{
           value: 0,
           label: "未派发"
         },{
@@ -120,6 +124,9 @@
           label: "已审核退单"
         },{
           value: 8,
+          label: "已失效"
+        },{
+          value: 9,
           label: "已撤回订单"
         }],
         start: 1,
@@ -128,7 +135,7 @@
       }
     },
     created () {
-//      this.getTableData()
+      this.getTableData()
     },
     mounted () {},
     methods: {
@@ -147,10 +154,10 @@
       getTableData () {
         this.$axios({
           type: 'post',
-          url: '/goods/activitycarouselgetlist',
-          data: {page: this.start, ...this.form},
+          url: '/shop-order/list',
+          data: {current: this.start, size: 20, ...this.form},
           fuc: (res) => {
-            this.tableData = res.data
+            this.tableData = res.records
           }
         })
       }
