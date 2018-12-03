@@ -238,6 +238,67 @@ Vue.prototype.$axios = function(params, type) {
           type: 'error'
         })
       })
+  } else if (params.type === 'delete') {
+    axios.delete(baseUrl + params.url, { params: params.data, withCredentials: false, headers: { 'Content-Type': type == 1 ? 'multipart/form-data' : 'application/json', 'Accept': '*/*', 'Authorization':  Cookies.get('token') ? 'Bearer ' + Cookies.get('token') : '' }})
+      .then((response) => {
+//        Cookies.set('token', response.data.token)
+//        Cookies.set('token', 'will')
+//        if (response.data.code == 416) {
+//          Message({
+//            showClose: true,
+//            message: response.data.msg,
+//            type: 'error'
+//          })
+//          params.fuc(response.data)
+//        } else if (response.data.code == 1010) {
+//          Cookies.remove('Admin-Token')
+//          Cookies.remove('token')
+//          location.reload()
+//        } else if (response.data.code != 1) {
+//          // params.fuc(response.data)
+//          Message({
+//            showClose: true,
+//            message: response.data.msg,
+//            type: 'error'
+//          })
+          //          params.nowThis.$Modal.warning({
+          //            content: response.data.msg,
+          //            title: '警告',
+          //            onOk: () => {
+          //              params.nowThis.$store.commit('logout', this);
+          //              params.nowThis.$store.commit('clearOpenedSubmenu');
+          //              params.nowThis.$router.push({
+          //                  name: 'login'
+          //              })
+          //            }
+          //          })
+//        } else {
+          params.fuc(response.data)
+//        }
+
+//        结束loading
+        this.$store.state.app.showLoadingNums-- // 开启请求数据
+        if (this.$store.state.app.showLoadingNums < 1) {
+          this.$store.state.app.showLoading.close()
+        }
+      })
+      .catch((error) => {
+        let mes = '加载超时 请检查网络！'
+        if (error.response && error.response.status) {
+          mes = error.response.data
+        }
+//        结束loading
+        this.$store.state.app.showLoadingNums-- // 开启请求数据
+        if (this.$store.state.app.showLoadingNums < 1) {
+          this.$store.state.app.showLoading.close()
+        }
+//        params.fuc(error)
+        Message({
+          showClose: true,
+          message: mes,
+          type: 'error'
+        })
+      })
   } else {
     axios.post(
       baseUrl + params.url,

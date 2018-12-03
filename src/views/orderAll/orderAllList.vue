@@ -88,6 +88,7 @@
     name: 'unlineBusinessList',
     data () {
       return {
+        form: {},
         tableData: [],
         formInline: {
           clientName: '',
@@ -98,9 +99,6 @@
         categoryList: [{
           value: '-1',
           label: "全部"
-        },{
-          value: 0,
-          label: "未派发"
         },{
           value: 1,
           label: "未接单"
@@ -140,12 +138,14 @@
     mounted () {},
     methods: {
       onsubmit () {
+        this.form = {}
         for (let val in this.formInline) {
           if (this.formInline[val] !== '') {
             this.form[val] = this.formInline[val]
           }
         }
         console.log(this.form)
+        this.getTableData()
       },
       handleCurrentChange (val) {
         this.start = val 
@@ -158,6 +158,7 @@
           data: {current: this.start, size: 20, ...this.form},
           fuc: (res) => {
             this.tableData = res.records
+            this.total = res.total
           }
         })
       }
