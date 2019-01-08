@@ -41,7 +41,13 @@
         label="地址"
         min-width="120" align='center'>
         <template slot-scope="scope">
-          <el-input placeholder="地址" v-model="scope.row.address"></el-input>
+          <el-autocomplete
+            v-model="scope.row.address"
+            :fetch-suggestions="querySearchAsync"
+            placeholder="地址"
+            @select="handleSelect"
+            :trigger-on-focus="false"
+          ></el-autocomplete>
         </template>
       </el-table-column>
       <el-table-column
@@ -135,6 +141,37 @@
     },
     mounted () {},
     methods: {
+      querySearchAsync(queryString, cb) {
+//        var restaurants = this.restaurants;
+//        var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants;
+//
+//        clearTimeout(this.timeout);
+//        this.timeout = setTimeout(() => {
+//          cb(results);
+//        }, 3000 * Math.random());
+        if (queryString) {
+          this.$axios({
+            type: 'get',
+            url: '/site/' + queryString,
+            data: {},
+            fuc: (res) => {
+              let arr = []
+              for (let val of res) {
+                arr.push({value: val.name})
+              }
+              cb(arr)
+            }
+          })
+          
+        }
+        
+        console.log(queryString, cb)
+      },
+      handleSelect(item) {
+        console.log(item);
+      },
+      
+      
       getTableData () {
         this.$axios({
           type: 'post',

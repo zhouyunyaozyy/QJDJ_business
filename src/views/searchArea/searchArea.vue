@@ -2,10 +2,11 @@
   <div class="indexSlideshowList">
     <el-form :inline="true" :model="formInline" class="demo-form-inline">
       <el-form-item label="商品分类">
-        <el-select v-model='formInline.category' placeholder='请选择对应状态'>
-          <el-option v-for='item in categoryList' :label='item.label' :key='item.value' :value='item.value'></el-option>
+        <el-select v-model='formInline.category' placeholder='请选择对应状态' @change="categoryChange">
+          <el-option v-for='item in categoryList' :label='item.name' :key='item.id' :value='item.id'></el-option>
         </el-select>
       </el-form-item>
+<!--
       <el-form-item label="省">
         <el-select v-model='formInline.province' placeholder='请选择对应状态' @change="provinceChange">
           <el-option v-for='item in provinceList' :label='item.name' :key='item.code' :value='item.code'></el-option>
@@ -21,11 +22,12 @@
           <el-option v-for='item in areaList' :label='item.name' :key='item.code' :value='item.code'></el-option>
         </el-select>
       </el-form-item>
+-->
     </el-form>
     <div style="margin-top: 10px;">
-      <p>提示：<span style="color: red">请选择类型和区域</span></p>
+<!--      <p>提示：<span style="color: red">请选择类型和区域</span></p>-->
       <p style="margin: 0;margin-top:10px;">
-        此区域产品安装费用约： 。。。
+        此区域产品安装费用约： {{priceValue}}
       </p>
       <p style="margin: 0;color: red;font-size: 14px;">注意此价格仅作用户参考，实际情况需与师傅沟通才可确认！</p>
     </div>
@@ -36,19 +38,14 @@
   export default {
     data () {
       return {
+        priceValue: '',
         formInline: {
           category: '',
           province: "",
           city: "",
           area: ""
         },
-        categoryList: [
-          {label: "集成墙板", value: 0},
-          {label: "桑拿板", value: 1},
-          {label: "防腐板", value: 2},
-          {label: "吊顶", value: 3},
-          {label: "吸音板", value: 4}
-        ],
+        categoryList: [],
         provinceList: [],
         cityList: [],
         areaList: []
@@ -63,6 +60,15 @@
           this.provinceList = res
         }
       })
+      this.$axios({
+        type: 'get',
+        url: '/shop-product/list',
+        data: {},
+        fuc: (res) => {
+          this.categoryList = res
+        }
+      })
+      
     },
     methods: {
       provinceChange (code) {
@@ -89,6 +95,16 @@
         })
       },
       areaChange (code) {},
+      categoryChange (code) {
+        this.$axios({
+          type: 'get',
+          url: '/shop-product/price/' + code,
+          data: {},
+          fuc: (res) => {
+            this.priceValue = res
+          }
+        })
+      },
     }
   }
 </script>

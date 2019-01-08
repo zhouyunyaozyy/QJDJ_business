@@ -101,7 +101,7 @@ export default {
 //          this.loading = true
           this.$axios({
             type: 'post',
-            url: '/shop/login',
+            url: '/shop-user/login',
             data: this.loginForm,
             fuc: (res) => {
               Cookies.set('Admin-Token', res)

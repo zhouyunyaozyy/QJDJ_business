@@ -92,12 +92,13 @@
         tableData: [],
         formInline: {
           clientName: '',
-          stateFlag: '-1'
+          stateFlag: -1,
+          dispatchFlag: -1
         },
         form: {},
 //        -1-全部 1-未接单，2-未预约，3-已预约，4-已开工，5-已完工，6-未审核，7-已审核，8-已失效，9-已撤回
         categoryList: [{
-          value: '-1',
+          value: -1,
           label: "全部"
         },{
           value: 1,
@@ -133,7 +134,7 @@
       }
     },
     created () {
-      this.getTableData()
+      this.onsubmit()
     },
     mounted () {},
     methods: {
