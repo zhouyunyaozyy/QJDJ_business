@@ -39,7 +39,7 @@
       <el-table-column
         prop="address"
         label="地址"
-        min-width="120" align='center'>
+        min-width="200" align='center'>
       </el-table-column>
       <el-table-column
         prop="productSize"

@@ -154,7 +154,7 @@
             fuc: (res) => {
               let arr = []
               for (let val of res) {
-                arr.push({value: val.name})
+                arr.push({value: val.name, areaCode: val.areaCode})
               }
               cb(arr)
             }
@@ -165,7 +165,8 @@
         console.log(queryString, cb)
       },
       handleSelect(item) {
-        console.log(item);
+//        console.log(row, item);
+        this.changeRow.areaCode = item.areaCode
       },
       
       
@@ -190,6 +191,7 @@
           remark: "",
           productPics: "",
           productPicsUrl: "",
+          areaCode: ""
         })
       },
       handleCurrentChange (row, event, column) {

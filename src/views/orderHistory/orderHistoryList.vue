@@ -168,7 +168,8 @@
         console.log(queryString, cb)
       },
       handleSelect(item) {
-        console.log(item);
+//        console.log(item);
+        this.changeRow.areaCode = item.areaCode
       },
       
       
