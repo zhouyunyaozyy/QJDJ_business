@@ -51,14 +51,14 @@
       :visible.sync="changeStatusDialog"
       width="30%">
       <el-form :model="changePwdForm" ref='changePwdForm' :rules='rules' label-width="80px">
-        <el-form-item label="旧密码" prop='oldpwd'>
-          <el-input v-model="changePwdForm.oldpwd"></el-input>
+        <el-form-item label="旧密码" prop='oldPassword'>
+          <el-input v-model="changePwdForm.oldPassword"></el-input>
         </el-form-item>
-        <el-form-item label="新密码" prop='newpwd'>
-          <el-input v-model="changePwdForm.newpwd"></el-input>
+        <el-form-item label="新密码" prop='newPassword'>
+          <el-input v-model="changePwdForm.newPassword"></el-input>
         </el-form-item>
-        <el-form-item label="确认密码" prop='newpwdRe'>
-          <el-input v-model="changePwdForm.newpwdRe"></el-input>
+        <el-form-item label="确认密码" prop='confirmPassword'>
+          <el-input v-model="changePwdForm.confirmPassword"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -92,17 +92,17 @@ export default {
     return {
       changeStatusDialog: false,
       rules: {
-        oldpwd: [{required: true, message: '请输入旧密码', trigger: 'blur'}],
-        newpwd: [{required: true, message: '请输入新密码', trigger: 'blur'}],
-        newpwdRe: [
+        oldPassword: [{required: true, message: '请输入旧密码', trigger: 'blur'}],
+        newPassword: [{required: true, message: '请输入新密码', trigger: 'blur'}],
+        confirmPassword: [
           {required: true, message: '请确认密码', trigger: 'blur'},
           {validator: this.checkPwd, trigger: 'blur'}
         ],
       },
       changePwdForm: {
-        oldpwd: '',
-        newpwd: '',
-        newpwdRe: ''
+        oldPassword: '',
+        newPassword: '',
+        confirmPassword: ''
       }
     }
   },
@@ -118,7 +118,7 @@ export default {
       this.$store.dispatch('toggleSideBar')
     },
     checkPwd (rule, value, callback) {
-     if (value === this.changePwdForm.newpwd) {
+     if (value === this.changePwdForm.newPassword) {
         callback()
       } else {
         callback(new Error('两次输入的密码不一致'))
@@ -130,33 +130,35 @@ export default {
         if (valid) {
           this.$axios({
             type: 'post',
-            url: '/System/resetPwd',
-            data: {uid: Cookies.get('BHS_uid'), ...this.changePwdForm},
+            url: '/shop-user/password',
+            data: this.changePwdForm,
             fuc: (res) => {
-              if (res.code == 200) {
-                Cookies.remove('Admin-Token')
-                Cookies.remove('token')
-                location.reload()
-              }
+              Cookies.remove('user-Token')
+              Cookies.remove('token')
+              location.reload()
             }
           })
         }
       })
     },
     logout() {
-      this.$axios({
-        type: 'post',
-        url: '/System/logout',
-        data: {},
-        fuc: (res) => {
-//          this.$message.success('注销成功')
+//      this.$axios({
+//        type: 'post',
+//        url: '/System/logout',
+//        data: {},
+//        fuc: (res) => {
+////          this.$message.success('注销成功')
+////          location.reload()
+//          Cookies.remove('Admin-Token')
+//          Cookies.remove('token')
+////          this.$router.push("/login")
 //          location.reload()
-          Cookies.remove('Admin-Token')
-          Cookies.remove('token')
+//        }
+//      })
+      Cookies.remove('Admin-Token')
+      Cookies.remove('token')
 //          this.$router.push("/login")
-          location.reload()
-        }
-      })
+      location.reload()
 //      this.$store.dispatch('LogOut').then(() => {
 //        location.reload()// In order to re-instantiate the vue-router object to avoid bugs
 //      })

@@ -1,5 +1,5 @@
 module.exports = {
   NODE_ENV: '"production"',
   ENV_CONFIG: '"online"',
-  BASE_API: '"https://dsbapi.duishangbao.com"'
+  BASE_API: '"http://47.106.231.165"'
 }

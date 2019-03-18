@@ -104,8 +104,8 @@ export default {
             url: '/shop-user/login',
             data: this.loginForm,
             fuc: (res) => {
-              Cookies.set('Admin-Token', res)
-              Cookies.set('token', res)
+              Cookies.set('user-Token', res)
+//              Cookies.set('token', res)
 //              Cookies.set('BHS_userName', res.data.username)
 //              Cookies.set('BHS_uid', res.data.uid)
               this.$store.commit('SET_TOKEN', res)

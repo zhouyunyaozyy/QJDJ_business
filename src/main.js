@@ -177,7 +177,7 @@ Vue.prototype.$axios = function(params, type) {
 //    return Promise.reject(error);
 //  });
   if (params.type === 'get') {
-    axios.get(baseUrl + params.url, { params: params.data, withCredentials: false, headers: { 'Content-Type': type == 1 ? 'multipart/form-data' : 'application/json', 'Accept': '*/*' , 'Authorization': Cookies.get('token') ? 'Bearer ' + Cookies.get('token') : ''}})
+    axios.get(baseUrl + params.url, { params: params.data, withCredentials: false, headers: { 'Content-Type': type == 1 ? 'multipart/form-data' : 'application/json', 'Accept': '*/*' , 'Authorization': Cookies.get('user-Token') ? 'Bearer ' + Cookies.get('user-Token') : ''}})
       .then((response) => {
 //        Cookies.set('token', response.data.token)
 //        Cookies.set('token', 'will')
@@ -239,7 +239,7 @@ Vue.prototype.$axios = function(params, type) {
         })
       })
   } else if (params.type === 'delete') {
-    axios.delete(baseUrl + params.url, { params: params.data, withCredentials: false, headers: { 'Content-Type': type == 1 ? 'multipart/form-data' : 'application/json', 'Accept': '*/*', 'Authorization':  Cookies.get('token') ? 'Bearer ' + Cookies.get('token') : '' }})
+    axios.delete(baseUrl + params.url, { params: params.data, withCredentials: false, headers: { 'Content-Type': type == 1 ? 'multipart/form-data' : 'application/json', 'Accept': '*/*', 'Authorization':  Cookies.get('user-Token') ? 'Bearer ' + Cookies.get('user-Token') : '' }})
       .then((response) => {
 //        Cookies.set('token', response.data.token)
 //        Cookies.set('token', 'will')
@@ -305,7 +305,7 @@ Vue.prototype.$axios = function(params, type) {
       type == 1 ? params.data : JSON.stringify(params.data),
       {
         withCredentials: false,
-        headers: { 'Content-Type': type == 1 ? 'multipart/form-data' : 'application/json' , 'Authorization':  Cookies.get('token') ? 'Bearer ' + Cookies.get('token') : ''}
+        headers: { 'Content-Type': type == 1 ? 'multipart/form-data' : 'application/json' , 'Authorization':  Cookies.get('user-Token') ? 'Bearer ' + Cookies.get('user-Token') : ''}
       })
       .then((response) => {
 //        Cookies.set('token', response.data.token)
